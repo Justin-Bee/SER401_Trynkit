@@ -11,4 +11,4 @@ github.com/Justin-Bee/SER401-Trynkit
 
 Google Docs Folder:
 
-https://drive.google.com/drive/folders/1FmNoYtnwIc00GcGCR9QHuf5uX6fgaI63?usp=sharing
+https://drive.google.com/folderview?id=1VyC_jkIzQ18kYB9YkAErLDm4tPa70Jlq
