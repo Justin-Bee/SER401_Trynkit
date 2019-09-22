@@ -5,9 +5,9 @@ Project Plan Link:
 
 https://drive.google.com/file/d/1ZyabZcgmchgNO5G_lyHV2p1fE50nop4r/view?usp=sharing
 
-Github:
+Taiga:
 
-github.com/Justin-Bee/SER401-Trynkit
+https://tree.taiga.io/project/justin-bee-ser-401-trynkit/timeline
 
 Google Docs Folder:
 
