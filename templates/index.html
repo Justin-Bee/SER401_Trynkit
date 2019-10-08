@@ -9,14 +9,17 @@
       </head>
 
 <body>
-<div id="menu"><p>Menu</p></div>
-<div contenteditable="true" id="editor">
-    This text can be edited by the user.
-</div>
+    <div id="menu"><p>Menu</p></div>
+    <script>
+        function myFunction() {
+          var x = document.getElementById("myFile");
+          x.disabled = true;
+        }
+        </script>
+    <input type="file" id="myFile">
+    <div contenteditable="true" id="editor">
+        This text can be edited by the user.
+    </div>
+
 </body>
-
-
-
-
-
 </html>
