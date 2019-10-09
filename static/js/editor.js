@@ -26,6 +26,7 @@ function updateEditor(){
             var replace = divValue.replace(re, "<span style=color:orange;>" + word + "</span></span>");
             document.getElementById('editor').innerHTML = replace;
             cursorAtEnd();
+
         }
     }
 }
@@ -43,3 +44,4 @@ function cursorAtEnd(){
             selection.addRange(range);
             el.focus();
 }
+
