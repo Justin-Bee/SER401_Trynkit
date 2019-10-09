@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en" class="no-js">
       <head>
@@ -9,7 +10,10 @@
       </head>
 
 <body>
-<div id="menu"><p>Menu</p></div>
+<div id="menu">
+    <p>Menu</p>
+    <img src="{% static 'SER401_Trynkit/images/newDoc.jpg' %}">
+</div>
 <div contenteditable="true" id="editor">
     This text can be edited by the user.
 </div>
