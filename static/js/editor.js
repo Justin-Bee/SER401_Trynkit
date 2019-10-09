@@ -23,8 +23,8 @@ function updateEditor(){
             //create regex variable
             var word = keyWords[i].toString();
             var re = new RegExp(word, "g");
-            var replace = divValue.replace(re, "<span style=color:orange;>" + word + "</span></span>");
-            document.getElementById('editor').innerHTML = replace;
+            divValue = divValue.replace(re, "<span style=color:orange;>" + word + "</span></span>");
+            document.getElementById('editor').innerHTML = divValue;
             cursorAtEnd();
 
         }
