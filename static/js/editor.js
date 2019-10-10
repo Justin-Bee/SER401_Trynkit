@@ -6,7 +6,7 @@
 
 
 //set event listener to the editor for keyup
-document.getElementById('editor').addEventListener("keypress", highlightKeywords, false);
+document.getElementById('editor').addEventListener("keyup", highlightKeywords, false);
 
 const keyWords = ['import', 'from', 'if', 'else', 'for', 'while', 'False', 'None', 'True',
                     'and', 'as', 'assert', 'break', 'class', 'continue', 'def','del', 'elif',
@@ -24,23 +24,26 @@ function to highlight the syntax for MicroPython
  */
 function highlightKeywords() {
      //have to set a delay so it doesn't format a partial word
+    //TODO find an optimal delay
      setTimeout(function(){
         var divValue = document.getElementById('editor').innerHTML;
-        for(var i=0; i<=keyWords.length; i++) {
+        for(var i=0; i<keyWords.length; i++) {
             var word = keyWords[i];  //word we want to replace
-            var wordHTML = ">"+keyWords[i]+"<";  //variable for same word surrounded by html tags
+            var wordHTML = "&gt;"+keyWords[i]+"&lt;";  //variable for same word surrounded by html tags
             if (divValue.includes(wordHTML)){
                 //do nothing so we dont continue to wrap the text in html tags
+                //TODO maybe explore this more with the HTML tags
             }else if (divValue.includes(word)) {
-                  //create regex variable
+                //create regex variable
                 re = new RegExp('\\b'+word+'\\b',"g");
-                divValue = divValue.replace(re , "<span style=color:orange;>" + word+ "</span></span>");
+                divValue = divValue.replace(re , "<span style=color:orange>" + word+ "</span></span>");
                 document.getElementById('editor').innerHTML = divValue;
                 cursorAtEnd();
                 console.log(divValue);
             }
         }
-      },2000); //2 second delay
+      },2000); //1.5 second delay
+
 }
 
 /**
