@@ -27,14 +27,17 @@ function highlightKeywords() {
      setTimeout(function(){
         var divValue = document.getElementById('editor').innerHTML;
         for(var i=0; i<=keyWords.length; i++) {
-              //if to replace with highlighting
-            var word = keyWords[i];
-            if (divValue.includes(word)) {
+            var word = keyWords[i];  //word we want to replace
+            var wordHTML = ">"+keyWords[i]+"<";  //variable for same word surrounded by html tags
+            if (divValue.includes(wordHTML)){
+                //do nothing so we dont continue to wrap the text in html tags
+            }else if (divValue.includes(word)) {
                   //create regex variable
                 re = new RegExp('\\b'+word+'\\b',"g");
-                divValue = divValue.replace(re , "<span style=color:orange;>" + word + "</span></span>");
+                divValue = divValue.replace(re , "<span style=color:orange;>" + word+ "</span></span>");
                 document.getElementById('editor').innerHTML = divValue;
                 cursorAtEnd();
+                console.log(divValue);
             }
         }
       },2000); //2 second delay
