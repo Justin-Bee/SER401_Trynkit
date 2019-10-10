@@ -6,50 +6,40 @@
 
 
 //set event listener to the editor for keyup
-document.getElementById('editor').addEventListener("keyup", updateEditor, false);
+document.getElementById('editor').addEventListener("keypress", highlightKeywords, false);
 
 const keyWords = ['import', 'from', 'if', 'else', 'for', 'while', 'False', 'None', 'True',
                     'and', 'as', 'assert', 'break', 'class', 'continue', 'def','del', 'elif',
                     'except', 'finally', 'global', 'in', 'is', 'lambda', 'nonlocal', 'not',
                     'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield'];
-/*
+
+/**
+ * TODO write a config function so we can change the colors of the formatting based upon the styles
+ */
+
+
+
+/**
 function to highlight the syntax for MicroPython
  */
-function updateEditor(){
-    //get the users input from the <div>
-    var divValue = document.getElementById('editor').innerHTML;
-    var found = false;
-    //for loop to search the input
-    for(var i=0; i<=keyWords.length; i++) {
-        //if to replace with highlighting
-        var word = keyWords[i];
-        var wordBeginning = keyWords[i];
-        var wordEnding = keyWords[i];
-        var wordCaret = keyWords[i];
-        wordBeginning = " " + wordBeginning + " ";
-        wordEnding = wordEnding + ' ';
-        wordCaret = ">"+word+"<";
-        //if word is surrounded by html tags already
-        if(divValue.includes(wordCaret)){
-            //do nothing
+function highlightKeywords() {
+     //have to set a delay so it doesn't format a partial word
+     setTimeout(function(){
+        var divValue = document.getElementById('editor').innerHTML;
+        for(var i=0; i<=keyWords.length; i++) {
+              //if to replace with highlighting
+            var word = keyWords[i];
+            if (divValue.includes(word)) {
+                  //create regex variable
+                re = new RegExp('\\b'+word+'\\b',"g");
+                divValue = divValue.replace(re , "<span style=color:orange;>" + word + "</span></span>");
+                document.getElementById('editor').innerHTML = divValue;
+                cursorAtEnd();
+            }
         }
-        else if (divValue.includes(wordBeginning)){
-            //create regex variable
-            var re = new RegExp(word, "g");
-            divValue = divValue.replace(re, "<span style=color:orange;>" + word+ "</span>");
-            document.getElementById('editor').innerHTML = divValue;
-            cursorAtEnd();
-            console.log(divValue); //this is just to see what im actually putting in the div
-        }else if(divValue.includes(wordEnding)){
-             var re = new RegExp(word, "g");
-            divValue = divValue.replace(re, "<span style=color:orange;>" + word + "</span>");
-            document.getElementById('editor').innerHTML = divValue;
-            cursorAtEnd();
-            //only for debugging
-            console.log(divValue);
-        }
-    }
+      },2000); //2 second delay
 }
+
 /**
  * this function sets the cursor at the end of the text
  */
@@ -64,4 +54,6 @@ function cursorAtEnd(){
             selection.addRange(range);
             el.focus();
 }
+
+
 
