@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en" class="no-js">
       <head>
@@ -9,13 +10,24 @@
       </head>
 
 <body>
-<div id="menu"><p>Menu</p></div>
+
+<div id="menu">
+    <p>Menu</p>
+    <button><input type="image" id ="nd2" src="{% static 'SER401_Trynkit/images/nd2.png' %}" width="50" height="50"></button>
+    <p></p>
+    <img src="{% static 'SER401_Trynkit/images/savefile.png' %}">
+    <p></p>
+    <button><input type="image" id ="load" src="{% static 'SER401_Trynkit/images/Load.png' %}" width="50" height="50"></button>
+    <p></p>
+    <img src="{% static 'SER401_Trynkit/images/Device.png' %}">
+    <p></p>
+    <img src="{% static 'SER401_Trynkit/images/Settings.png' %}">
+</div>
 <div contenteditable="true" id="editor">
 
 </div>
 <script src="/static/js/editor.js" type="text/javascript"></script>
 </body>
-
 
 
 
