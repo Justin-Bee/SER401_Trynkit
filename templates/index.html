@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en" class="no-js">
       <head>
@@ -9,21 +10,25 @@
       </head>
 
 <body>
-    <div id="menu">
-    <p>Menu</p>
-    <img type="image" id="nd2" src="{% static 'SER401_Trynkit/images/nd2.png' %}" width="50" height="50" >
-    <p></p>
-    <img id="save" src="{% static 'SER401_Trynkit/images/savefile.png' %}" width="50" height="50">
-    <p></p>
-    <input type="image" id ="load" src="{% static 'SER401_Trynkit/images/Load.png' %}" width="50" height="50">
-    <p></p>
-    <img id="device" src="{% static 'SER401_Trynkit/images/Device.png' %}" width="50" height="50">
-    <p></p>
-    <img id="settings" src="{% static 'SER401_Trynkit/images/settings.png' %}" width="50" height="50">
-    </div>
-    <div contenteditable="true" id="editor">
-      This text can be edited by the user.
-    </div>
 
+<div id="menu">
+    <p>Menu</p>
+    <button><input type="image" id ="nd2" src="{% static 'SER401_Trynkit/images/nd2.png' %}" width="50" height="50"></button>
+    <p></p>
+    <img src="{% static 'SER401_Trynkit/images/savefile.png' %}">
+    <p></p>
+    <button><input type="image" id ="load" src="{% static 'SER401_Trynkit/images/Load.png' %}" width="50" height="50"></button>
+    <p></p>
+    <img src="{% static 'SER401_Trynkit/images/Device.png' %}">
+    <p></p>
+    <img src="{% static 'SER401_Trynkit/images/Settings.png' %}">
+</div>
+<div contenteditable="true" id="editor">
+    This text can be edited by the user.
+</div>
 </body>
+
+
+
+
 </html>
