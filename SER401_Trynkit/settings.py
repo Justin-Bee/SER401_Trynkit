@@ -25,7 +25,10 @@ SECRET_KEY = 'o80$ej2q0$b=vlko6q9h11guz*i^iq19#nlg^6)rdwo4_57ylz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+        'ec2-18-236-141-148.us-west-2.compute.amazonaws.com',
+        '127.0.0.1'
+        ]
 
 
 # Application definition
@@ -37,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djangosecure',
+    'sslserver',
 ]
 
 MIDDLEWARE = [
@@ -123,3 +128,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
