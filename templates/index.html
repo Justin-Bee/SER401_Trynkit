@@ -7,16 +7,15 @@
           {% load static %}
           <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}" />
           <script src="/static/js/save.js" type="text/javascript"></script>
-
       </head>
 
 <body>
 
 <div id="menu">
     <p>Menu</p>
-    <button onclick="myFunction()"><input type="image" id ="nd2" src="{% static '/images/nd2.png' %}" width="50" height="50"></button>
+    <button onclick="newFile()"><input type="image" id ="nd2" src="{% static '/images/nd2.png' %}" width="50" height="50"></button>
     <p></p>
-    <button onclick="saveEditorContents(document.getElementById('editor').innerHTML, projectName)"><input type="image" id ="nd2" src="{% static '/images/savefile.png' %}" width="50" height="50"></button>
+    <button onclick="save()"><input type="image" id ="nd2" src="{% static '/images/savefile.png' %}" width="50" height="50"></button>
     <p></p>
     <button><input type="image" id ="load" src="{% static '/images/Load.png' %}" width="50" height="50"></button>
     <p></p>
@@ -24,15 +23,28 @@
     <p></p>
     <button><input type="image" id ="load" src="{% static '/images/Settings.png' %}" width="50" height="50"></button>
 </div>
-<div contenteditable="true" id="editor">
+<div contenteditable="true" id="editor" name='empty'>
 
 </div>
 <script src="/static/js/editor.js" type="text/javascript"></script>
 </body>
 
 <script>
-    function myFunction() {
-        projectName = prompt("Creating a new project:", "NewProjectName.py");
+    function newFile() {
+        var projectName = prompt("Creating a new project:", "NewProjectName.py");
+        document.getElementById('editor').setAttribute('name', projectName);
+        document.getElementById('editor').innerHTML = '';
+    }
+</script>
+<script>
+    function save() {
+        if (document.getElementById('editor').getAttribute('name') == 'empty' ){
+            var projectName = prompt("Enter the name of the project: ", "NewProjectName.py");
+            document.getElementById('editor').setAttribute('name', projectName);
+        } else {
+           var projectName = document.getElementById('editor').getAttribute('name');
+        } 
+        saveEditorContents(projectName); 
     }
 </script>
 </html>

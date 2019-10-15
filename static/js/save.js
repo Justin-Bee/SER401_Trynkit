@@ -14,6 +14,7 @@
  *
  * Purpose: This file handles the saving functionality for the text editor web application
  * SER401
+ * @file save.js
  * @author Andrew Fiorentino 
  * @version October 2019
  */
@@ -21,13 +22,13 @@
 /**
  * saveEditorContents
  * Saves the contents of the text editor to a file of the user's choice.
- * @author: Andrew Fiorentino
- * @parm: none
- * @returns: none
+ * @author Andrew Fiorentino
+ * @param filename the name of the file to be saved
+ * @returns none
  **/
-function saveEditorContents(contents, filename) {
+function saveEditorContents(filename) {
       var element = document.createElement('a');
-      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(contents));
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(document.getElementById('editor').innerHTML));
       element.setAttribute('download', filename);
 
       element.style.display = 'none';
