@@ -15,7 +15,7 @@
     <p>Menu</p>
     <button onclick="myFunction()"><input type="image" id ="nd2" src="{% static '/images/nd2.png' %}" width="50" height="50"></button>
     <p></p>
-    <button onclick="saveEditorContents(document.getElementById('editor').innerHTML, "test.py")"><input type="image" id ="nd2" src="{% static '/images/savefile.png' %}" width="50" height="50"></button>
+    <button onclick="saveEditorContents(document.getElementById('editor').innerHTML, projectName)"><input type="image" id ="nd2" src="{% static '/images/savefile.png' %}" width="50" height="50"></button>
     <p></p>
     <button><input type="image" id ="load" src="{% static '/images/Load.png' %}" width="50" height="50"></button>
     <p></p>
@@ -32,9 +32,7 @@
 
 <script>
     function myFunction() {
-        var projectName = prompt("Creating a new project:", "NewProjectName.py");
+        projectName = prompt("Creating a new project:", "NewProjectName.py");
     }
 </script>
-
-
 </html>

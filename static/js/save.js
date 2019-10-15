@@ -26,19 +26,14 @@
  * @returns: none
  **/
 function saveEditorContents(contents, filename) {
-    var file = new Blob([contents], {type: 'text/plain'});
-    if (window.navigator.msSaveOrOpenBlob){
-        window.navigator.msSaveOrOpenBlob(file, filename);
-    } else {
-        var a = document.createElement('a'),
-            url = URL.createObject(file);
-        a.href = file;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        setTimeout(function() {
-            document.removeChild(a);
-            window.URL.revokeObjectURL(url);
-        }, 0);
-    }
+      var element = document.createElement('a');
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(contents));
+      element.setAttribute('download', filename);
+
+      element.style.display = 'none';
+      document.body.appendChild(element);
+
+      element.click();
+
+      document.body.removeChild(element);
 }
