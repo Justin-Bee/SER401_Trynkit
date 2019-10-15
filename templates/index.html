@@ -33,10 +33,17 @@
     function newFile() {
         var projectName = prompt("Creating a new project:", "NewProjectName.py");
         document.getElementById('editor').setAttribute('name', projectName);
-        document.getElementById('editor').innerHTML = '';
     }
 </script>
 <script>
+//------------------------------------------------------------------------------------------
+// save
+// Prompts the user to name the project, if it doesn't already have a name, and saves the
+// project to a user specified location.
+// @author: Andrew Fiorentino
+// @param: none
+// @returns: none
+//-----------------------------------------------------------------------------------------
     function save() {
         if (document.getElementById('editor').getAttribute('name') == 'empty' ){
             var projectName = prompt("Enter the name of the project: ", "NewProjectName.py");

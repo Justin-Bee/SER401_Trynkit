@@ -22,9 +22,9 @@
 /**
  * saveEditorContents
  * Saves the contents of the text editor to a file of the user's choice.
- * @author Andrew Fiorentino
- * @param filename the name of the file to be saved
- * @returns none
+ * @author: Andrew Fiorentino
+ * @param: filename the name of the file to be saved
+ * @returns: none
  **/
 function saveEditorContents(filename) {
       var element = document.createElement('a');
