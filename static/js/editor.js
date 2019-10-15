@@ -41,51 +41,35 @@ function config(key, num){
  * function to highlight the syntax for MicroPython
  */
 function highlightKeywords() {
-        var divValue = document.getElementById('editor').innerText;
-        for(var i=0; i<keyWords.length; i++) {
-            var word = keyWords[i];  //word we want to replace
-            var wordHTML = ">"+word+"<";  //variable for same word surrounded by html tags
-            var nbsp = String.fromCharCode(160);
-            if (divValue.includes(wordHTML)){
-                //do nothing so we dont continue to wrap the text in html tags
-            }else if(divValue.includes(word)) {
-                //create regex variable
-                re = new RegExp('\\b'+word+'\\b',"g");
-                divValue = divValue.replace(re , "<span style=color:"+keyWordColor+">" + word+"</span></span>");
-                document.getElementById('editor').innerHTML = divValue;
+    var divValue = document.getElementById('editor').innerText;
+    //for the number highlighting
+    var str = divValue.split(" ");
+        for (var i = 0; i < str.length; i++) {
+            //  console.log(str[i]);
+            if (str[i].match(/\d+/)) {
+                str[i] = "<span style=color:" + numberColor + ">" + str[i] + "</span>";
             }
         }
-        highlightNumbers();
-        cursorAtEnd();
-}
+        divValue = "";
+        for (var i = 0; i < str.length; i++) {
+                divValue = divValue + str[i] + " ";
+            }
 
-/**
- * @author: Justin Bee
- * @param: none
- * The function finds numeric characters and highlights them
- */
-function highlightNumbers(){
-    var test = document.getElementById('editor').innerHTML;
-    console.log(test);
-     var divValue = document.getElementById('editor').innerHTML;
-   //  wsReg = new RegExp('&nbsp;', 'g');
-  //   divValue = divValue.replace(wsReg, " ");
-     var nbsp = String.fromCharCode(160);
-     var str = divValue.split(/\s/)
-     for(var i =0; i<str.length; i++) {
-        //  console.log(str[i]);
-         if(str[i].match(/^[0-9]+$/)){
-             str[i]= "<span style=color:"+numberColor+">"+str[i]+"</span></span>";
-         }
-        // if(str[i].match(/^>*[0-9]*</)){
-       ///      str[i]= "<span style=color:"+numberColor+">"+str[i]+"</span></span>";
-       //  }
-     }
-     divValue = "";
-     for(var i =0; i<str.length; i++){
-         divValue = divValue +str[i] + " ";
-     }
-     document.getElementById('editor').innerHTML = divValue;
+        //for the keyword highlighting
+    for (var i = 0; i < keyWords.length; i++) {
+        var word = keyWords[i];  //word we want to replace
+        var wordHTML = ">" + word + "<";  //variable for same word surrounded by html tags
+        if (divValue.includes(wordHTML)) {
+            //do nothing so we dont continue to wrap the text in html tags
+        } else if (divValue.includes(word)) {
+            //create regex variable
+            re = new RegExp('\\b' + word + '\\b', "g");
+            divValue = divValue.replace(re, "<span style=color:" + keyWordColor + ">" + word + "</span>");
+        }
+    }
+    console.log(divValue); //for debugging purposes
+    document.getElementById('editor').innerHTML = divValue;
+    cursorAtEnd();
 }
 
 
