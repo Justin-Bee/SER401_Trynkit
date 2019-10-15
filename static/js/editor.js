@@ -41,7 +41,7 @@ function config(key, num){
  * function to highlight the syntax for MicroPython
  */
 function highlightKeywords() {
-        var divValue = document.getElementById('editor').innerHTML;
+        var divValue = document.getElementById('editor').innerText;
         for(var i=0; i<keyWords.length; i++) {
             var word = keyWords[i];  //word we want to replace
             var wordHTML = ">"+word+"<";  //variable for same word surrounded by html tags
@@ -104,6 +104,7 @@ function cursorAtEnd(){
             selection.addRange(range);
             el.focus();
 }
+
 
 
 
