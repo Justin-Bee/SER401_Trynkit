@@ -9,3 +9,6 @@ def index(request):
 
 def devices(request):
     return render(request, 'devices.html')
+
+def console(request):
+    return render(request, 'console.html')
