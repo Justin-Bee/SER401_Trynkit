@@ -6,7 +6,7 @@
 
 
 //set event listener to the editor for keypress
-document.getElementById('editor').addEventListener("keydown", highlightKeywords, false);
+//document.getElementById('editor').addEventListener("keydown", highlightKeywords, false);
 
 
 const keyWords = ['import', 'from', 'if', 'else', 'for', 'while', 'False', 'None', 'True',
@@ -21,7 +21,32 @@ var numberColor="blue";
 var commentColor ="yellow";
 var stringColor = "green";
 
-var isEnterPressed = false;
+var editor = document.getElementById('editor');
+editor.addEventListener("keydown", function(event){
+    if(event.keyCode === 13){//to handle enter presses
+        event.preventDefault(); //Prevent default browser behavior
+        if (window.getSelection) {
+             var selection = window.getSelection(),
+             range = selection.getRangeAt(0),
+             br = document.createElement("br"),
+             textNode = document.createTextNode("\u00a0"); //Passing " " directly will not end up being shown correctly
+             range.deleteContents();//required or not?
+             range.insertNode(br);
+             range.collapse(false);
+             range.insertNode(textNode);
+             range.selectNodeContents(textNode);
+             selection.removeAllRanges();
+             selection.addRange(range);
+             return false;
+            }
+    }
+    else if (event.keyCode ===32){ //this is to handle if space is pressed
+        highlightKeywords();
+    }else if (event.keyCode ===8){  //this is for backspace
+       highlightKeywords();
+       cursorAtEnd(); //need to create a function for this to keep cursor at current location
+    }
+});
 
 /**
  * @author: Justin Bee
@@ -43,17 +68,21 @@ function config(key, num){
 function highlightKeywords() {
     var divValue = document.getElementById('editor').innerText;
     //for the number highlighting
-    var str = divValue.split(" ");
+    var str = divValue.split(' ');
         for (var i = 0; i < str.length; i++) {
             //  console.log(str[i]);
             if (str[i].match(/\d+/)) {
-                str[i] = "<span style=color:" + numberColor + ">" + str[i] + "</span>";
+                str[i] = "<span style=color:" + numberColor + ">"+str[i]+"</span>";
             }
         }
         divValue = "";
         for (var i = 0; i < str.length; i++) {
+            if(str.length<=1){
+                divValue =divValue + str[i];
+            }else{
                 divValue = divValue + str[i] + " ";
             }
+        }
 
         //for the keyword highlighting
     for (var i = 0; i < keyWords.length; i++) {
@@ -67,13 +96,21 @@ function highlightKeywords() {
             divValue = divValue.replace(re, "<span style=color:" + keyWordColor + ">" + word + "</span>");
         }
     }
-    console.log(divValue); //for debugging purposes
+    
+    //formatting for comments
+    //match # until newline or </div>
+  //  comRegEXP = new RegExp('^#.*<$', g); //this regex will match # to < assuming <div> is at end of line
+   // divValue = divValue.replace(comRegEXP, "<span style=color:" + commentColor +">"+ comRegEXP+ "</span>");
+
+
+    console.log(document.getElementById('editor').innerHTML); //for debugging purposes
     document.getElementById('editor').innerHTML = divValue;
     cursorAtEnd();
 }
 
 
 /**
+ * @param: none
  * this function sets the cursor at the end of the text
  * TODO fix function to find current location of cursor and set back to there
  */
