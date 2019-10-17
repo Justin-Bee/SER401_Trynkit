@@ -1,4 +1,6 @@
 #editor {
+    background-color: #afb4ca;
+    color: #838bae;
     width: 500px;
     height: 800px;
     border: 3px solid #ccc;
@@ -13,5 +15,6 @@
     left:0;
     border: 3px solid #ccc;
     text-align: center;
-
+    background-color: #afb4ca;
+    color: #838bae;
 }
