@@ -33,7 +33,7 @@ const keyWords = ['import', 'from', 'if', 'else', 'for', 'while', 'False', 'None
 //all are set to default colors
 var keyWordColor ="orange";
 var numberColor="blue";
-var commentColor ="yellow";
+var commentColor ="red";
 var stringColor = "green";
 
 var editor = document.getElementById('editor');
@@ -44,8 +44,10 @@ editor.addEventListener("keydown", function(event){
              var selection = window.getSelection(),
              range = selection.getRangeAt(0),
              br = document.createElement("br"), //create <br> for the html
+             span = document.createElement('span'),
              textNode = document.createTextNode("\u00a0"); //Passing " " directly will not end up being shown correctly
              range.deleteContents();
+             range.insertNode(span);//insert a close out span just in case
              range.insertNode(br); //insert the br into the correct position
              range.collapse(false);
              range.insertNode(textNode);
@@ -83,25 +85,25 @@ function config(key, num){
  * function to highlight the syntax for MicroPython
  */
 function highlightKeywords(divValue) {
-  //  var divValue = document.getElementById('editor').innerText;
+    //  var divValue = document.getElementById('editor').innerText;
     //for the number highlighting
     var str = divValue.split(' ');
-        for (var i = 0; i < str.length; i++) {
-            //  console.log(str[i]);
-            if (str[i].match(/\d+/)) {
-                str[i] = "<span style=color:" + numberColor + ">"+str[i]+"</span>";
-            }
+    for (var i = 0; i < str.length; i++) {
+        //  console.log(str[i]);
+        if (str[i].match(/\d+/)) {
+            str[i] = "<span style=color:" + numberColor + ">" + str[i] + "</span></span>";
         }
-        divValue = "";
-        for (var i = 0; i < str.length; i++) {
-            if(str.length<=1){
-                divValue =divValue + str[i];
-            }else{
-                divValue = divValue + str[i] + " ";
-            }
+    }
+    divValue = "";
+    for (var i = 0; i < str.length; i++) {
+        if (str.length <= 1) {
+            divValue = divValue + str[i];
+        } else {
+            divValue = divValue + str[i] + " ";
         }
+    }
 
-        //for the keyword highlighting
+    //for the keyword highlighting
     for (var i = 0; i < keyWords.length; i++) {
         var word = keyWords[i];  //word we want to replace
         var wordHTML = ">" + word + "<";  //variable for same word surrounded by html tags
@@ -110,20 +112,27 @@ function highlightKeywords(divValue) {
         } else if (divValue.includes(word)) {
             //create regex variable
             re = new RegExp('\\b' + word + '\\b', "g");
-            divValue = divValue.replace(re, "<span style=color:" + keyWordColor + ">" + word + "</span>");
+            divValue = divValue.replace(re, "<span style=color:" + keyWordColor + ">" + word + "</span></span>");
         }
     }
-    
-    //formatting for comments
-    //match # until newline or </div>
-  //  comRegEXP = new RegExp('^#.*<$', g); //this regex will match # to < assuming <div> is at end of line
-   // divValue = divValue.replace(comRegEXP, "<span style=color:" + commentColor +">"+ comRegEXP+ "</span>");
 
+    //formatting for comments
+    //match # until newline
+    var comRegEXP = new RegExp('^#.*$', 'gm'); //this regex will match # to < assuming <div> is at end of line
+    var matched = divValue.match(comRegEXP);
+    if (matched != null) {
+        for (var i = 0; i < matched.length; i++) {
+            newWord = removeHTML(matched[i]);
+         divValue = divValue.replace(matched[i], "<span style=color:" + commentColor + ">" + newWord + "</span></span>");
+         }
+    }
 
     console.log(document.getElementById('editor').innerHTML); //for debugging purposes
     document.getElementById('editor').innerHTML = divValue;
     cursorAtEnd();
 }
+
+
 
 
 /**
@@ -142,6 +151,20 @@ function cursorAtEnd(){
             selection.addRange(range);
             el.focus();
 }
+
+/**
+ * Function to remove HTML tags from the inside of a string
+ * @param: String - str
+ * @return: String
+ */
+ function removeHTML(str) {
+      if ((str===null) || (str===''))
+      return false;
+      else
+      str = str.toString();
+      var htmlReg = new RegExp('<([^>]+)>', "g");
+      return str.replace( htmlReg, '');
+   }
 
 
 
