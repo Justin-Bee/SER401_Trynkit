@@ -12,7 +12,8 @@ function loadFile() {
 
         var reader = new FileReader();
         reader.onload = function(progressEvent){
-            document.getElementById('editor').innerHTML = this.result;
+            //document.getElementById('editor').innerHTML = this.result;
+            highlightKeywords(this.result);
         };
         reader.readAsText(file);
         document.getElementById('editor').setAttribute('name', projectName);
