@@ -56,9 +56,11 @@ editor.addEventListener("keydown", function(event){
             }
     }
     else if (event.keyCode ===32){ //this is to handle if space is pressed
-        highlightKeywords();
+        var divValue = document.getElementById('editor').innerText;
+        highlightKeywords(divValue);
     }else if (event.keyCode ===8){  //this is for backspace
-       highlightKeywords();
+        var divValue = document.getElementById('editor').innerText;
+       highlightKeywords(divValue);
        cursorAtEnd(); //need to create a function for this to keep cursor at current location
     }
 });
@@ -80,8 +82,8 @@ function config(key, num){
  * @param: none
  * function to highlight the syntax for MicroPython
  */
-function highlightKeywords() {
-    var divValue = document.getElementById('editor').innerText;
+function highlightKeywords(divValue) {
+  //  var divValue = document.getElementById('editor').innerText;
     //for the number highlighting
     var str = divValue.split(' ');
         for (var i = 0; i < str.length; i++) {

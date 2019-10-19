@@ -1,0 +1,28 @@
+{% load static %}
+<!doctype html>
+
+<html lang="en" class="no-js">
+      <head>
+          <meta charset="UTF-8"/>
+          <title>Trynkit Serial Console</title>
+          {% load static %}
+          <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}" />
+
+      </head>
+
+<body>
+
+<div id="title">
+    <h1>Serial Console</h1>
+</div>
+
+<!–– commands entered in this text box -->
+<textarea rows="30" cols="100" id="txtBox"></textarea>
+
+<p>Detected Device:</p>
+
+<div></div>
+<button type="button">Send</button>
+
+</body>
+</html>
