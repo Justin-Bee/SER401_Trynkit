@@ -47,6 +47,7 @@ editor.addEventListener("keydown", function(event){
              br = document.createElement("br"), //create <br> for the html
              textNode = document.createTextNode("\u00a0"); //Passing " " directly will not end up being shown correctly
              range.deleteContents();
+             range.insertNode(textNode);
              range.insertNode(br); //insert the br into the correct position
              range.collapse(false);
              range.insertNode(textNode);
@@ -136,7 +137,7 @@ function highlightKeywords(divValue) {
          }
     }
 
-    //console.log(document.getElementById('editor').innerHTML); //for debugging purposes
+    console.log(document.getElementById('editor').innerHTML); //for debugging purposes
     //console.log(document.getElementById('editor').innerText); //for debugging purposes
     document.getElementById('editor').innerHTML = divValue;
     cursorAtEnd();
