@@ -128,7 +128,7 @@ function highlightKeywords(divValue) {
 
     //formatting for comments
     //match # until newline
-    var comRegEXP = new RegExp('^#.*$', 'gm'); //this regex will match # to < assuming <div> is at end of line
+    var comRegEXP = new RegExp('#.*$', 'gm'); //this regex will match # to < assuming <div> is at end of line
     var matched = divValue.match(comRegEXP);
     if (matched != null) {
         for (var i = 0; i < matched.length; i++) {
