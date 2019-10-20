@@ -20,10 +20,6 @@
  */
 
 
-//set event listener to the editor for keypress
-//document.getElementById('editor').addEventListener("keydown", highlightKeywords, false);
-
-
 const keyWords = ['import', 'from', 'if', 'else', 'for', 'while', 'False', 'None', 'True',
                     'and', 'as', 'assert', 'break', 'class', 'continue', 'def','del', 'elif',
                     'except', 'finally', 'global', 'in', 'is', 'lambda', 'nonlocal', 'not',
@@ -36,6 +32,11 @@ var numberColor="blue";
 var commentColor ="red";
 var stringColor = "green";
 
+
+/**
+ * This block of code handles the key events: "Enter", "Space", "Backspace"
+ * @type {HTMLElement}
+ */
 var editor = document.getElementById('editor');
 editor.addEventListener("keydown", function(event){
     if(event.keyCode === 13){//to handle enter presses
@@ -44,10 +45,8 @@ editor.addEventListener("keydown", function(event){
              var selection = window.getSelection(),
              range = selection.getRangeAt(0),
              br = document.createElement("br"), //create <br> for the html
-             span = document.createElement('span'),
              textNode = document.createTextNode("\u00a0"); //Passing " " directly will not end up being shown correctly
              range.deleteContents();
-             range.insertNode(span);//insert a close out span just in case
              range.insertNode(br); //insert the br into the correct position
              range.collapse(false);
              range.insertNode(textNode);
@@ -73,9 +72,11 @@ editor.addEventListener("keydown", function(event){
  * @params: String: key, String num
  * This is to set the colors of the different types of formatting
  */
-function config(key, num){
+function config(key, num, com, str){
     keyWordColor = key;
     numberColor = num;
+    commentColor = com;
+    stringColor = str;
 }
 
 
@@ -85,8 +86,7 @@ function config(key, num){
  * function to highlight the syntax for MicroPython
  */
 function highlightKeywords(divValue) {
-    //  var divValue = document.getElementById('editor').innerText;
-    //for the number highlighting
+
     var str = divValue.split(' ');
     for (var i = 0; i < str.length; i++) {
         //  console.log(str[i]);
@@ -115,6 +115,15 @@ function highlightKeywords(divValue) {
             divValue = divValue.replace(re, "<span style=color:" + keyWordColor + ">" + word + "</span></span>");
         }
     }
+    //formatting for strings
+    var strRegEXP = new RegExp('"(.*?)"', 'gm');
+    var mat = divValue.match(strRegEXP);
+    if(mat != null){
+        for(var i = 0; i<mat.length; i++){
+            newStr = removeHTML(mat[i]);
+            divValue = divValue.replace(mat[i], "<span style=color:" + stringColor + ">" + newStr + "</span></span>");
+        }
+    }
 
     //formatting for comments
     //match # until newline
@@ -123,11 +132,12 @@ function highlightKeywords(divValue) {
     if (matched != null) {
         for (var i = 0; i < matched.length; i++) {
             newWord = removeHTML(matched[i]);
-         divValue = divValue.replace(matched[i], "<span style=color:" + commentColor + ">" + newWord + "</span></span>");
+            divValue = divValue.replace(matched[i], "<span style=color:" + commentColor + ">" + newWord + "</span></span>");
          }
     }
 
-    console.log(document.getElementById('editor').innerHTML); //for debugging purposes
+    //console.log(document.getElementById('editor').innerHTML); //for debugging purposes
+    //console.log(document.getElementById('editor').innerText); //for debugging purposes
     document.getElementById('editor').innerHTML = divValue;
     cursorAtEnd();
 }
@@ -167,8 +177,26 @@ function cursorAtEnd(){
    }
 
 
+   function removeNBSP() {
+     value = document.getElementById('editor').innerHTML;
+     value = value.replace('&nbsp;', ' ');
+     document.getElementById('editor').innerHTML= value;
+
+   }
 
 
+/**
+ * this is code that I am working on the improve the number formatting
+ */
+ //var numRegEXP = new RegExp('\\b\d*\\b', 'g');
+   // var num1 = divValue.match(numRegEXP);
+   // if(num1 != null){
+    //    for(var i =0; i<num1.length; i++){
+    //        console.log(num1.length);
+     //        newNum = num1[i];
+     //        divValue = divValue.replace(newNum,  "<span style=color:" + numberColor + ">" + newNum + "</span>");
+     //   }
+   // }//
 
 
 
