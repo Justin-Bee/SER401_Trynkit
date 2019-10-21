@@ -14,7 +14,7 @@ textarea{
 	left: 60px;
 }
 
-textarea: focus{
+textarea:focus{
 	outline: 0;
 }
 
