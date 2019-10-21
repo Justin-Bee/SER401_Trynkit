@@ -47,6 +47,7 @@ editor.addEventListener("keydown", function(event){
              br = document.createElement("br"), //create <br> for the html
              textNode = document.createTextNode("\u00a0"); //Passing " " directly will not end up being shown correctly
              range.deleteContents();
+             range.insertNode(textNode);
              range.insertNode(br); //insert the br into the correct position
              range.collapse(false);
              range.insertNode(textNode);
@@ -186,18 +187,7 @@ function cursorAtEnd(){
    }
 
 
-/**
- * this is code that I am working on the improve the number formatting
- */
- //var numRegEXP = new RegExp('\\b\d+\\b', 'g');
-   // var num1 = divValue.match(numRegEXP);
-   // if(num1 != null){
-    //    for(var i =0; i<num1.length; i++){
-    //        console.log(num1.length);
-     //        newNum = num1[i];
-     //        divValue = divValue.replace(newNum,  "<span style=color:" + numberColor + ">" + newNum + "</span>");
-     //   }
-   // }//
+
 
 
 
