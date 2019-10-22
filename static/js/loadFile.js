@@ -12,7 +12,6 @@ function loadFile() {
 
         var reader = new FileReader();
         reader.onload = function(progressEvent){
-            //document.getElementById('editor').innerHTML = this.result;
             highlightKeywords(this.result);
         };
         reader.readAsText(file);
