@@ -26,15 +26,21 @@
  * @param: filename the name of the file to be saved
  * @returns: none
  **/
-function saveEditorContents(filename) {
-      var element = document.createElement('a');
-      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(document.getElementById('editor').innerText));
-      element.setAttribute('download', filename);
+function saveEditorContents() {
+    if (document.getElementById('editor').getAttribute('name') == 'empty') {
+        projectName = prompt('Please chose a name for your project: ', 'NewProject.py');
+        document.getElementById('editor').setAttribute('name', projectName);
+    } else {
+        projectName = document.getElementById('editor').getAttribute('name');
+    }
 
-      element.style.display = 'none';
-      document.body.appendChild(element);
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(document.getElementById('editor').innerText));
+    element.setAttribute('download', projectName);
 
-      element.click();
+    element.style.display = 'none';
+    document.body.appendChild(element);
 
-      document.body.removeChild(element);
+    element.click();
+    document.body.removeChild(element);
 }
