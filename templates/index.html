@@ -56,8 +56,22 @@
             <button><input type="image" id ="load" src="{% static '/images/Device.png' %}" width="50" height="50"></button>
             <p></p>
             <button><input type="image" id ="load" src="{% static '/images/Settings.png' %}" width="50" height="50"></button>
+             <p></p>
+            <button onClick="consoleHide()"><input type ="image" id ="consoleBtn" src="{% static '' %}" width="50" height="50"></button>
+        <script>
+        function consoleHide(){
+            var x = document.getElementById('console');
+            if (x.style.display ==="none"){
+                x.style.display = "block";
+            }else{
+                x.style.display = "none";
+            }
+        }
+        </script>
         </div>
-        <div id="editor" contenteditable="true" name="empty"></div>
+        <div id="editor" contenteditable="true" name="empty"></div> <!-- we must not have any space between the div and close div-->
+        <div id="console" contenteditable="true" name="empty" style="display:none"></div>
+
     </body>
     <script src="/static/js/editor.js" type="text/javascript"></script>
     <script>

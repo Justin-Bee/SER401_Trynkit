@@ -2,7 +2,7 @@
     background-color: #ccd1db;
     color: #000000;
     width: 1500px;
-    height: 800px;
+    height: 700px;
     border: 2px solid #667490;
     padding: 5px;
     margin-left: 100px;
@@ -11,9 +11,23 @@
 
 }
 
+#console {
+    background-color: #ccd1db;
+    color: #000000;
+    width: 1500px;
+    height: 100px;
+    border: 2px solid #667490;
+    padding: 5px;
+    margin-left: 100px;
+    font-family: "Arial";
+    white-space: pre-line;
+
+}
+
+
 #menu {
     width: 100px;
-    height: 810px;
+    height: 100%;
     position: fixed;
     left:0;
     border: 2px solid #667490;
