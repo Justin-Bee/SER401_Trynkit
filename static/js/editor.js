@@ -92,7 +92,8 @@ function highlightKeywords(divValue) {
     for (var i = 0; i < str.length; i++) {
         //  console.log(str[i]);
         if (str[i].match(/\d+/)) {
-            str[i] = "<span style=color:" + numberColor + ">" + str[i] + "</span></span>";
+            newNum = str[i].match(/\d+/);
+            str[i] = str[i].replace(newNum, "<span style=color:" + numberColor + ">" + newNum + "</span></span>");
         }
     }
     divValue = "";
@@ -186,18 +187,7 @@ function cursorAtEnd(){
    }
 
 
-/**
- * this is code that I am working on the improve the number formatting
- */
- //var numRegEXP = new RegExp('\\b\d*\\b', 'g');
-   // var num1 = divValue.match(numRegEXP);
-   // if(num1 != null){
-    //    for(var i =0; i<num1.length; i++){
-    //        console.log(num1.length);
-     //        newNum = num1[i];
-     //        divValue = divValue.replace(newNum,  "<span style=color:" + numberColor + ">" + newNum + "</span>");
-     //   }
-   // }//
+
 
 
 
