@@ -32,6 +32,19 @@
                     document.getElementById('editor').innerText = sessionStorage.getItem(currentTab.toString());
                 };
             }
+            function newTab(id) {
+                var t = document.createElement('button');
+                t.setAttribute('id', 'tab' + tabCount);
+                document.getElementById('tabs').insertBefore(t, document.getElementById('newTabBtn'));
+                t.innerText = id; //TODO set the name of the innertext to the file name for other user story
+                tabCount++;
+                sessionStorage.setItem(t.id, "");
+                t.onclick = function() {
+                    sessionStorage.setItem(currentTab, document.getElementById('editor').innerText);
+                    currentTab = t.id;
+                    document.getElementById('editor').innerText = sessionStorage.getItem(currentTab.toString());
+                };
+            }
             function switchTab0() {
                 sessionStorage.setItem(currentTab, document.getElementById('editor').innerText);
                 document.getElementById('editor').innerText = sessionStorage.getItem('tab0');
@@ -80,6 +93,8 @@
         function newFile() {
             var projectName = prompt("Creating a new project:", "NewProjectName.py");
             document.getElementById('editor').setAttribute('name', projectName);
+            //create tab button with corresponding project name
+            newTab(projectName);            
         }
     </script>
     <script>
