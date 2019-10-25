@@ -19,7 +19,10 @@
  * @version October 2019
  */
 
-
+/**
+ * MicroPython keywords for syntax highlighting.
+ * @type: String
+ */
 const keyWords = ['import', 'from', 'if', 'else', 'for', 'while', 'False', 'None', 'True',
                     'and', 'as', 'assert', 'break', 'class', 'continue', 'def','del', 'elif',
                     'except', 'finally', 'global', 'in', 'is', 'lambda', 'nonlocal', 'not',
@@ -88,6 +91,7 @@ function config(key, num, com, str){
  */
 function highlightKeywords(divValue) {
 
+    //for number highlighting
     var str = divValue.split(' ');
     for (var i = 0; i < str.length; i++) {
         //  console.log(str[i]);
@@ -117,7 +121,7 @@ function highlightKeywords(divValue) {
             divValue = divValue.replace(re, "<span style=color:" + keyWordColor + ">" + word + "</span></span>");
         }
     }
-    //formatting for strings
+    //formatting for strings (anything between double quotes
     var strRegEXP = new RegExp('"(.*?)"', 'gm');
     var mat = divValue.match(strRegEXP);
     if(mat != null){
@@ -139,7 +143,6 @@ function highlightKeywords(divValue) {
     }
 
     console.log(document.getElementById('editor').innerHTML); //for debugging purposes
-    //console.log(document.getElementById('editor').innerText); //for debugging purposes
     document.getElementById('editor').innerHTML = divValue;
     cursorAtEnd();
 }
@@ -178,13 +181,6 @@ function cursorAtEnd(){
       return str.replace( htmlReg, '');
    }
 
-
-   function removeNBSP() {
-     value = document.getElementById('editor').innerHTML;
-     value = value.replace('&nbsp;', ' ');
-     document.getElementById('editor').innerHTML= value;
-
-   }
 
 
 
