@@ -27,9 +27,10 @@
  * @returns: none
  **/
 function saveEditorContents() {
-    if (document.getElementById('editor').getAttribute('name') == 'empty') {
+    if (document.getElementById('editor').getAttribute('name') == '.py') {
         projectName = prompt('Please chose a name for your project: ', 'NewProject.py');
         document.getElementById('editor').setAttribute('name', projectName);
+        document.getElementById('tab0').innerText = projectName;
     } else {
         projectName = document.getElementById('editor').getAttribute('name');
     }

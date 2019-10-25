@@ -37,6 +37,7 @@ function loadFile() {
         };
         reader.readAsText(file);
         document.getElementById('editor').setAttribute('name', projectName);
+        document.getElementById('tab0').innerText = projectName;
     };
 
 }
