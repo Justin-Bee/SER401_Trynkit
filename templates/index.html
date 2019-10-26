@@ -31,8 +31,7 @@
                     currentTab = t.id;
                     document.getElementById('editor').innerText = sessionStorage.getItem(currentTab.toString());
                 };
-            }
-            function newTab(id) {
+            }function newTab1(id) {
                 var t = document.createElement('button');
                 t.setAttribute('id', 'tab' + tabCount);
                 document.getElementById('tabs').insertBefore(t, document.getElementById('newTabBtn'));
@@ -94,7 +93,7 @@
             var projectName = prompt("Creating a new project:", "NewProjectName.py");
             document.getElementById('editor').setAttribute('name', projectName);
             //create tab button with corresponding project name
-            newTab(projectName);            
+            newTab1(projectName);
         }
     </script>
     <script>
