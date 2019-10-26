@@ -2,9 +2,9 @@
 
 <html lang="en-US">
       <head>
-          <meta charset="UTF-8"/>
-          <title>Trynkit Serial Console</title>
-          <link rel="stylesheet" type="text/css" href= "../static/css/console.css" />
+			<meta charset="UTF-8"/>
+			<title>Trynkit Serial Console</title>
+			<link rel="stylesheet" type="text/css" href= "../static/css/console.css" />
 
       </head>
 
@@ -14,15 +14,19 @@
     <h1>Serial Console<h1>
 </div>
 
+<div id="cPos"></div>
+
 <!–– commands entered in this text box -->
 <div class="cont">
 	<div class="numCol" id="nums">
 		<div class="row">1</div>
 	</div>
-	<textarea rows="30" id="txtBox"></textarea>
+	<textarea onkeyup="getCurrentPos(this);" onmouseup="this.onkeyup();" rows="30" id="txtBox"></textarea>
 	<div id="copy"></div>
+	<div id="copy2"></div>
 </div>
 <script src="../static/js/lineCount.js" type="text/javascript"></script>
+<script src="../static/js/caretPos.js" type="text/javascript"></script>
 
 </body>
 </html>
