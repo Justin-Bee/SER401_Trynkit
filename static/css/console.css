@@ -22,6 +22,11 @@ textarea, .numCol{
 	display: inline-block;
 }
 
+#cPos{
+	position: relative;
+	left: 50px;
+}
+
 .numCol{
 	box-sizing: border-box;
 	font-family: monospace;
@@ -35,7 +40,7 @@ textarea, .numCol{
 	vertical-align: top;
 }
 
-#copy{
+#copy, #copy2{
 	display: inline-block;
 	font-family: sans-serif;
 	line-height: 22px;
