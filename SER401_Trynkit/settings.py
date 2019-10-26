@@ -27,7 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
         'ec2-18-236-141-148.us-west-2.compute.amazonaws.com',
-        '127.0.0.1'
+        '127.0.0.1',
+        'SER401Group5-Trynkit-env.ku6ek4xjux.us-west-2.elasticbeanstalk.com'
         ]
 
 
