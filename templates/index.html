@@ -52,6 +52,25 @@
                 document.getElementById('editor').innerText = sessionStorage.getItem('tab0');
                 currentTab = 'tab0';
             }
+
+            /*
+            * Function for the web bluetooth functionality
+            * this opens a popup window automatically that shows devices
+            * and allows the user to select and pair.
+            */
+            function bluetooth(){
+                navigator.bluetooth.requestDevice({
+                    acceptAllDevices: true //this will show all devices that have bluetooth enabled
+                    /* for later iterations we cna specify the type of device so we only see dev boards
+                    * we will have to code the dev boards with an identifier we can filter
+                    *
+                    * filters:[{
+                    *   name: 'pyBoard'}]
+                    */
+                })
+                .then(device => { device.name })
+                .catch(error => { console.log(error);});
+            }
         </script>
     </div>
     <body>
@@ -70,7 +89,7 @@
                 window.onload = loadFile();
             </script>
             <p></p>
-            <button><input type="image" id ="devicesBtn" src="/static/images/Device.png" width="50" height="50"></button>
+            <button onClick="bluetooth()"><input type="image" id ="devicesBtn" src="/static/images/Device.png" width="50" height="50"></button>
             <p></p>
             <button><input type="image" id ="settingsBtn" src="/static/images/Settings.png" width="50" height="50"></button>
              <p></p>
