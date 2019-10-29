@@ -33,7 +33,7 @@ function loadFile() {
 
         var reader = new FileReader();
         reader.onload = function(progressEvent){
-            highlightKeywords(this.result);
+
         };
         reader.readAsText(file);
         document.getElementById('editor').setAttribute('name', projectName);
