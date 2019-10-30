@@ -27,6 +27,13 @@
 
 }
 
+#devices{
+    background-color: #ccd1db;
+    width: 1500px;
+    height: 700px;
+    align-self: center;
+}
+
 
 #menu {
     width: 100px;

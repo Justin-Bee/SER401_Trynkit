@@ -1,3 +1,4 @@
+
 {% load static %}
 <!doctype html>
 <html lang="en" class="no-js">
@@ -52,7 +53,6 @@
                 document.getElementById('editor').innerText = sessionStorage.getItem('tab0');
                 currentTab = 'tab0';
             }
-
             /*
             * Function for the web bluetooth functionality
             * this opens a popup window automatically that shows devices
@@ -70,6 +70,22 @@
                 })
                 .then(device => { device.name })
                 .catch(error => { console.log(error);});
+
+               .return
+      var x = document.getElementById('devices');
+                var y = document.getElementById('editor');
+                var z = document.getElementById('console');
+             //   x.innerHTML='<object type="text/html" data="/static/devices.html"></object>';
+                if (x.style.display ==="none"){
+                    x.style.display = "block";
+                    y.style.display = "none";
+                    z.style.display = "none";
+                }else{
+                    x.style.display = "none";
+                    y.style.display = "block";
+                    z.style.display = "block";
+                }
+
             }
         </script>
     </div>
@@ -117,7 +133,6 @@
             //create tab button with corresponding project name
             newTab1(projectName);
         }
-
         //this is for the code editing
         var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         mode: {name: "python",
@@ -130,3 +145,4 @@
     </script>
 
 </html>
+
