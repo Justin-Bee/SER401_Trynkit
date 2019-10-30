@@ -21,4 +21,6 @@ To use the web bluetooth functionality you may have to enable developer options 
   
 Install django-secure and django-sslserver
 
+## Copyright Info
+
 Copyright 2019 Justin Bee, Brian Carson, Andrew Fiorentino, Abigail Ida, and Vicente Ochoa. Code released under the [Apache 2.0](https://github.com/Justin-Bee/SER401_Trynkit/blob/master/LICENSE) license.
