@@ -11,6 +11,7 @@
         <script src="/static/js/save.js" type="text/javascript"></script>
         <script src="/static/js/codemirror.js" type="text/javascript"></script>
         <script src="/static/js/python.js" type="text/javascript"></script>
+        <script src="/static/js/bluetooth.js" type="text/javascript"></script>
         <link rel="stylesheet" type="text/css" href="/static/css/codemirror.css"/>
 
     </head>
@@ -53,40 +54,8 @@
                 document.getElementById('editor').innerText = sessionStorage.getItem('tab0');
                 currentTab = 'tab0';
             }
-            /*
-            * Function for the web bluetooth functionality
-            * this opens a popup window automatically that shows devices
-            * and allows the user to select and pair.
-            */
-            function bluetooth(){
-                navigator.bluetooth.requestDevice({
-                    acceptAllDevices: true //this will show all devices that have bluetooth enabled
-                    /* for later iterations we cna specify the type of device so we only see dev boards
-                    * we will have to code the dev boards with an identifier we can filter
-                    *
-                    * filters:[{
-                    *   name: 'pyBoard'}]
-                    */
-                })
-                .then(device => { device.name })
-                .catch(error => { console.log(error);});
-
-               .return
-      var x = document.getElementById('devices');
-                var y = document.getElementById('editor');
-                var z = document.getElementById('console');
-             //   x.innerHTML='<object type="text/html" data="/static/devices.html"></object>';
-                if (x.style.display ==="none"){
-                    x.style.display = "block";
-                    y.style.display = "none";
-                    z.style.display = "none";
-                }else{
-                    x.style.display = "none";
-                    y.style.display = "block";
-                    z.style.display = "block";
-                }
-
-            }
+            
+            
         </script>
     </div>
     <body>
@@ -122,7 +91,8 @@
         </script>
         </div>
         <div id="editor" contenteditable="true" name="empty"><textarea id="code"></textarea></div> <!-- we must not have any space between the div and close div-->
-        <div id="console" contenteditable="true" name="empty" style="display:none"></div>
+        <div id="console" contenteditable="true" name="empty" style="display:none">Serial Console</div>
+        <div id="devices" name="empty" style="display:none"></div>
 
     </body>
 
