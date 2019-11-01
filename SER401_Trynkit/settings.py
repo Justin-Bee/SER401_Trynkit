@@ -28,7 +28,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
         '127.0.0.1',
         'localhost',
-        'http://ser401-trynkit-env.h7p2npp8yj.us-west-2.elasticbeanstalk.com/'
+        'ser401trynkit-env.dpvfkpi7gs.us-west-2.elasticbeanstalk.com',
+        'ec2-52-12-196-187.us-west-2.compute.amazonaws.com',
         ]
 
 
