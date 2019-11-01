@@ -30,6 +30,12 @@ ALLOWED_HOSTS = [
         'localhost',
         'ser401trynkit-env.dpvfkpi7gs.us-west-2.elasticbeanstalk.com',
         'ec2-52-12-196-187.us-west-2.compute.amazonaws.com',
+        '172.31.3.140',
+        '172.31.49.55',
+        'www.ser401trynkit-env.dpvfkpi7gs.us-west-2.elasticbeanstalk.com',
+        '52.35.123.74',
+        'www.ser401trynkit-env.dpvfkpi7gs.us-west-2.elasticbeanstalk.com',
+
         ]
 
 
