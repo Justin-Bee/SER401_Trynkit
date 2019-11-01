@@ -29,10 +29,23 @@
                 t.innerText = 'Tab' + tabCount; //TODO set the name of the innertext to the file name for other user story
                 tabCount++;
                 sessionStorage.setItem(t.id, "");
+				t.style.backgroundColor = '#50B6E2';
+				var prevTab = document.getElementById('tab0');
+				prevTab.style.backgroundColor = '#D3D3D3';
+				for (i = 1; i < tabCount - 1; i++) {
+					prevTab = document.getElementById('tab' + i);
+					prevTab.style.backgroundColor = '#D3D3D3';
+				}
                 t.onclick = function() {
                     sessionStorage.setItem(currentTab, document.getElementById('editor').innerText);
                     currentTab = t.id;
                     document.getElementById('editor').innerText = sessionStorage.getItem(currentTab.toString());
+					var iTab = document.getElementById('tab0');
+					for (i = 0; i < tabCount; i++) {
+						iTab = document.getElementById('tab' + i);
+						iTab.style.backgroundColor = '#D3D3D3';
+					}
+					t.style.backgroundColor = '#50B6E2';
                 };
             }function newTab1(id) {
                 var t = document.createElement('button');
@@ -51,6 +64,13 @@
                 sessionStorage.setItem(currentTab, document.getElementById('editor').innerText);
                 document.getElementById('editor').innerText = sessionStorage.getItem('tab0');
                 currentTab = 'tab0';
+				var iTab = document.getElementById('tab0');
+				for (i = 0; i < tabCount; i++) {
+					iTab = document.getElementById('tab' + i);
+					iTab.style.backgroundColor = '#D3D3D3';
+				}
+				iTab = document.getElementById('tab0');
+				iTab.style.backgroundColor = '#50B6E2';
             }
 
             /*
