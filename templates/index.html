@@ -78,6 +78,8 @@
             <p>Menu</p>
             <button onclick="newFile()"><input type="image" id ="newFileBtn" src="/static/images/newFile.png" width="50" height="50"></button>
             <p></p>
+            <button onclick="newProject()"><input type="image" id ="newProjectBtn" src="/static/images/newProject.png" width="50" height="50"></button>
+            <p></p>
             <button onclick=saveEditorContents()><input type="image" id ="saveFileBtn" src="/static/images/savefile.png" width="50" height="50"></button>
             <p></p>
             <button id="loadFileBtn">
@@ -118,6 +120,13 @@
             newTab1(projectName);
         }
 
+        function newProject() {
+            var projectName = prompt("Creating a new project:", "NewProjectName.py");
+            document.getElementById('editor').setAttribute('name', projectName);
+            //create tab button with corresponding project name
+            newTab1(projectName);
+        }
+
         //this is for the code editing
         var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         mode: {name: "python",
@@ -127,6 +136,7 @@
         indentUnit: 4,
         matchBrackets: true
         });
+
     </script>
 
 </html>
