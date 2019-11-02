@@ -134,7 +134,7 @@
         }
         </script>
         </div>
-        <div id="editor" contenteditable="true" name="empty"><textarea id="code"></textarea></div> <!-- we must not have any space between the div and close div-->
+        <div id="editor" contenteditable="true" name="empty"><textarea id="code"></textarea></div>
         <div id="console" contenteditable="true" name="empty" style="display:none"></div>
 
     </body>
@@ -158,11 +158,13 @@
         var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         mode: {name: "python",
                version: 3,
-               singleLineStringErrors: false},
+               singleLineStringErrors: false
+        },
         lineNumbers: true,
         indentUnit: 4,
-        matchBrackets: true
-
+        matchBrackets: true,
+            spellcheck:true,
+            autofocus:true
         });
 
     </script>
