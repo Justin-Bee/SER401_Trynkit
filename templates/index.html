@@ -141,10 +141,12 @@
         }
 
         function newProject() {
-            var projectName = prompt("Creating a new project:", "NewProjectName.py");
-            document.getElementById('editor').setAttribute('name', projectName);
+            var projectName = prompt("Creating a new project:", "NewProjectName");
+            //creates directory folder with name of project
+            var mainFileName = prompt("Creating a new file within project:", "main.py");
+            document.getElementById('editor').setAttribute('name', mainFileName);
             //create tab button with corresponding project name
-            newTab1(projectName);
+            newTab1(mainFileName);
         }
 
         //this is for the code editing
