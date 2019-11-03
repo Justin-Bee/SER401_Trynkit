@@ -33,10 +33,12 @@ function loadFile() {
 
         var reader = new FileReader();
         reader.onload = function(progressEvent){
-
+             var contents = reader.result;
+             editor.setValue(contents);
         };
         reader.readAsText(file);
-        document.getElementById('code').setAttribute('name', projectName);
+        document.getElementById('editor').setAttribute('name', projectName);
+
     };
 
 }

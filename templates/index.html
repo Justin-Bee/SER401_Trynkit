@@ -37,9 +37,9 @@
 					prevTab.style.backgroundColor = '#D3D3D3';
 				}
                 t.onclick = function() {
-                    sessionStorage.setItem(currentTab, document.getElementById('code').getValue);
+                    sessionStorage.setItem(currentTab, editor.getValue());
                     currentTab = t.id;
-                    document.getElementById('code').setValue = sessionStorage.getItem(currentTab.toString());
+                    editor.setValue(sessionStorage.getItem(currentTab.toString()));
 					var iTab = document.getElementById('tab0');
 					for (i = 0; i < tabCount; i++) {
 						iTab = document.getElementById('tab' + i);
@@ -55,20 +55,14 @@
                 tabCount++;
                 sessionStorage.setItem(t.id, "");
                 t.onclick = function() {
-                    sessionStorage.setItem(currentTab, document.getElementById('code').getValue);
+                    sessionStorage.setItem(currentTab, editor.getValue());
                     currentTab = t.id;
-                    document.getElementById('code').setValue = sessionStorage.getItem(currentTab.toString());
-                    var iTab = document.getElementById('tab0');
-					for (i = 0; i < tabCount; i++) {
-						iTab = document.getElementById('tab' + i);
-						iTab.style.backgroundColor = '#D3D3D3';
-					}
-					t.style.backgroundColor = '#50B6E2';
+                    editor.setValue(sessionStorage.getItem(currentTab.toString()));
                 };
             }
             function switchTab0() {
-                sessionStorage.setItem(currentTab, document.getElementById('code').getValue);
-                document.getElementById('code').setValue = sessionStorage.getItem('tab0');
+                sessionStorage.setItem(currentTab, editor.getValue());
+                editor.setValue(sessionStorage.getItem('tab0'));
                 currentTab = 'tab0';
 				var iTab = document.getElementById('tab0');
 				for (i = 0; i < tabCount; i++) {
@@ -78,7 +72,6 @@
 				iTab = document.getElementById('tab0');
 				iTab.style.backgroundColor = '#50B6E2';
             }
-
             /*
             * Function for the web bluetooth functionality
             * this opens a popup window automatically that shows devices
