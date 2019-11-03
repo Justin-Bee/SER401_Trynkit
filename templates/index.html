@@ -1,3 +1,4 @@
+
 {% load static %}
 <!doctype html>
 <html lang="en" class="no-js">
@@ -13,6 +14,7 @@
         <script src="/static/js/save.js" type="text/javascript"></script>
         <script src="/static/js/codemirror.js" type="text/javascript"></script>
         <script src="/static/js/python.js" type="text/javascript"></script>
+        <script src="/static/js/bluetooth.js" type="text/javascript"></script>
         <link rel="stylesheet" type="text/css" href="/static/css/codemirror.css"/>
         <link rel="stylesheet" type="text/css" href="/static/css/ambiance.css"/>
         <link rel="stylesheet" type="text/css" href="/static/css/darcula.css"/>
@@ -82,6 +84,7 @@
 				iTab = document.getElementById('tab0');
 				iTab.style.backgroundColor = '#50B6E2';
             }
+
             /*
             * Function for the web bluetooth functionality
             * this opens a popup window automatically that shows devices
@@ -125,6 +128,8 @@
             <button data-toggle="modal" data-target="#settingsModal"><input type="image" id ="settingsBtn" src="/static/images/Settings.png" width="50" height="50"></button>
              <p></p>
             <button onClick="consoleHide()"><input type ="image" id ="consoleBtn" src="/static/images/serial.png" width="50" height="50"></button>
+            <p></p>
+            <button><input type ="image" id="debuggerBtn" src="/static/images/tempBug.png" width="50" height="50"></button>
         <script>
         function consoleHide(){
             var x = document.getElementById('console');
@@ -137,7 +142,8 @@
         </script>
         </div>
         <div id="editor" contenteditable="true" name="empty"><textarea id="code"></textarea></div> <!-- we must not have any space between the div and close div-->
-        <div id="console" contenteditable="true" name="empty" style="display:none"></div>
+        <div id="console" contenteditable="true" name="empty" style="display:none">Serial Console</div>
+        <div id="devices" name="empty" style="display:none"></div>
 
 
                 <!-- Settings Modal -->
@@ -172,13 +178,6 @@
     </body>
 
     <script>
-
-        function newFile() {
-            var projectName = prompt("Creating a new project:", "NewProjectName.py");
-            document.getElementById('code').setAttribute('name', projectName);
-            //create tab button with corresponding project name
-            newTab1(projectName);
-        }
 
         function newProject() {
             var projectName = prompt("Creating a new project:", "NewProjectName.py");
@@ -225,3 +224,4 @@
     </script>
 
 </html>
+
