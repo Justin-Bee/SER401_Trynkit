@@ -33,11 +33,12 @@ function loadFile() {
 
         var reader = new FileReader();
         reader.onload = function(progressEvent){
-            highlightKeywords(this.result);
+             var contents = reader.result;
+             editor.setValue(contents);
         };
         reader.readAsText(file);
         document.getElementById('editor').setAttribute('name', projectName);
-        document.getElementById('tab0').innerText = projectName;
+
     };
 
 }

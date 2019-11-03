@@ -14,4 +14,13 @@ https://tree.taiga.io/project/justin-bee-ser-401-trynkit/timeline
 
 https://drive.google.com/folderview?id=1VyC_jkIzQ18kYB9YkAErLDm4tPa70Jlq
 
+## Setup
+
+To use the web bluetooth functionality you may have to enable developer options in Google Chrome:
+  chrome://flags/#enable-experimental-web-platform-features
+  
+Install django-secure and django-sslserver
+
+## Copyright Info
+
 Copyright 2019 Justin Bee, Brian Carson, Andrew Fiorentino, Abigail Ida, and Vicente Ochoa. Code released under the [Apache 2.0](https://github.com/Justin-Bee/SER401_Trynkit/blob/master/LICENSE) license.
