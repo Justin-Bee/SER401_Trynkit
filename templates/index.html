@@ -11,6 +11,7 @@
         <script src="/static/js/codemirror.js" type="text/javascript"></script>
         <script src="/static/js/python.js" type="text/javascript"></script>
         <script src="/static/js/matchbrackets.js" type="text/javascript"></script>
+        <script src="/static/js/closebrackets.js" type="text/javascript"></script>
         <link rel="stylesheet" type="text/css" href="/static/css/codemirror.css"/>
 
     </head>
@@ -155,16 +156,20 @@
         }
 
         //this is for the code editing
-        var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+       var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         mode: {name: "python",
                version: 3,
-               singleLineStringErrors: false
+               singleLineStringErrors: false,
+               gutters: ["CodeMirror-lint-markers"],
+               lint: true
         },
         lineNumbers: true,
         indentUnit: 4,
         matchBrackets: true,
             spellcheck:true,
-            autofocus:true
+            autofocus:true,
+            autoCloseBrackets: true
+
         });
 
     </script>
