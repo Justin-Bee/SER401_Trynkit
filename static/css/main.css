@@ -9,6 +9,7 @@
     margin-left: 100px;
     font-family: "Arial";
     white-space: pre-line;
+    overflow:auto;
 
 }
 
@@ -24,7 +25,15 @@
     margin-left: 100px;
     font-family: "Arial";
     white-space: pre-line;
+    overflow:auto;
 
+}
+
+#devices{
+    background-color: #ccd1db;
+    width: 1500px;
+    height: 700px;
+    align-self: center;
 }
 
 
