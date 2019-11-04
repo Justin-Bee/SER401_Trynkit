@@ -114,8 +114,10 @@
             <button onClick="bluetooth()"><input type="image" id ="devicesBtn" src="/static/images/Device.png" width="50" height="50"></button>
             <p></p>
             <button><input type="image" id ="settingsBtn" src="/static/images/Settings.png" width="50" height="50"></button>
-             <p></p>
+            <p></p>
             <button onClick="consoleHide()"><input type ="image" id ="consoleBtn" src="/static/images/serial.png" width="50" height="50"></button>
+			<p></p>
+			<button onclick="debugToggle()" id="dToggle"><input type ="image" id ="consoleBtn" src="/static/images/serial.png" width="50" height="50"></button>
         <script>
         function consoleHide(){
             var x = document.getElementById('console');
@@ -129,6 +131,7 @@
         </div>
         <div id="editor" contenteditable="true" name="empty"><textarea id="code"></textarea></div> <!-- we must not have any space between the div and close div-->
         <div id="console" contenteditable="true" name="empty" style="display:none"></div>
+		<div id="debugger" contenteditable="false" name="empty" style="display:none"><input type="text" id="dText" value="Debugger output here." readonly></div>
 
     </body>
 
@@ -146,6 +149,11 @@
             //create tab button with corresponding project name
             newTab1(projectName);
         }
+
+		function debugToggle() {
+			var debugDiv = document.getElementById('debugger');
+			debugDiv.style.display = debugDiv.style.display == "none" ? "block" : "none";
+		}
 
         //this is for the code editing
         var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
