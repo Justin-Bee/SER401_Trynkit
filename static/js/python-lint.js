@@ -21,6 +21,7 @@ function python_validator(value, updateLinting, options, cm) {
             if(xmlhttp.status == 200) {
                 result = [];
                 var messages = JSON.parse(xmlhttp.responseText);
+                console.log(messages);
                 for (var i in messages) {
                     var message = messages[i];
                     result.push({message: message.message,

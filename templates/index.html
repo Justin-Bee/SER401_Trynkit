@@ -130,7 +130,7 @@
         </div>
 
 
-        <div id="editor" contenteditable="true" name="empty"><textarea id="code"></textarea></div> <!-- we must not have any space between the div and close div-->
+        <div id="editor" contenteditable="true" name="empty"><textarea id="code-mirror"></textarea></div> <!-- we must not have any space between the div and close div-->
         <div id="console" contenteditable="true" name="empty" style="display:none">Serial Console</div>
         <div id="devices" name="empty" style="display:none"></div>
 
@@ -170,7 +170,7 @@
 
         function newProject() {
             var projectName = prompt("Creating a new project:", "NewProjectName.py");
-            document.getElementById('code').setAttribute('name', projectName);
+            document.getElementById('code-mirror').setAttribute('name', projectName);
             //create tab button with corresponding project name
             newTab1(projectName);
         }
@@ -194,10 +194,11 @@
                 }]
 
             result_cb(error_list);
+           
         }
 
         //this is for the code editing
-       var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+       var editor = CodeMirror.fromTextArea(document.getElementById("code-mirror"), {
        lineNumbers: true,
     mode: "python",
     gutters: ["CodeMirror-lint-markers"],

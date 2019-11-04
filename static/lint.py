@@ -1,4 +1,4 @@
-#!/usr/bin/python
+# !/usr/bin/python
 # -*- coding: UTF-8 -*-
 
 from pylint.epylint import lint
@@ -13,7 +13,9 @@ file = tempfile.NamedTemporaryFile(delete=False)
 file.write(form.getfirst("code"))
 file.close()
 
-print('Content-type: text/html')
+print '''Content-type: text/html
+
+'''
 
 options = ['--reports', 'no',
            '--output-format', 'JSONReporter']
