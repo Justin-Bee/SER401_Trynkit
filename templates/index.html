@@ -84,6 +84,12 @@
 				iTab = document.getElementById('tab0');
 				iTab.style.backgroundColor = '#50B6E2';
             }
+            
+            window.onbeforeunload = function() {
+                for (var j = 0; j < sessionStorage.length; j++) {
+                    localStorage.setItem(sessionStorage.key(j), sessionStorage.getItem(sessionStorage.key(j)));
+                }
+            }
 
 
         </script>
