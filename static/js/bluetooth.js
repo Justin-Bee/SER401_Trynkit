@@ -22,7 +22,7 @@ function bluetooth(){
      var y = document.getElementById('editor');
      var z = document.getElementById('console');
   //   x.innerHTML='<object type="text/html" data="/static/devices.html"></object>';
-     if (x.style.display ==="none"){
+     if (z.style.display ==="none"){
        //  x.style.display = "block";
        //  y.style.display = "none";
          z.style.display = "block";
