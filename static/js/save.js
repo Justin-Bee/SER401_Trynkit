@@ -28,19 +28,33 @@
  **/
 function saveEditorContents() {
     if (document.getElementById('editor').getAttribute('name') == 'empty') {
-        projectName = prompt('Please chose a name for your project: ', 'NewProject.py');
-        document.getElementById('editor').setAttribute('name', projectName);
+        fileName = prompt('Please choose a name for your file within your project: ', 'NewFile.py');
+        document.getElementById('editor').setAttribute('name', fileName);
     } else {
-        projectName = document.getElementById('editor').getAttribute('name');
+        fileName = document.getElementById('editor').getAttribute('name');
     }
 
     var element = document.createElement('a');
+    var folder = createFolder.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(document.getElementById('editor').innerText));
-    element.setAttribute('download', projectName);
+    element.setAttribute('download', fileName);
 
     element.style.display = 'none';
     document.body.appendChild(element);
 
     element.click();
     document.body.removeChild(element);
+}
+
+function CreateAndSaveProject(){
+    //obtain folder and file names from user
+    var ProjectName = prompt("Creating a new project:", "NewProjectName");
+    var fileName = prompt("Creating a new file within project:", "NewFile.py");
+    document.getElementById('editor').setAttribute('name', fileName);
+    //creating folder for project (Research shows: may need to use node.js in order for folder and contents to be saved locally on the user's computer)
+    var newProjectObj = new ActiveXObject("Scripting.FileSystemObject");
+    newProjectObj.createFolder(ProjectName);
+    newProjectObj = null;
+    //create tab button with corresponding project name
+    newTab1(mainFileName);
 }
