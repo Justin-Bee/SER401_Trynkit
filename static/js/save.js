@@ -36,9 +36,16 @@ function saveEditorContents() {
     }
 
     var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(document.getElementById('editor').innerText));
-    element.setAttribute('download', projectName);
+    var editorContent = document.getElementById('editor').innerText;
+    var contentArray = editorContent.split("\n");
+    var finalContent = "";
+    for(var i = 1; i < contentArray.length; i = i+2) {
+        finalContent = finalContent + contentArray[i] + "\n";
+    }
 
+    //element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(document.getElementById('editor').innerText));
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(finalContent));
+    element.setAttribute('download', projectName);
     element.style.display = 'none';
     document.body.appendChild(element);
 
