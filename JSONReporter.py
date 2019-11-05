@@ -1,13 +1,11 @@
-
 import json
-from abc import ABC
 
 from pylint.interfaces import IReporter
 from pylint.reporters import BaseReporter, Message
-from logilab.common.ureports import TextWriter, Section
 
+from logilab.common.ureports import TextWriter
 
-class JSONReporter(BaseReporter, ABC):
+class JSONReporter(BaseReporter):
     """reports messages and layouts in plain text"""
 
     __implements__ = IReporter

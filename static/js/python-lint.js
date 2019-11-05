@@ -14,7 +14,7 @@ function python_validator(value, updateLinting, options, cm) {
     }
 
     var xmlhttp = getXmlHttp()
-    xmlhttp.open("POST", "/static/lint.py", true);
+    xmlhttp.open("POST", "lint.py", true);
     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4) {
