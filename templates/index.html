@@ -95,7 +95,7 @@
             <p></p>
             <button onclick="newProject()"><input type="image" id ="newProjectBtn" src="/static/images/newProject.png" width="50" height="50"></button>
             <p></p>
-            <button onclick=saveEditorContents()><input type="image" id ="saveFileBtn" src="/static/images/savefile.png" width="50" height="50"></button>
+            <button onclick='saveEditorContents()'><input type="image" id ="saveFileBtn" src="/static/images/savefile.png" width="50" height="50"></button>
             <p></p>
             <button id="loadFileBtn">
                 <img src="/static/images/Load.png" width="50" height="50">
@@ -162,7 +162,7 @@
     </body>
 
     <script>
-
+        document.getElementById('code').setAttribute('name', '.py');
         function newProject() {
             var projectName = prompt("Creating a new project:", "NewProjectName.py");
             document.getElementById('code').setAttribute('name', projectName);
