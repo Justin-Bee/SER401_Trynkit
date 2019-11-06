@@ -170,6 +170,13 @@
             newTab1(projectName);
         }
 
+         function newfile() {
+            var projectName = prompt("Creating a new project:", "NewProjectName.py");
+            document.getElementById('code').setAttribute('name', projectName);
+            //create tab button with corresponding project name
+            newTab1(projectName);
+        }
+
         //this is for the code editing
         var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         mode: {name: "python",
