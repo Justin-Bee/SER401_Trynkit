@@ -37,8 +37,10 @@ function loadFile() {
              editor.setValue(contents);
         };
         reader.readAsText(file);
-        document.getElementById('editor').setAttribute('name', projectName);
+        document.getElementById('code').setAttribute('name', projectName);
 
     };
 
 }
+
+
