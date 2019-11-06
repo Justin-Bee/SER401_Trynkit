@@ -27,16 +27,16 @@
  * @returns: none
  **/
 function saveEditorContents() {
-    if (editor.getAttribute('name') == '.py') {
+    if (document.getElementById('editor').getAttribute('name') == '.py') {
         projectName = prompt('Please chose a name for your project: ', 'NewProject.py');
-        editor.setAttribute('name', projectName);
+        document.getElementById('editor').setAttribute('name', projectName);
         document.getElementById('tab0').innerText = projectName;
     } else {
-        projectName = editor.getAttribute('name');
+        projectName = document.getElementById('editor').getAttribute('name');
     }
 
     var element = document.createElement('a');
-    var editorContent = editor.getValue();
+    var editorContent = document.getElementById('editor').innerText;
     var contentArray = editorContent.split("\n");
     var finalContent = "";
     for(var i = 1; i < contentArray.length; i = i+2) {
