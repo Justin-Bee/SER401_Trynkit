@@ -18,7 +18,9 @@
         <p></p>
         <button id="tab0" style="margin-left: 102px; margin-right: 0px" onclick='switchTab0()'>Tab0</button>
         <button id="newTabBtn" onclick="newTab()">+</button>
+        <button id="TabBtn" onclick="closeTab()">&times;</button>
         <script>
+            var t = document.createElement('button');
             function newTab() {
                 var t = document.createElement('button');
                 t.setAttribute('id', 'tab' + tabCount);
@@ -31,7 +33,8 @@
                     currentTab = t.id;
                     document.getElementById('editor').innerText = sessionStorage.getItem(currentTab.toString());
                 };
-            }function newTab1(id) {
+            }
+            function newTab1(id) {
                 var t = document.createElement('button');
                 t.setAttribute('id', 'tab' + tabCount);
                 document.getElementById('tabs').insertBefore(t, document.getElementById('newTabBtn'));
@@ -43,6 +46,30 @@
                     currentTab = t.id;
                     document.getElementById('editor').innerText = sessionStorage.getItem(currentTab.toString());
                 };
+            }
+            function closeTab(){
+                var tabName = prompt("Please identify the tab you would like to close:", "TabTitle.py");
+                if (tabName == "Tabtitle.py"){
+                    var tabName = prompt("You need to select a tab to close", "TabTitle.py");
+                }else{
+                    //save contents
+                    saveEditorContents();
+                    //close tab and reset editor window
+                    document.getElementById('editor').innerText = "";
+                    currentTab = 'tab0';
+                    document.getElementById('editor').innerText.remove();
+                    //sessionStorage.setItem(currentTab, "");
+                    //document.getElementById('button').remove();
+                    //var remTab = document.getElementById(tabName);
+                    //remTab.parentNode.removeChild(remTab);
+                    //var tab = document.getElementById('button');
+                    //if (document.getElementById('button').innerText == tabName){
+                    //    tab.innerText = id;
+                    //}
+                    //document.getElementById(tabName).value = "";
+
+                }
+
             }
             function switchTab0() {
                 sessionStorage.setItem(currentTab, document.getElementById('editor').innerText);
