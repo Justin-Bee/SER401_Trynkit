@@ -27,18 +27,25 @@
  * @returns: none
  **/
 function saveEditorContents() {
-    if (document.getElementById('editor').getAttribute('name') == '.py') {
+    if (editor.getAttribute('name') == '.py') {
         projectName = prompt('Please chose a name for your project: ', 'NewProject.py');
-        document.getElementById('editor').setAttribute('name', projectName);
+        editor.setAttribute('name', projectName);
         document.getElementById('tab0').innerText = projectName;
     } else {
-        projectName = document.getElementById('editor').getAttribute('name');
+        projectName = editor.getAttribute('name');
     }
 
     var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(document.getElementById('editor').innerText));
-    element.setAttribute('download', projectName);
+    var editorContent = editor.getValue();
+    var contentArray = editorContent.split("\n");
+    var finalContent = "";
+    for(var i = 1; i < contentArray.length; i = i+2) {
+        finalContent = finalContent + contentArray[i] + "\n";
+    }
 
+    //element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(document.getElementById('editor').innerText));
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(finalContent));
+    element.setAttribute('download', projectName);
     element.style.display = 'none';
     document.body.appendChild(element);
 
