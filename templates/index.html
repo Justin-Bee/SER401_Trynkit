@@ -95,7 +95,7 @@
             <p></p>
             <button onclick="newProject()"><input type="image" id ="newProjectBtn" src="/static/images/newProject.png" width="50" height="50"></button>
             <p></p>
-            <button onclick=saveEditorContents()><input type="image" id ="saveFileBtn" src="/static/images/savefile.png" width="50" height="50"></button>
+            <button onclick='saveEditorContents()'><input type="image" id ="saveFileBtn" src="/static/images/savefile.png" width="50" height="50"></button>
             <p></p>
             <button id="loadFileBtn">
                 <img src="/static/images/Load.png" width="50" height="50">
@@ -108,6 +108,12 @@
             <p></p>
             <button onClick="bluetooth()"><input type="image" id ="devicesBtn" src="/static/images/Device.png" width="50" height="50"></button>
             <p></p>
+
+            <button><input type="image" id ="settingsBtn" src="/static/images/Settings.png" width="50" height="50"></button>
+            <p></p>
+            <button onClick="consoleHide()"><input type ="image" id ="consoleBtn" src="/static/images/serial.png" width="50" height="50"></button>
+			<p></p>
+			<button onclick="debugToggle()" id="dToggle"><input type ="image" id ="consoleBtn" src="/static/images/serial.png" width="50" height="50"></button>
             <button data-toggle="modal" data-target="#settingsModal"><input type="image" id ="settingsBtn" src="/static/images/Settings.png" width="50" height="50"></button>
              <p></p>
             <button onClick="consoleHide()"><input type ="image" id ="consoleBtn" src="/static/images/serial.png" width="50" height="50"></button>
@@ -126,8 +132,10 @@
         </div>
 
         <div id="editor" contenteditable="true" name="empty"><textarea id="code"></textarea></div> <!-- we must not have any space between the div and close div-->
+		<div id="debugger" contenteditable="false" name="empty" style="display:none"><input type="text" id="dText" value="Debugger output here." readonly></div>
         <div id="console" contenteditable="true" name="empty" style="display:none">Serial Console</div>
         <div id="devices" name="empty" style="display:none"></div>
+
 
 
                 <!-- Settings Modal -->
@@ -188,13 +196,23 @@
     </body>
 
     <script>
-
+        document.getElementById('code').setAttribute('name', '.py');
         function newProject() {
             var projectName = prompt("Creating a new project:", "NewProjectName.py");
             document.getElementById('code').setAttribute('name', projectName);
             //create tab button with corresponding project name
             newTab1(projectName);
         }
+         function newfile() {
+            var projectName = prompt("Creating a new project:", "NewProjectName.py");
+            document.getElementById('code').setAttribute('name', projectName);
+            //create tab button with corresponding project name
+            newTab1(projectName);
+        }
+		function debugToggle() {
+			var debugDiv = document.getElementById('debugger');
+			debugDiv.style.display = debugDiv.style.display == "none" ? "block" : "none";
+		}
 
         //this is for the code editing
         var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
