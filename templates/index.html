@@ -108,18 +108,13 @@
             <p></p>
             <button onClick="bluetooth()"><input type="image" id ="devicesBtn" src="/static/images/Device.png" width="50" height="50"></button>
             <p></p>
-
-            <button><input type="image" id ="settingsBtn" src="/static/images/Settings.png" width="50" height="50"></button>
-            <p></p>
-            <button onClick="consoleHide()"><input type ="image" id ="consoleBtn" src="/static/images/serial.png" width="50" height="50"></button>
-			<p></p>
-			<button onclick="debugToggle()" id="dToggle"><input type ="image" id ="consoleBtn" src="/static/images/serial.png" width="50" height="50"></button>
             <button data-toggle="modal" data-target="#settingsModal"><input type="image" id ="settingsBtn" src="/static/images/Settings.png" width="50" height="50"></button>
              <p></p>
             <button onClick="consoleHide()"><input type ="image" id ="consoleBtn" src="/static/images/serial.png" width="50" height="50"></button>
             <p></p>
-            <button><input type ="image" id="debuggerBtn" src="/static/images/tempBug.png" width="50" height="50"></button>
-        <script>
+            <button onclick="debugToggle()"><input type ="image" id="debuggerBtn" src="/static/images/tempBug.png" width="50" height="50"></button>
+       
+     <script>
         function consoleHide(){
             var x = document.getElementById('console');
             if (x.style.display ==="none"){
