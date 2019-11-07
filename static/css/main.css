@@ -9,6 +9,7 @@
     margin-left: 100px;
     font-family: "Arial";
     white-space: pre-line;
+    overflow:auto;
 
 }
 
@@ -24,8 +25,10 @@
     margin-left: 100px;
     font-family: "Arial";
     white-space: pre-line;
+    overflow:auto;
 
 }
+
 
 #debugger {
     background-color: #ccd1db;
@@ -44,6 +47,11 @@
 	width: 1490px;
 	height: 70px;
 	
+#devices{
+    background-color: #ccd1db;
+    width: 1500px;
+    height: 700px;
+    align-self: center;
 }
 
 
