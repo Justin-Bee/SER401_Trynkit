@@ -170,14 +170,19 @@
     </body>
 
     <script>
-
+        document.getElementById('code').setAttribute('name', '.py');
         function newProject() {
             var projectName = prompt("Creating a new project:", "NewProjectName.py");
             document.getElementById('code').setAttribute('name', projectName);
             //create tab button with corresponding project name
             newTab1(projectName);
         }
-
+         function newfile() {
+            var projectName = prompt("Creating a new project:", "NewProjectName.py");
+            document.getElementById('code').setAttribute('name', projectName);
+            //create tab button with corresponding project name
+            newTab1(projectName);
+        }
 		function debugToggle() {
 			var debugDiv = document.getElementById('debugger');
 			debugDiv.style.display = debugDiv.style.display == "none" ? "block" : "none";
