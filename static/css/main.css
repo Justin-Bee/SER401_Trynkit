@@ -45,9 +45,10 @@
 
 #dText {
 	width: 1490px;
-	height: 70px;
+    height: 70px;
+}
 	
-#devices{
+#devices {
     background-color: #ccd1db;
     width: 1500px;
     height: 700px;
