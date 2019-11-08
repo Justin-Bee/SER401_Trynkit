@@ -90,14 +90,16 @@
     </div>
     <body>
         <div id="menu">
-            <button onclick="newFile()"><img type="image/svg+xml" id ="newFileBtn" src="/static/images/newProject.svg" width="50" height="50"></button>
+            <p>Menu</p>
+            <button onclick="newFile()"><img type="image/svg+xml" id ="newFileBtn" src="/static/images/file-regular.svg" width="50" height="50"></button>
             <p></p>
-            <button onclick="newProject()"><img type="image/svg+xml" id ="newProjectBtn" src="/static/images/newProject.svg" width="50" height="50"></button>
+            <button onclick="newProject()"><img type="image/svg+xml" id ="newProjectBtn" src="/static/images/folder-regular.svg" width="50" height="50"></button>
             <p></p>
-            <button onclick=saveEditorContents()><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/newProject.svg" width="50" height="50"></button>
+            <button onclick=saveEditorContents()><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50"></button>
             <p></p>
             <button id="loadFileBtn">
-                <img type="image/svg+xml" src="/static/images/newProject.svg" width="50" height="50">
+                <img type="image/svg+xml" src="/static/images/cloud-upload-alt-solid.svg" width="50" height="50">
+
             </button>
             <span id="spnFilePath"></span>
             <input type="file" id="file" style="display: none" />
@@ -105,14 +107,16 @@
                 window.onload = loadFile();
             </script>
             <p></p>
-            <button onClick="bluetooth()"><img type="image/svg+xml" id ="devicesBtn" src="/static/images/newProject.svg" width="50" height="50"></button>
+
+            <button onClick="bluetooth()"><img type="image/svg+xml" id ="devicesBtn" src="/static/images/bluetooth-b-brands.svg" width="50" height="50"></button>
             <p></p>
-            <button data-toggle="modal" data-target="#settingsModal"><img type="image/svg+xml" id ="settingsBtn" src="/static/images/newProject.svg" width="50" height="50"></button>
+            <button data-toggle="modal" data-target="#settingsModal"><img type="image/svg+xml" id ="settingsBtn" src="/static/images/cogs-solid.svg" width="50" height="50"></button>
              <p></p>
-            <button onClick="consoleHide()"><img type="image/svg+xml" id ="consoleBtn" src="/static/images/newProject.svg" width="50" height="50"></button>
+            <button onClick="consoleHide()"><img type="image/svg+xml" id ="consoleBtn" src="/static/images/plug-solid.svg" width="50" height="50"></button>
             <p></p>
-            <button><img type ="image/svg+xml" id="debuggerBtn" src="/static/images/newProject.svg" width="50" height="50"></button>
-        <script>
+            <button><img type ="image/svg+xml" id="debuggerBtn" src="/static/images/bug-solid.svg" width="50" height="50"></button>
+       
+     <script>
         function consoleHide(){
             var x = document.getElementById('console');
             if (x.style.display ==="none"){
@@ -125,8 +129,10 @@
         </div>
 
         <div id="editor" contenteditable="true" name="empty"><textarea id="code"></textarea></div> <!-- we must not have any space between the div and close div-->
+		<div id="debugger" contenteditable="false" name="empty" style="display:none"><input type="text" id="dText" value="Debugger output here." readonly></div>
         <div id="console" contenteditable="true" name="empty" style="display:none">Serial Console</div>
         <div id="devices" name="empty" style="display:none"></div>
+
 
 
                 <!-- Settings Modal -->
@@ -161,13 +167,23 @@
     </body>
 
     <script>
-
+        document.getElementById('code').setAttribute('name', '.py');
         function newProject() {
             var projectName = prompt("Creating a new project:", "NewProjectName.py");
             document.getElementById('code').setAttribute('name', projectName);
             //create tab button with corresponding project name
             newTab1(projectName);
         }
+         function newfile() {
+            var projectName = prompt("Creating a new project:", "NewProjectName.py");
+            document.getElementById('code').setAttribute('name', projectName);
+            //create tab button with corresponding project name
+            newTab1(projectName);
+        }
+		function debugToggle() {
+			var debugDiv = document.getElementById('debugger');
+			debugDiv.style.display = debugDiv.style.display == "none" ? "block" : "none";
+		}
 
         //this is for the code editing
         var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
