@@ -55,8 +55,10 @@
                     for (i = 0; i < tabCount; i++) {
                         iTab = document.getElementById('tab' + i);
                         iTab.style.backgroundColor = "#D3D3D3";
+                        iTab.disabled = false;
                     }
                     t.style.backgroundColor = "#50B6E2";
+                    t.disabled = true;
                 };
             }
             function newTab() {
@@ -81,8 +83,10 @@
 					for (i = 0; i < tabCount; i++) {
 						iTab = document.getElementById('tab' + i);
 						iTab.style.backgroundColor = '#D3D3D3';
+                        iTab.disabled = false;
 					}
 					t.style.backgroundColor = '#50B6E2';
+                    t.disabled = true;
                 };
             }
             function newTab1(id) {
@@ -106,15 +110,21 @@
 				for (i = 0; i < tabCount; i++) {
 					iTab = document.getElementById('tab' + i);
 					iTab.style.backgroundColor = '#D3D3D3';
+                    iTab.disabled = false;
 				}
 				iTab = document.getElementById('tab0');
+                iTab.disabled = true;
 				iTab.style.backgroundColor = '#50B6E2';
             }
             document.onreadystatechange = function() {
-                currentTab = "tab" + (localStorage.length - 1);
-                editor.setValue(localStorage.getItem(currentTab).toString());
-                for (i = 1; i < localStorage.length - 1; i++) {
-                    loadTab();
+                if (localStorage.length == 0) {
+                    document.getElementById('tab0').disabled = true;
+                } else {
+                    currentTab = "tab" + (localStorage.length - 1);
+                    editor.setValue(localStorage.getItem(currentTab).toString());
+                    for (i = 1; i < localStorage.length - 1; i++) {
+                        loadTab();
+                    }
                 }
             }
         </script>
