@@ -91,14 +91,14 @@
     <body>
         <div id="menu">
             <p>Menu</p>
-            <button onclick="newFile()"><input type="image" id ="newFileBtn" src="/static/images/newFile.png" width="50" height="50"></button>
+            <button onclick="newFile()"><img type="image/svg+xml" id ="newFileBtn" src="/static/images/file-regular.svg" width="50" height="50"></button>
             <p></p>
-            <button onclick="newProject()"><input type="image" id ="newProjectBtn" src="/static/images/newProject.png" width="50" height="50"></button>
+            <button onclick="newProject()"><img type="image/svg+xml" id ="newProjectBtn" src="/static/images/folder-regular.svg" width="50" height="50"></button>
             <p></p>
-            <button onclick='saveEditorContents()'><input type="image" id ="saveFileBtn" src="/static/images/savefile.png" width="50" height="50"></button>
+            <button onclick=saveEditorContents()><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50"></button>
             <p></p>
             <button id="loadFileBtn">
-                <img src="/static/images/Load.png" width="50" height="50">
+                <img type="image/svg+xml" src="/static/images/cloud-upload-alt-solid.svg" width="50" height="50">
             </button>
             <span id="spnFilePath"></span>
             <input type="file" id="file" style="display: none" />
@@ -106,13 +106,13 @@
                 window.onload = loadFile();
             </script>
             <p></p>
-            <button onClick="bluetooth()"><input type="image" id ="devicesBtn" src="/static/images/Device.png" width="50" height="50"></button>
+            <button onClick="bluetooth()"><img type="image/svg+xml" id ="devicesBtn" src="/static/images/bluetooth-b-brands.svg" width="50" height="50"></button>
             <p></p>
-            <button data-toggle="modal" data-target="#settingsModal"><input type="image" id ="settingsBtn" src="/static/images/Settings.png" width="50" height="50"></button>
+            <button data-toggle="modal" data-target="#settingsModal"><img type="image/svg+xml" id ="settingsBtn" src="/static/images/cogs-solid.svg" width="50" height="50"></button>
              <p></p>
-            <button onClick="consoleHide()"><input type ="image" id ="consoleBtn" src="/static/images/serial.png" width="50" height="50"></button>
+            <button onClick="consoleHide()"><img type="image/svg+xml" id ="consoleBtn" src="/static/images/plug-solid.svg" width="50" height="50"></button>
             <p></p>
-            <button onclick="debugToggle()"><input type ="image" id="debuggerBtn" src="/static/images/tempBug.png" width="50" height="50"></button>
+            <button><img type ="image/svg+xml" id="debuggerBtn" src="/static/images/bug-solid.svg" width="50" height="50"></button>
        
      <script>
         function consoleHide(){
