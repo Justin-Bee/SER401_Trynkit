@@ -26,8 +26,13 @@ SECRET_KEY = 'o80$ej2q0$b=vlko6q9h11guz*i^iq19#nlg^6)rdwo4_57ylz'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-        'ec2-18-236-141-148.us-west-2.compute.amazonaws.com',
-        '127.0.0.1'
+        '127.0.0.1',
+        'localhost',
+        'ser401trynkit-env.dpvfkpi7gs.us-west-2.elasticbeanstalk.com',
+        'ec2-52-12-196-187.us-west-2.compute.amazonaws.com',
+        'www.ser401trynkit-env.dpvfkpi7gs.us-west-2.elasticbeanstalk.com',
+        'ip-172-31-54-73.us-west-2.compute.internal',
+        '0.0.0.0',
         ]
 
 
@@ -79,12 +84,12 @@ WSGI_APPLICATION = 'SER401_Trynkit.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
+#}
 
 
 # Password validation
