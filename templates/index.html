@@ -142,6 +142,19 @@
 
         function newProject() {
             var projectName = prompt("Creating a new project:", "NewProjectName");
+            const fs = require('fs');
+            const folderName = './tmp';
+            //get the full path
+            //fs.readdirSync(folderPath).map(projectName => {
+            //    return path.join(folderPath,projectName);
+           // })
+            try{
+                if(!fs.existSync(folderName)){
+                    fs.mkdirSync(folderName);
+                }
+            }catch (err){
+                console.error(err);
+            }
             //creates directory folder with name of project
             var fileName = prompt("Creating a new file within project:", "NewFile.py");
             document.getElementById('editor').setAttribute('name', fileName);
