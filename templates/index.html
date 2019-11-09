@@ -58,19 +58,18 @@
                     document.getElementById('editor').innerText = "";
                     currentTab = 'tab0';
                     document.getElementById('editor').innerText.remove();
-                    //sessionStorage.setItem(currentTab, "");
-                    //document.getElementById('button').remove();
-                    //var remTab = document.getElementById(tabName);
-                    //remTab.parentNode.removeChild(remTab);
-                    //var tab = document.getElementById('button');
-                    //if (document.getElementById('button').innerText == tabName){
-                    //    tab.innerText = id;
-                    //}
-                    //document.getElementById(tabName).value = "";
-
                 }
+            //functionaloity to be implemented with new tab setup in the next sprint
+            /*<ul id = "tabList" onclick='switchTab()'>
+                <li>tab0</li>
+            </ul>
+            <ul id = "newTab" onclick='NewTab()'>
+                <li>+</li>
+            </ul>
+            //closeButton = $('<button />').addClass('closeButton').text('X');
+            <button id="closeButton" onclick="closeTab()">&times;</button>
+            closeButton.appendTo('tabList'); */
 
-            }
             function switchTab0() {
                 sessionStorage.setItem(currentTab, document.getElementById('editor').innerText);
                 document.getElementById('editor').innerText = sessionStorage.getItem('tab0');
