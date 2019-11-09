@@ -99,7 +99,7 @@
                 t.onclick = function() {
                     localStorage.setItem(currentTab, editor.getValue());
                     currentTab = t.id;
-                    editor.setValue(sessionStorage.getItem(currentTab.toString()));
+                    editor.setValue(localStorage.getItem(currentTab.toString()));
                 };
             }
             function switchTab0() {
