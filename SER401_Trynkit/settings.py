@@ -32,6 +32,7 @@ ALLOWED_HOSTS = [
         'ec2-52-12-196-187.us-west-2.compute.amazonaws.com',
         'www.ser401trynkit-env.dpvfkpi7gs.us-west-2.elasticbeanstalk.com',
         'ip-172-31-54-73.us-west-2.compute.internal',
+        '0.0.0.0',
         ]
 
 
