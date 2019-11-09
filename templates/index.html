@@ -120,11 +120,11 @@
                     t.disabled = true;
                 };
             }
-            function closeTab(){
+            function closeTab() {
                 var tabName = prompt("Please identify the tab you would like to close:", "TabTitle.py");
-                if (tabName == "Tabtitle.py"){
+                if (tabName == "Tabtitle.py") {
                     var tabName = prompt("You need to select a tab to close", "TabTitle.py");
-                }else{
+                } else {
                     //save contents
                     saveEditorContents();
                     //close tab and reset editor window
@@ -132,6 +132,7 @@
                     currentTab = 'tab0';
                     document.getElementById('editor').innerText.remove();
                 }
+            }
             //functionaloity to be implemented with new tab setup in the next sprint
             /*<ul id = "tabList" onclick='switchTab()'>
                 <li>tab0</li>
