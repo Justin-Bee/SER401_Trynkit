@@ -80,3 +80,15 @@ button{
     margin-left: 4px;
     margin-right: 4px;
 }
+
+#cBtn {
+    border-radius: 6px;
+    background-color: #e7e7e7;
+    color: black;
+}
+
+#lBtn {
+    border-radius: 6px;
+    background-color: #e7e7e7;
+    color: black;
+}
