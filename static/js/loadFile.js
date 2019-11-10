@@ -33,10 +33,39 @@ function loadFile() {
 
         var reader = new FileReader();
         reader.onload = function(progressEvent){
-            highlightKeywords(this.result);
+             var content = reader.result;
+             editor.setValue(content);
         };
         reader.readAsText(file);
-        document.getElementById('editor').setAttribute('name', projectName);
+        document.getElementById('code').setAttribute('name', projectName);
+
     };
 
 }
+
+function loadProject() {
+    var fileupload1 = document.getElementById("file1");
+    var filePath1 = document.getElementById("spnFilePath1");
+    var button1 = document.getElementById("lBtn");
+    button1.onclick = function () {
+        fileupload1.click();
+    };
+    file1.onchange = function () {
+        var projectName1 = fileupload1.value.split('\\')[fileupload1.value.split('\\').length - 1];
+
+        var file1 = this.files[0];
+
+        var reader1 = new FileReader();
+        reader1.onload = function(progressEvent){
+             var contents = reader1.result;
+             editor.setValue(contents);
+        };
+        reader1.readAsText(file1);
+        document.getElementById('code').setAttribute('name', projectName1);
+
+    };
+
+}
+
+
+
