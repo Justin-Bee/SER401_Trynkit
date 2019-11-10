@@ -256,23 +256,40 @@
     <script>
         document.getElementById('code').setAttribute('name', '.py');
         function newProject() {
+            //TODO this needs changed to reflect the new project code right now just creates a file
             var projectName = prompt("Creating a new project:", "NewProjectName.py");
             document.getElementById('code').setAttribute('name', projectName);
             //create tab button with corresponding project name
             newTab1(projectName);
+            switchTab0();
         }
-         function newfile() {
-            var projectName = prompt("Creating a new project:", "NewProjectName.py");
+
+        /**
+         * newFile()
+         * This function prompts the user to enter a new file
+         * creates a new tab and sets the tab name with that file name.
+         *
+         * @param: none
+         * @return: nothing
+         */
+         function newFile() {
+            var projectName = prompt("Enter a filename for the new file:", "NewProjectName.py");
             document.getElementById('code').setAttribute('name', projectName);
             //create tab button with corresponding project name
             newTab1(projectName);
+            //TODO when the new tabs are implemented make this function switch to the newly created tab/file
         }
+
 		function debugToggle() {
 			var debugDiv = document.getElementById('debugger');
 			debugDiv.style.display = debugDiv.style.display == "none" ? "block" : "none";
 		}
 
-        //this is for the code editing
+		/**
+         * Code Mirror
+         * This initializes the code mirror editor.
+         * It is set in the "code" text area.
+         */
         var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         mode: {name: "python",
                version: 3,
@@ -280,10 +297,12 @@
                singleLineStringErrors: false},
         lineNumbers: true,
         indentUnit: 4,
-        matchBrackets: true
+        matchBrackets: true,
+        autofocus:true
         });
 
         /**
+         * selectTheme()
          * This function is used to change the theme of the editor
          * When an option is selected in the settings dropdown menu
          * it changes the theme by what choice is selected.
