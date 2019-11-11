@@ -76,7 +76,7 @@ body{
 }
 
 button{
-    background-color: #d9dbdf; 
+    background-color: #d9dbdf;
     margin-left: 4px;
     margin-right: 4px;
 }
@@ -91,4 +91,44 @@ button{
     border-radius: 6px;
     background-color: #e7e7e7;
     color: black;
+}
+
+#nfBtn{
+    background-color: Transparent;
+    border: none;
+}
+
+#npBtn{
+    background-color: Transparent;
+    border: none;
+}
+
+#sBtn{
+    background-color: Transparent;
+    border: none;
+}
+
+#loadFileBtn{
+    background-color: Transparent;
+    border: none;
+}
+
+#bBtn{
+    background-color: Transparent;
+    border: none;
+}
+
+#settingsBtn{
+    background-color: Transparent;
+    border: none;
+}
+
+#serialBtn{
+    background-color: Transparent;
+    border: none;
+}
+
+#debugBtn{
+    background-color: Transparent;
+    border: none;
 }
