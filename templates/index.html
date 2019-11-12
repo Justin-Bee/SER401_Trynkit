@@ -272,11 +272,8 @@
             //create tab button with corresponding project name
             newTab1(projectName);
         }
-         function newfile() {
-            var projectName = prompt("Creating a new project:", "NewProjectName.py");
-            document.getElementById('code').setAttribute('name', projectName);
-            //create tab button with corresponding project name
-            newTab1(projectName);
+         function newFile() {
+            $(".add-tab").click();   
         }
 		function debugToggle() {
 			var debugDiv = document.getElementById('debugger');
@@ -335,19 +332,19 @@
                 $(this).tab('show');
                 }
             })
-            .on("click", "span", function () {
-                var anchor = $(this).siblings('a');
-              //  $(anchor.attr('href')).remove();  //TODO remove the code in the editor 
-                    $(this).parent().remove();
-                 //   $(".nav-tabs li").children('a').first().click();
+            .on("click", "span", function () { //this is to handle the remove button
+                    //todo prompt the user to save file
+                    //TODO remove the code in the editor 
+                    $(this).parent().remove(); //this removes the tab
+                   
                 });
-
+            //This function handles the logic when you click add tab
             $('.add-tab').click(function (e) {
+                var projectName = prompt("Creating a new project:", "NewProjectName.py");
                 e.preventDefault();
                 var id = $(".nav-tabs").children().length; 
                 var tabId = 'tab_' + id;
-                $(this).closest('li').before('<li><a href="#tab_' + id + '">New Tab</a> <span> x </span></li>');
-             //   $('.tab-content').append('<div class="tab-pane" id="' + tabId + '"> <div id="editor" contenteditable="true" name="empty"><textarea id="code"></textarea></div> <!-- we must not have any space between the div and close div--></div>');
+                $(this).closest('li').before('<li><a href="#tab_' + id + '">"'+ projectName+'"</a> <span> x </span></li>');
             $('.nav-tabs li:nth-child(' + id + ') a').click();
             });
 
