@@ -25,16 +25,14 @@
 
 
     </head>
-    <div id="tabs">
+    
     <script>
         var tabCount = 1;
-        var currentTab = 'tab0';
-    </script>
-        <p></p>
-        <button id="tab0" style="margin-left: 102px; margin-right: 0px" onclick='switchTab0()'>*.py</button>
-        <button id="newTabBtn" onclick="newTab()">+</button>
-        <script>
-            function loadTab() {
+        var currentTab = 'tab0'; 
+       
+
+
+         /*   function loadTab() {
                 var t = document.createElement('button');
                 t.setAttribute('id', 'tab' + tabCount);
                 document.getElementById('tabs').insertBefore(t, document.getElementById('newTabBtn'));
@@ -141,7 +139,7 @@
                         loadTab();
                     }
                 }
-            }
+            } */
         </script>
     </div>
     <body>
@@ -184,7 +182,20 @@
         </script>
         </div>
 
-        <div id="editor" contenteditable="true" name="empty"><textarea id="code"></textarea></div> <!-- we must not have any space between the div and close div-->
+        <div class="container">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active"><a href="#tab_01" data-toggle="tab">*.py</a><span>x</span>
+                </li>
+                <li><a href="#" class="add-tab">+ New File</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab_01"><textarea id="code"></textarea></div>
+                
+            </div>
+        </div>
+
+       
 		<div id="debugger" contenteditable="false" name="empty" style="display:none"><input type="text" id="dText" value="Debugger output here." readonly></div>
         <div id="console" contenteditable="true" name="empty" style="display:none">Serial Console</div>
         <div id="devices" name="empty" style="display:none"></div>
@@ -313,6 +324,32 @@
         $(window).on('load',function(){
         $('#onloadModal').modal('show');
         });
+
+        /**
+         * This is for the bootstrap toggeable tabs
+         * has the ability to add new tabs and close tabs
+         */
+         $(".nav-tabs").on("click", "a", function (e) {
+            e.preventDefault();
+             if (!$(this).hasClass('add-tab')) {
+                $(this).tab('show');
+                }
+            })
+            .on("click", "span", function () {
+                var anchor = $(this).siblings('a');
+              //  $(anchor.attr('href')).remove();  //TODO remove the code in the editor 
+                    $(this).parent().remove();
+                 //   $(".nav-tabs li").children('a').first().click();
+                });
+
+            $('.add-tab').click(function (e) {
+                e.preventDefault();
+                var id = $(".nav-tabs").children().length; 
+                var tabId = 'tab_' + id;
+                $(this).closest('li').before('<li><a href="#tab_' + id + '">New Tab</a> <span> x </span></li>');
+             //   $('.tab-content').append('<div class="tab-pane" id="' + tabId + '"> <div id="editor" contenteditable="true" name="empty"><textarea id="code"></textarea></div> <!-- we must not have any space between the div and close div--></div>');
+            $('.nav-tabs li:nth-child(' + id + ') a').click();
+            });
 
     </script>
 
