@@ -151,7 +151,9 @@
             <p></p>
             <button onclick="newProject()"><img type="image/svg+xml" id ="newProjectBtn" src="/static/images/folder-regular.svg" width="50" height="50"></button>
             <p></p>
-            <button onclick=saveEditorContents()><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50"></button>
+			<input type="file" id="FileUpload" onchange="selectDir(event)" webkitdirectory mozdirectory msdirectory odirectory directory multiple />
+            <p></p>
+			<button onclick=saveEditorContents()><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50"></button>
             <p></p>
             <button id="loadFileBtn">
                 <img type="image/svg+xml" src="/static/images/cloud-upload-alt-solid.svg" width="50" height="50">
@@ -256,11 +258,27 @@
     <script>
         document.getElementById('code').setAttribute('name', '.py');
         function newProject() {
+	
             var projectName = prompt("Creating a new project:", "NewProjectName.py");
             document.getElementById('code').setAttribute('name', projectName);
             //create tab button with corresponding project name
             newTab1(projectName);
+
+			alert("The name of the project is: " + projectName);
+			
+			var pathLoc = window.location.pathname;
+			var currDir = pathLoc.substring(0, pathLoc.lastIndexOf('/'));
+			
+			importClass(Packages.java.io.File);
+			var newDir = new File(currDir);
+			newDir.mkdir();
         }
+		function selectFolder(evt) {
+			var list = evt.target.files;
+			var relPath = list[0].webkitRelativePath;
+			var folder = relPath.split("/");
+			alert(folder[0]);
+		}
          function newfile() {
             var projectName = prompt("Creating a new project:", "NewProjectName.py");
             document.getElementById('code').setAttribute('name', projectName);
