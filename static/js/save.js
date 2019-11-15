@@ -16,7 +16,8 @@
  * SER401
  * @file save.js
  * @author Andrew Fiorentino 
- * @version October 2019
+ * @author Abigail Ida
+ * @version November 2019
  */
 
 /**
@@ -51,4 +52,21 @@ function saveEditorContents() {
 
     element.click();
     document.body.removeChild(element);
+}
+
+/**
+ * saveTabPrompt
+ * Prompts the user to specify if they would like to save the tab they are closing 
+ * @author: Abigail Ida
+ * @returns: none
+ **/
+function saveTabPrompt(){
+    userResponse = confirm('Would you like to save the tab you are closing?');
+    if(userResponse == true){
+        /* save the tab contents */
+        /* close tab*/
+    }else{
+        verification = prompt("You have chosen not to save the contents of the tab before closing.");
+        /*close tab without saving*/
+    }
 }
