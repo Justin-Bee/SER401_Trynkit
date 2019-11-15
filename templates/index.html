@@ -27,8 +27,6 @@
     </head>
     
     <script>
-        var tabCount = 1;
-        var currentTab = 'tab0'; 
        
 
 
@@ -184,7 +182,7 @@
 
         <div class="container">
             <ul class="nav nav-tabs" role="tablist">
-                <li class="active"><a href="#tab_01" data-toggle="tab">*.py</a><span>x</span>
+                <li class="active"><a href="#tab_01" data-toggle="tab">main.py</a><span>x</span>
                 </li>
                 <li><a href="#" class="add-tab">+ New File</a>
                 </li>
@@ -336,14 +334,21 @@
 
         /**
          * This is for the bootstrap toggeable tabs
-         * has the ability to add new tabs and close tabs
+         * has the ability add new tabs and close tabs
          */
+        var currentTab = "main.py";
          $(".nav-tabs").on("click", "a", function (e) {
             e.preventDefault();
+
              if (!$(this).hasClass('add-tab')) {
+                 localStorage.setItem(currentTab, editor.getValue());
                 $(this).tab('show');
-           //     var proj = this.innerText;
-              //  editor.setValue(localStorage.getItem(proj).toString());
+                 currentTab = this.innerText;
+                 try {
+                     editor.setValue(localStorage.getItem(currentTab).toString());
+                 }catch{
+
+                 }
                 }
             })
             .on("click", "span", function () { //this is to handle the remove button
