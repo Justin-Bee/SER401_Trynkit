@@ -76,7 +76,7 @@ body{
 }
 
 button{
-    background-color: #d9dbdf; 
+    background-color: #d9dbdf;
     margin-left: 4px;
     margin-right: 4px;
 }
@@ -92,3 +92,78 @@ button{
     background-color: #e7e7e7;
     color: black;
 }
+
+
+@import url('http://getbootstrap.com/2.3.2/assets/css/bootstrap.css');
+ .container {
+    margin-top: 10px;
+    margin-left: 100px;
+}
+.nav-tabs > li {
+    position:relative;
+    
+}
+.nav-tabs > li > a {
+    display:inline-block;
+    
+}
+.nav-tabs > li > span {
+    display:none;
+    cursor:pointer;
+    position:absolute;
+    right: 6px;
+    top: 8px;
+    color: red;
+    
+}
+.nav-tabs > li:hover > span {
+    display: inline-block;
+    
+}
+
+.nav li {
+    background-color:rgb(168, 167, 167);
+    border-block-color: black;
+   }
+
+
+#nfBtn{
+    background-color: Transparent;
+    border: none;
+}
+
+#npBtn{
+    background-color: Transparent;
+    border: none;
+}
+
+#sBtn{
+    background-color: Transparent;
+    border: none;
+}
+
+#loadFileBtn{
+    background-color: Transparent;
+    border: none;
+}
+
+#bBtn{
+    background-color: Transparent;
+    border: none;
+}
+
+#settingsBtn{
+    background-color: Transparent;
+    border: none;
+}
+
+#serialBtn{
+    background-color: Transparent;
+    border: none;
+}
+
+#debugBtn{
+    background-color: Transparent;
+    border: none;
+}
+
