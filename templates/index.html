@@ -190,8 +190,7 @@
                 </li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane active" id="tab_01"><textarea id="code"></textarea></div>
-                
+                <div class="tab-pane active" id="tab_01"><textarea id="code"> </textarea></div>
             </div>
         </div>
 
@@ -252,13 +251,11 @@
             <script type="text/javascript">
                 window.onload = loadProject();
             </script>
-                       
                </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
                      </div>
-
                   </div>
                 </div>
               </div>
@@ -272,7 +269,7 @@
             document.getElementById('code').setAttribute('name', projectName);
             //create tab button with corresponding project name
             newTab1(projectName);
-            switchTab0();
+
         }
 
         /**
@@ -345,12 +342,15 @@
             e.preventDefault();
              if (!$(this).hasClass('add-tab')) {
                 $(this).tab('show');
+           //     var proj = this.innerText;
+              //  editor.setValue(localStorage.getItem(proj).toString());
                 }
             })
             .on("click", "span", function () { //this is to handle the remove button
                     //todo prompt the user to save file
                     //TODO remove the code in the editor 
                     $(this).parent().remove(); //this removes the tab
+                    saveTabPrompt();
                    
                 });
             //This function handles the logic when you click add tab
@@ -360,6 +360,7 @@
                 var id = $(".nav-tabs").children().length; 
                 var tabId = 'tab_' + id;
                 $(this).closest('li').before('<li><a href="#tab_' + id + '">"'+ projectName+'"</a> <span> x </span></li>');
+             //   localStorage.setItem(ID, id);
             $('.nav-tabs li:nth-child(' + id + ') a').click();
             });
 
