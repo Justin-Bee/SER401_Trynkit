@@ -64,6 +64,7 @@ function saveTabPrompt(){
     userResponse = confirm('Would you like to save the tab you are closing?');
     if(userResponse == true){
         /* save the tab contents */
+        /* US3154 branch saving folder*/
         /* close tab*/
     }else{
         verification = prompt("You have chosen not to save the contents of the tab before closing.");
