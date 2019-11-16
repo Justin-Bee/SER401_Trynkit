@@ -188,6 +188,8 @@
                 </li>
                 <li><a href="#" class="add-tab">+ New File</a>
                 </li>
+                <li><a href="#" class="remove-tabs">- Close All Tabs</a>
+                </li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_01"><textarea id="code"></textarea></div>
@@ -362,7 +364,15 @@
                 $(this).closest('li').before('<li><a href="#tab_' + id + '">"'+ projectName+'"</a> <span> x </span></li>');
             $('.nav-tabs li:nth-child(' + id + ') a').click();
             });
-
+            //This function handles the logic when you click close all tabs
+            $('.remove-tabs').click(function(e) {
+                var navTabsLength = $(".nav-tabs").children().length;
+                if (navTabsLength > 2 ) {
+                    for (var i=0; i < $(".nav-tabs").children().length - 1; i++){
+                        $(".nav-tabs").children().eq(i).remove();
+                    }
+                }
+            });
     </script>
 
 </html>
