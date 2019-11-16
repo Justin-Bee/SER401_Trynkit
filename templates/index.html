@@ -366,10 +366,12 @@
             });
             //This function handles the logic when you click close all tabs
             $('.remove-tabs').click(function(e) {
-                var navTabsLength = $(".nav-tabs").children().length;
-                if (navTabsLength > 2 ) {
-                    for (var i=0; i < $(".nav-tabs").children().length - 1; i++){
-                        $(".nav-tabs").children().eq(i).remove();
+                if (confirm("Would you like to close and save all tabs?")) {
+                    var navTabsLength = $(".nav-tabs").children().length;
+                    if (navTabsLength > 2 ) {
+                        for (var i=0; i < $(".nav-tabs").children().length - 1; i++){
+                            $(".nav-tabs").children().eq(i).remove();
+                        }
                     }
                 }
             });
