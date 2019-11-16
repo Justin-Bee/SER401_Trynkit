@@ -342,7 +342,7 @@
 
              if (!$(this).hasClass('add-tab')) {
                  localStorage.setItem(currentTab, editor.getValue());
-                $(this).tab('show');
+                 $(this).tab('show');
                  currentTab = this.innerText;
                  try {
                      editor.setValue(localStorage.getItem(currentTab).toString());
@@ -360,13 +360,16 @@
                 });
             //This function handles the logic when you click add tab
             $('.add-tab').click(function (e) {
+               localStorage.setItem(currentTab, editor.getValue());
                 var projectName = prompt("Creating a new project:", "NewProjectName.py");
                 e.preventDefault();
                 var id = $(".nav-tabs").children().length; 
                 var tabId = 'tab_' + id;
                 $(this).closest('li').before('<li><a href="#tab_' + id + '">"'+ projectName+'"</a> <span> x </span></li>');
-             //   localStorage.setItem(ID, id);
+                 currentTab = projectName;
+                editor.setValue("");
             $('.nav-tabs li:nth-child(' + id + ') a').click();
+
             });
 
     </script>
