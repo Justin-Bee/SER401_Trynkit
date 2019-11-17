@@ -27,8 +27,6 @@
     </head>
     
     <script>
-        var tabCount = 1;
-        var currentTab = 'tab0'; 
        
 
 
@@ -184,14 +182,13 @@
 
         <div class="container">
             <ul class="nav nav-tabs" role="tablist">
-                <li class="active"><a href="#tab_01" data-toggle="tab">*.py</a><span>x</span>
+                <li class="active"><a href="#tab_01" data-toggle="tab">main.py</a><span>x</span>
                 </li>
                 <li><a href="#" class="add-tab">+ New File</a>
                 </li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane active" id="tab_01"><textarea id="code"></textarea></div>
-                
+                <div class="tab-pane active" id="tab_01"><textarea id="code"> </textarea></div>
             </div>
         </div>
 
@@ -252,13 +249,11 @@
             <script type="text/javascript">
                 window.onload = loadProject();
             </script>
-                       
                </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
                      </div>
-
                   </div>
                 </div>
               </div>
@@ -272,7 +267,7 @@
             document.getElementById('code').setAttribute('name', projectName);
             //create tab button with corresponding project name
             newTab1(projectName);
-            switchTab0();
+
         }
 
         /**
@@ -339,28 +334,42 @@
 
         /**
          * This is for the bootstrap toggeable tabs
-         * has the ability to add new tabs and close tabs
+         * has the ability add new tabs and close tabs
          */
+        var currentTab = "main.py";
          $(".nav-tabs").on("click", "a", function (e) {
             e.preventDefault();
+
              if (!$(this).hasClass('add-tab')) {
-                $(this).tab('show');
+                 localStorage.setItem(currentTab, editor.getValue());
+                 $(this).tab('show');
+                 currentTab = this.innerText;
+                 try {
+                     editor.setValue(localStorage.getItem(currentTab).toString());
+                 }catch{
+
+                 }
                 }
             })
             .on("click", "span", function () { //this is to handle the remove button
                     //todo prompt the user to save file
                     //TODO remove the code in the editor 
                     $(this).parent().remove(); //this removes the tab
+                    saveTabPrompt();
                    
                 });
             //This function handles the logic when you click add tab
             $('.add-tab').click(function (e) {
+               localStorage.setItem(currentTab, editor.getValue());
                 var projectName = prompt("Creating a new project:", "NewProjectName.py");
                 e.preventDefault();
                 var id = $(".nav-tabs").children().length; 
                 var tabId = 'tab_' + id;
                 $(this).closest('li').before('<li><a href="#tab_' + id + '">"'+ projectName+'"</a> <span> x </span></li>');
+                 currentTab = projectName;
+                editor.setValue("");
             $('.nav-tabs li:nth-child(' + id + ') a').click();
+
             });
 
     </script>
