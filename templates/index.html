@@ -361,7 +361,8 @@
             //This function handles the logic when you click add tab
             $('.add-tab').click(function (e) {
                localStorage.setItem(currentTab, editor.getValue());
-                var projectName = prompt("Creating a new project:", "NewProjectName.py");
+                var projectName = prompt("Creating a new file:", "NewProjectName.py");
+                if(projectName){
                 e.preventDefault();
                 var id = $(".nav-tabs").children().length; 
                 var tabId = 'tab_' + id;
@@ -369,6 +370,9 @@
                  currentTab = projectName;
                 editor.setValue("");
             $('.nav-tabs li:nth-child(' + id + ') a').click();
+                }else{
+                    //Don't do anything
+                }
 
             });
 
