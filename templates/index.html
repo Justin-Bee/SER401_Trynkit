@@ -186,9 +186,11 @@
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active"><a href="#tab_01" data-toggle="tab">*.py</a><span>x</span>
                 </li>
-                <li><a href="#" class="add-tab">+ New File</a>
-                </li>
-                <li><a href="#" class="remove-tabs">- Close All Tabs</a>
+                <li><a href="javascript:void(0)" class="add-tab">+ New File</a>
+                </li> 
+            </ul>
+            <ul class="nav close-tabs">
+                <li><a href="javascript:void(0)" class="remove-tabs">- Close All Tabs</a>
                 </li>
             </ul>
             <div class="tab-content">
@@ -354,27 +356,32 @@
                     //TODO remove the code in the editor 
                     $(this).parent().remove(); //this removes the tab
                    
-                });
+        });
+	        
             //This function handles the logic when you click add tab
             $('.add-tab').click(function (e) {
                 var projectName = prompt("Creating a new project:", "NewProjectName.py");
                 e.preventDefault();
                 var id = $(".nav-tabs").children().length; 
                 var tabId = 'tab_' + id;
-                $(this).closest('li').before('<li><a href="#tab_' + id + '">"'+ projectName+'"</a> <span> x </span></li>');
-            $('.nav-tabs li:nth-child(' + id + ') a').click();
-            });
-            //This function handles the logic when you click close all tabs
+                $(this).closest('li').before('<li class="active"><a href="#tab_' + id + '">"'+ projectName+'"</a> <span> x </span></li>');
+                $('.nav-tabs li:nth-child(' + id + ') a').click();
+        });
+	        //This function handles the logic when you click close all tabs
             $('.remove-tabs').click(function(e) {
-                if (confirm("Would you like to close and save all tabs?")) {
+               if (confirm("Would you like to close and save all tabs?")) {
                     var navTabsLength = $(".nav-tabs").children().length;
-                    if (navTabsLength > 2 ) {
-                        for (var i=0; i < $(".nav-tabs").children().length - 1; i++){
-                            $(".nav-tabs").children().eq(i).remove();
+                    if (navTabsLength > 1 ) {
+                        for (var i=0; i < navTabsLength +1; i++){
+                            if ($(".nav-tabs").children().eq(i).hasClass('active')) {
+                                $(".nav-tabs").children().eq(i).remove();
+                                i--;
+                            }
                         }
                     }
                 }
             });
+            
     </script>
 
 </html>
