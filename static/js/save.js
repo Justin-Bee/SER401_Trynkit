@@ -58,27 +58,74 @@ function saveEditorContents() {
  * saveTabPrompt
  * Prompts the user to specify if they would like to save the tab they are closing 
  * @author: Abigail Ida
+ * @param: TabTitle
  * @returns: none
  **/
-function saveTabPrompt(){
+function saveTabPrompt(currentTab){
     userResponse = confirm('Select ok to save the current tab.');
+     //get tab title
+     var tabTitle = currentTab;
     if(userResponse == true){
-        /* save contents and close tab*/
-        check = alert("saving");
-        saveEditorContents();
+        //"save" by downloading .py file to users machine
+        downloadEditorContents(tabTitle);
+        //remove tab and corresponding contents from local storage??
+        //clear contents
+        clearEditorContents();
+        //close tab
+        closeTab();
     }else{
-        verification = alert("You have chosen not to save the contents of the tab before closing.");
+        verification = alert('You have chosen not to save the contents of ' + tabTitle + ' before closing.');
+        //remove tab and corresponding contents from local storage??
+        //clear contents from the editor
+        clearEditorContents();
         /*close tab without saving*/
         closeTab();
-        clearEditorContents();
     }
 }
 
+/**
+ * CloseTab
+ * Closes the current tab 
+ * @author: Abigail Ida
+ * @returns: none
+ **/
 function closeTab(){
-    document.body.appendChild(element);
-    document.body.removeChild(element);
+    //working progress
 }
 
+/**
+ * clearEditorContents
+ * Clears the current contents in the editor window
+ * @author: Abigail Ida
+ * @returns: none
+ **/
 function clearEditorContents(){
     editor.setValue("");
+}
+
+/**
+ * downloadEditorContents
+ * saves the current contents of the editor window in a .py file by downloading it to the users machine.
+ * The name of the .py file is named after the user slected tab title listed on the corresponding tab.
+ * @author: Abigail Ida
+ * @param: tabTitle
+ * @returns: none
+ **/
+function downloadEditorContents(tabTitle) {
+    projectName = tabTitle;
+    var element = document.createElement('a');
+    var editorContent = editor.getValue();
+    var contentArray = editorContent.split("\n");
+    var finalContent = "";
+    for(var i = 0; i < contentArray.length; i ++) {
+        finalContent = finalContent + contentArray[i] + "\n";
+    }
+    console.log(finalContent);
+    //element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(document.getElementById('editor').innerText));
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(finalContent));
+    element.setAttribute('download', projectName);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
 }
