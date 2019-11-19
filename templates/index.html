@@ -147,7 +147,7 @@
             <p></p>
             <button onclick="newProject()" id="npBtn"><img type="image/svg+xml" id ="newProjectBtn" src="/static/images/folder-regular.svg" width="50" height="50"></button>
             <p></p>
-            <button onclick="saveEditorContents()" id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50"></button>
+            <button onclick="saveTabPrompt()" id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50"></button>
             <p></p>
             <button id="loadFileBtn">
                 <img type="image/svg+xml" src="/static/images/cloud-upload-alt-solid.svg" width="50" height="50">
@@ -326,7 +326,7 @@
           });
 
         /**
-         * This function is for the startup modal to show only when the page loads
+         * This function is for the startup model to show only when the page loads
          */
         $(window).on('load',function(){
         $('#onloadModal').modal('show');
