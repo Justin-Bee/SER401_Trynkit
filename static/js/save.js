@@ -61,13 +61,24 @@ function saveEditorContents() {
  * @returns: none
  **/
 function saveTabPrompt(){
-    userResponse = confirm('Would you like to save the tab you are closing?');
+    userResponse = confirm('Select ok to save the current tab.');
     if(userResponse == true){
-        /* save the tab contents */
-        /* US3154 branch saving folder*/
-        /* close tab*/
+        /* save contents and close tab*/
+        check = alert("saving");
+        saveEditorContents();
     }else{
-        verification = prompt("You have chosen not to save the contents of the tab before closing.");
+        verification = alert("You have chosen not to save the contents of the tab before closing.");
         /*close tab without saving*/
+        closeTab();
+        clearEditorContents();
     }
+}
+
+function closeTab(){
+    document.body.appendChild(element);
+    document.body.removeChild(element);
+}
+
+function clearEditorContents(){
+    editor.setValue("");
 }
