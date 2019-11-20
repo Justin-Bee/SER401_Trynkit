@@ -184,7 +184,11 @@
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active"><a href="#tab_01" data-toggle="tab">main.py</a><span>x</span>
                 </li>
-                <li><a href="#" class="add-tab">+ New File</a>
+                <li><a href="javascript:void(0)" class="add-tab">+ New File</a>
+                </li> 
+            </ul>
+            <ul class="nav close-tabs">
+                <li><a href="javascript:void(0)" class="remove-tabs">- Close All Tabs</a>
                 </li>
             </ul>
             <div class="tab-content">
@@ -357,7 +361,8 @@
                     $(this).parent().remove(); //this removes the tab
                     saveTabPrompt();
                    
-                });
+        });
+	        
             //This function handles the logic when you click add tab
             $('.add-tab').click(function (e) {
                localStorage.setItem(currentTab, editor.getValue());
@@ -366,6 +371,7 @@
                 e.preventDefault();
                 var id = $(".nav-tabs").children().length; 
                 var tabId = 'tab_' + id;
+
                 $(this).closest('li').before('<li><a href="#tab_' + id + '">"'+ projectName+'"</a> <span> x </span></li>');
                  currentTab = projectName;
                 editor.setValue("");
@@ -373,9 +379,23 @@
                 }else{
                     //Don't do anything
                 }
-
+        });
+	        //This function handles the logic when you click close all tabs
+            $('.remove-tabs').click(function(e) {
+               if (confirm("Would you like to close and save all tabs?")) {
+                    var navTabsLength = $(".nav-tabs").children().length;
+                    if (navTabsLength > 1 ) {
+                        for (var i=0; i < navTabsLength +1; i++){
+                            if ($(".nav-tabs").children().eq(i).hasClass('active')) {
+                                $(".nav-tabs").children().eq(i).remove();
+                                i--;
+                            }
+                        }
+                    }
+                }
             });
-
+                
+            
     </script>
 
 </html>
