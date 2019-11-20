@@ -366,12 +366,19 @@
             //This function handles the logic when you click add tab
             $('.add-tab').click(function (e) {
                localStorage.setItem(currentTab, editor.getValue());
-                var projectName = prompt("Creating a new project:", "NewProjectName.py");
+                var projectName = prompt("Creating a new file:", "NewProjectName.py");
+                if(projectName){
                 e.preventDefault();
                 var id = $(".nav-tabs").children().length; 
                 var tabId = 'tab_' + id;
-                $(this).closest('li').before('<li class="active"><a href="#tab_' + id + '">"'+ projectName+'"</a> <span> x </span></li>');
-                $('.nav-tabs li:nth-child(' + id + ') a').click();
+
+                $(this).closest('li').before('<li><a href="#tab_' + id + '">"'+ projectName+'"</a> <span> x </span></li>');
+                 currentTab = projectName;
+                editor.setValue("");
+            $('.nav-tabs li:nth-child(' + id + ') a').click();
+                }else{
+                    //Don't do anything
+                }
         });
 	        //This function handles the logic when you click close all tabs
             $('.remove-tabs').click(function(e) {
