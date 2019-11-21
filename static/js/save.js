@@ -21,12 +21,38 @@
  */
 
 /**
- * saveEditorContents
- * Saves the contents of the text editor to a file of the user's choice.
+ * saveTab
+ * Saves the contents of the text editor for the specified tab
  * @author: Andrew Fiorentino
  * @param: filename the name of the file to be saved
  * @returns: none
  **/
+function saveTab(currentTab) {
+    fileName = document.getElementById('code').getAttribute('name');
+    var element = document.createElement('a');
+    var editorContent = editor.getValue();
+    var contentArray = editorContent.split("\n");
+    var finalContent = "";
+    for (var i = 0; i < contentArray.length; i++) {
+        finalContent = finalContent + contentArray[i] + "\n";
+    }
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' encodeURIComponent(finalContent));
+    element.setAttribute('download', fileName);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+    document.body.removeChild(element);
+}
+
+/**
+ * saveEditorContents
+ * Saves the contents of the editor to a file of the user's choice.
+ * @author: Andrew Fiorentino
+ * @param: none
+ * @returns: none
+ **/
+
 function saveEditorContents() {
     if (document.getElementById('code').getAttribute('name') == '.py') {
         projectName = prompt('Please chose a name for your project: ', 'NewProject.py');

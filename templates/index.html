@@ -387,6 +387,7 @@
                     if (navTabsLength > 1 ) {
                         for (var i=0; i < navTabsLength +1; i++){
                             if ($(".nav-tabs").children().eq(i).hasClass('active')) {
+                                saveTab(localStorage.key(i);
                                 $(".nav-tabs").children().eq(i).remove();
                                 i--;
                             }
