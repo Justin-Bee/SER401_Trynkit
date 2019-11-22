@@ -332,26 +332,42 @@
         /**
          * This function is for the startup modal to show only when the page loads
          */
+        var masterList = ["main.py"]; /* array variable to store the tab names */
         $(window).on('load',function(){
-        $('#onloadModal').modal('show');
+            $('#onloadModal').modal('show');
+            try{
+                masterList = localStorage.getItem("tabList").toString();
+                masterList = masterList.split(",");
+                populateTabs();
+            }catch(error){
+                console.error(error);
+            }
+            
         });
+
+        function populateTabs(){
+            for(i =1; i< masterList.length; i++){
+                $(".add-tab").closest('li').before('<li><a href="#tab_' + i + '">"'+ masterList[i].toString()+'"</a> <span> x </span></li>');
+            }
+        }
 
         /**
          * This is for the bootstrap toggeable tabs
          * has the ability add new tabs and close tabs
          */
-        var currentTab = "main.py";
+        var currentTab = "main.py";  /* used to determine the previous tab */
+        
+        var tabList;
          $(".nav-tabs").on("click", "a", function (e) {
             e.preventDefault();
-
              if (!$(this).hasClass('add-tab')) {
                  localStorage.setItem(currentTab, editor.getValue());
                  $(this).tab('show');
                  currentTab = this.innerText;
                  try {
                      editor.setValue(localStorage.getItem(currentTab).toString());
-                 }catch{
-
+                 }catch(e){
+                     console.error(e);
                  }
                 }
             })
@@ -365,17 +381,19 @@
 	        
             //This function handles the logic when you click add tab
             $('.add-tab').click(function (e) {
-               localStorage.setItem(currentTab, editor.getValue());
+                localStorage.setItem(currentTab, editor.getValue());
                 var projectName = prompt("Creating a new file:", "NewProjectName.py");
                 if(projectName){
-                e.preventDefault();
-                var id = $(".nav-tabs").children().length; 
-                var tabId = 'tab_' + id;
-
-                $(this).closest('li').before('<li><a href="#tab_' + id + '">"'+ projectName+'"</a> <span> x </span></li>');
-                 currentTab = projectName;
-                editor.setValue("");
-            $('.nav-tabs li:nth-child(' + id + ') a').click();
+                    e.preventDefault();
+                    var id = $(".nav-tabs").children().length; 
+                    var tabId = 'tab_' + id;
+                    $(this).closest('li').before('<li><a href="#tab_' + id + '">"'+ projectName+'"</a> <span> x </span></li>');
+                    currentTab = projectName; 
+                    masterList.push(projectName); 
+                    localStorage.setItem("tabList", masterList); /* add tab to the tab list */
+               //     console.log(masterList);
+                    editor.setValue("");
+                    $('.nav-tabs li:nth-child(' + id + ') a').click();
                 }else{
                     //Don't do anything
                 }
