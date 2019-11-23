@@ -269,9 +269,8 @@
             //TODO this needs changed to reflect the new project code right now just creates a file
             var projectName = prompt("Creating a new project:", "NewProjectName.py");
             document.getElementById('code').setAttribute('name', projectName);
-            //create tab button with corresponding project name
-            newTab1(projectName);
-
+            newFile();
+            //NOTE: upon saving the newFile is intented to be saved within a folder titled with the projectName variable
         }
 
         /**
