@@ -142,15 +142,14 @@
     </div>
     <body>
         <div id="menu">
-            <p>Menu</p>
-            <button onclick="newFile()" id="nfBtn"><img type="image/svg+xml" id ="newFileBtn" src="/static/images/file-regular.svg" width="50" height="50"></button>
+            <button onclick="newFile()" id="nfBtn"><img type="image/svg+xml" id ="newFileBtn" src="/static/images/file-regular.svg" width="50" height="50"><figcaption> New File </figcaption></button>
             <p></p>
-            <button onclick="newProject()" id="npBtn"><img type="image/svg+xml" id ="newProjectBtn" src="/static/images/folder-regular.svg" width="50" height="50"></button>
+            <button onclick="newProject()" id="npBtn"><img type="image/svg+xml" id ="newProjectBtn" src="/static/images/folder-regular.svg" width="50" height="50"><figcaption> New Project </figcaption></button>
             <p></p>
-            <button onclick="saveEditorContents()" id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50"></button>
+            <button onclick="saveEditorContents()" id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50"><figcaption> Save File </figcaption></button>
             <p></p>
             <button id="loadFileBtn">
-                <img type="image/svg+xml" src="/static/images/cloud-upload-alt-solid.svg" width="50" height="50">
+                <img type="image/svg+xml" src="/static/images/cloud-upload-alt-solid.svg" width="50" height="50"><figcaption> Load File </figcaption>
 
             </button>
             <span id="spnFilePath"></span>
@@ -160,13 +159,13 @@
             </script>
             <p></p>
 
-            <button onClick="bluetooth()" id="bBtn"><img type="image/svg+xml" id ="devicesBtn" src="/static/images/bluetooth-b-brands.svg" width="50" height="50"></button>
+            <button onClick="bluetooth()" id="bBtn"><img type="image/svg+xml" id ="devicesBtn" src="/static/images/bluetooth-b-brands.svg" width="50" height="50"><figcaption> Bluetooth </figcaption></button>
             <p></p>
-            <button data-toggle="modal" data-target="#settingsModal" id="settingsBtn"><img type="image/svg+xml" id ="settingsBtn" src="/static/images/cogs-solid.svg" width="50" height="50"></button>
+            <button data-toggle="modal" data-target="#settingsModal" id="settingsBtn"><img type="image/svg+xml" id ="settingsBtn" src="/static/images/cogs-solid.svg" width="50" height="50"><figcaption> Settings </figcaption></button>
              <p></p>
-            <button onClick="consoleHide()" id="serialBtn"><img type="image/svg+xml"  src="/static/images/plug-solid.svg" width="50" height="50"></button>
+            <button onClick="consoleHide()" id="serialBtn"><img type="image/svg+xml"  src="/static/images/plug-solid.svg" width="50" height="50"><figcaption> Console </figcaption></button>
             <p></p>
-            <button onclick="debugToggle()" id="debugBtn"><img type ="image/svg+xml" id="debuggerBtn" src="/static/images/bug-solid.svg" width="50" height="50"></button>
+            <button onclick="debugToggle()" id="debugBtn"><img type ="image/svg+xml" id="debuggerBtn" src="/static/images/bug-solid.svg" width="50" height="50"><figcaption> Debug </figcaption></button>
        
      <script>
         function consoleHide(){
