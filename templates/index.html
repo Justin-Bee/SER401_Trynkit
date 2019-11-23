@@ -146,7 +146,7 @@
             <p></p>
             <button onclick="newProject()" id="npBtn"><img type="image/svg+xml" id ="newProjectBtn" src="/static/images/folder-regular.svg" width="50" height="50"><figcaption> New Project </figcaption></button>
             <p></p>
-            <button onclick="saveEditorContents()" id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50"><figcaption> Save File </figcaption></button>
+            <button onclick="saveTabPrompt(currentTab)" id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50"><figcaption> Save File </figcaption></button>
             <p></p>
             <button id="loadFileBtn">
                 <img type="image/svg+xml" src="/static/images/cloud-upload-alt-solid.svg" width="50" height="50"><figcaption> Load File </figcaption>
@@ -268,9 +268,8 @@
             //TODO this needs changed to reflect the new project code right now just creates a file
             var projectName = prompt("Creating a new project:", "NewProjectName.py");
             document.getElementById('code').setAttribute('name', projectName);
-            //create tab button with corresponding project name
-            newTab1(projectName);
-
+            newFile();
+            //NOTE: upon saving the newFile is intented to be saved within a folder titled with the projectName variable
         }
 
         /**
@@ -329,7 +328,7 @@
           });
 
         /**
-         * This function is for the startup modal to show only when the page loads
+         * This function is for the startup model to show only when the page loads
          */
         var masterList = ["main.py"]; /* array variable to store the tab names */
         $(window).on('load',function(){
@@ -372,9 +371,9 @@
             })
             .on("click", "span", function () { //this is to handle the remove button
                     //todo prompt the user to save file
+                    saveTabPrompt(currentTab);
                     //TODO remove the code in the editor 
                     $(this).parent().remove(); //this removes the tab
-                    saveTabPrompt();
                    
         });
 	        
