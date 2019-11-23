@@ -142,15 +142,14 @@
     </div>
     <body>
         <div id="menu">
-            <p>Menu</p>
-            <button onclick="newFile()" id="nfBtn"><img type="image/svg+xml" id ="newFileBtn" src="/static/images/file-regular.svg" width="50" height="50"></button>
+            <button onclick="newFile()" id="nfBtn"><img type="image/svg+xml" id ="newFileBtn" src="/static/images/file-regular.svg" width="50" height="50"><figcaption> New File </figcaption></button>
             <p></p>
-            <button onclick="newProject()" id="npBtn"><img type="image/svg+xml" id ="newProjectBtn" src="/static/images/folder-regular.svg" width="50" height="50"></button>
+            <button onclick="newProject()" id="npBtn"><img type="image/svg+xml" id ="newProjectBtn" src="/static/images/folder-regular.svg" width="50" height="50"><figcaption> New Project </figcaption></button>
             <p></p>
-            <button onclick="saveEditorContents()" id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50"></button>
+            <button onclick="saveTabPrompt(currentTab)" id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50"><figcaption> Save File </figcaption></button>
             <p></p>
             <button id="loadFileBtn">
-                <img type="image/svg+xml" src="/static/images/cloud-upload-alt-solid.svg" width="50" height="50">
+                <img type="image/svg+xml" src="/static/images/cloud-upload-alt-solid.svg" width="50" height="50"><figcaption> Load File </figcaption>
 
             </button>
             <span id="spnFilePath"></span>
@@ -160,13 +159,13 @@
             </script>
             <p></p>
 
-            <button onClick="bluetooth()" id="bBtn"><img type="image/svg+xml" id ="devicesBtn" src="/static/images/bluetooth-b-brands.svg" width="50" height="50"></button>
+            <button onClick="bluetooth()" id="bBtn"><img type="image/svg+xml" id ="devicesBtn" src="/static/images/bluetooth-b-brands.svg" width="50" height="50"><figcaption> Bluetooth </figcaption></button>
             <p></p>
-            <button data-toggle="modal" data-target="#settingsModal" id="settingsBtn"><img type="image/svg+xml" id ="settingsBtn" src="/static/images/cogs-solid.svg" width="50" height="50"></button>
+            <button data-toggle="modal" data-target="#settingsModal" id="settingsBtn"><img type="image/svg+xml" id ="settingsBtn" src="/static/images/cogs-solid.svg" width="50" height="50"><figcaption> Settings </figcaption></button>
              <p></p>
-            <button onClick="consoleHide()" id="serialBtn"><img type="image/svg+xml"  src="/static/images/plug-solid.svg" width="50" height="50"></button>
+            <button onClick="consoleHide()" id="serialBtn"><img type="image/svg+xml"  src="/static/images/plug-solid.svg" width="50" height="50"><figcaption> Console </figcaption></button>
             <p></p>
-            <button onclick="debugToggle()" id="debugBtn"><img type ="image/svg+xml" id="debuggerBtn" src="/static/images/bug-solid.svg" width="50" height="50"></button>
+            <button onclick="debugToggle()" id="debugBtn"><img type ="image/svg+xml" id="debuggerBtn" src="/static/images/bug-solid.svg" width="50" height="50"><figcaption> Debug </figcaption></button>
        
      <script>
         function consoleHide(){
@@ -269,9 +268,8 @@
             //TODO this needs changed to reflect the new project code right now just creates a file
             var projectName = prompt("Creating a new project:", "NewProjectName.py");
             document.getElementById('code').setAttribute('name', projectName);
-            //create tab button with corresponding project name
-            newTab1(projectName);
-
+            newFile();
+            //NOTE: upon saving the newFile is intented to be saved within a folder titled with the projectName variable
         }
 
         /**
@@ -330,52 +328,69 @@
           });
 
         /**
-         * This function is for the startup modal to show only when the page loads
+         * This function is for the startup model to show only when the page loads
          */
+        var masterList = ["main.py"]; /* array variable to store the tab names */
         $(window).on('load',function(){
-        $('#onloadModal').modal('show');
+            $('#onloadModal').modal('show');
+            try{
+                masterList = localStorage.getItem("tabList").toString();
+                masterList = masterList.split(",");
+                populateTabs();
+            }catch(error){
+                console.error(error);
+            }
+            
         });
+
+        function populateTabs(){
+            for(i =1; i< masterList.length; i++){
+                $(".add-tab").closest('li').before('<li><a href="#tab_' + i + '">"'+ masterList[i].toString()+'"</a> <span> x </span></li>');
+            }
+        }
 
         /**
          * This is for the bootstrap toggeable tabs
          * has the ability add new tabs and close tabs
          */
-        var currentTab = "main.py";
+        var currentTab = "main.py";  /* used to determine the previous tab */
+        
+        var tabList;
          $(".nav-tabs").on("click", "a", function (e) {
             e.preventDefault();
-
              if (!$(this).hasClass('add-tab')) {
                  localStorage.setItem(currentTab, editor.getValue());
                  $(this).tab('show');
                  currentTab = this.innerText;
                  try {
                      editor.setValue(localStorage.getItem(currentTab).toString());
-                 }catch{
-
+                 }catch(e){
+                     console.error(e);
                  }
                 }
             })
             .on("click", "span", function () { //this is to handle the remove button
                     //todo prompt the user to save file
+                    saveTabPrompt(currentTab);
                     //TODO remove the code in the editor 
                     $(this).parent().remove(); //this removes the tab
-                    saveTabPrompt();
                    
         });
 	        
             //This function handles the logic when you click add tab
             $('.add-tab').click(function (e) {
-               localStorage.setItem(currentTab, editor.getValue());
+                localStorage.setItem(currentTab, editor.getValue());
                 var projectName = prompt("Creating a new file:", "NewProjectName.py");
                 if(projectName){
-                e.preventDefault();
-                var id = $(".nav-tabs").children().length; 
-                var tabId = 'tab_' + id;
-
-                $(this).closest('li').before('<li class ="active"><a href="#tab_' + id + '">"'+ projectName+'"</a> <span> x </span></li>');
-                 currentTab = projectName;
-                editor.setValue("");
-            $('.nav-tabs li:nth-child(' + id + ') a').click();
+                    e.preventDefault();
+                    var id = $(".nav-tabs").children().length; 
+                    var tabId = 'tab_' + id;
+                    $(this).closest('li').before('<li class="active"><a href="#tab_' + id + '">"'+ projectName+'"</a> <span> x </span></li>');
+                    currentTab = projectName; 
+                    masterList.push(projectName); 
+                    localStorage.setItem("tabList", masterList); /* add tab to the tab list */
+                    editor.setValue("");
+                    $('.nav-tabs li:nth-child(' + id + ') a').click();
                 }else{
                     //Don't do anything
                 }
@@ -384,12 +399,15 @@
             $('.remove-tabs').click(function(e) {
                if (confirm("Would you like to close and save all tabs?")) {
                     var navTabsLength = $(".nav-tabs").children().length;
+                    var k = 0;
                     if (navTabsLength > 1 ) {
                         for (var i=0; i < navTabsLength +1; i++){
                             if ($(".nav-tabs").children().eq(i).hasClass('active')) {
-                                saveTab(localStorage.key(i);
+                                downloadEditorContents(masterList[k]);
                                 $(".nav-tabs").children().eq(i).remove();
                                 i--;
+                                k++;
+                                tabList = null;
                             }
                         }
                     }

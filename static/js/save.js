@@ -20,30 +20,6 @@
  * @version November 2019
  */
 
-/**
- * saveTab
- * Saves the contents of the text editor for the specified tab
- * @author: Andrew Fiorentino
- * @param: filename the name of the file to be saved
- * @returns: none
- **/
-function saveTab(currentTab) {
-    fileName = document.getElementById('code').getAttribute('name');
-    var element = document.createElement('a');
-    var editorContent = editor.getValue();
-    var contentArray = editorContent.split("\n");
-    var finalContent = "";
-    for (var i = 0; i < contentArray.length; i++) {
-        finalContent = finalContent + contentArray[i] + "\n";
-    }
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' encodeURIComponent(finalContent));
-    element.setAttribute('download', fileName);
-    element.style.display = 'none';
-    document.body.appendChild(element);
-
-    element.click();
-    document.body.removeChild(element);
-}
 
 /**
  * saveEditorContents
@@ -70,7 +46,6 @@ function saveEditorContents() {
         finalContent = finalContent + contentArray[i] + "\n";
     }
     console.log(finalContent);
-    //element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(document.getElementById('editor').innerText));
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(finalContent));
     element.setAttribute('download', projectName);
     element.style.display = 'none';
@@ -84,15 +59,55 @@ function saveEditorContents() {
  * saveTabPrompt
  * Prompts the user to specify if they would like to save the tab they are closing 
  * @author: Abigail Ida
+ * @param: TabTitle
  * @returns: none
  **/
-function saveTabPrompt(){
-    userResponse = confirm('Would you like to save the tab you are closing?');
+function saveTabPrompt(currentTab){
+    userResponse = confirm('Select ok to save the current tab.');
+     //get tab title
+    var tabTitle = currentTab; 
     if(userResponse == true){
-        /* save the tab contents */
-        /* close tab*/
+        //"save" by downloading .py file to users machine
+        downloadEditorContents(tabTitle);
     }else{
-        verification = prompt("You have chosen not to save the contents of the tab before closing.");
-        /*close tab without saving*/
+        verification = alert('You have chosen not to save the contents of ' + tabTitle + ' before closing.');
+        //remove tab and corresponding contents from local storage??
     }
+}
+
+/**
+ * clearEditorContents
+ * Clears the current contents in the editor window
+ * @author: Abigail Ida
+ * @returns: none
+ **/
+function clearEditorContents(content){
+    editor.setValue("");
+}
+
+/**
+ * downloadEditorContents
+ * saves the current contents of the editor window in a .py file by downloading it to the users machine.
+ * The name of the .py file is named after the user slected tab title listed on the corresponding tab.
+ * @author: Abigail Ida
+ * @param: tabTitle
+ * @returns: none
+ **/
+function downloadEditorContents(tabTitle) {
+    projectName = tabTitle;
+    var element = document.createElement('a');
+    var editorContent = editor.getValue();
+    var contentArray = editorContent.split("\n");
+    var finalContent = "";
+    for(var i = 0; i < contentArray.length; i ++) {
+        finalContent = finalContent + contentArray[i] + "\n";
+    }
+    console.log(finalContent);
+    //element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(document.getElementById('editor').innerText));
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(finalContent));
+    element.setAttribute('download', projectName);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
 }
