@@ -29,11 +29,26 @@ if (typeof jQuery === 'undefined') {
   }
 
   $.fn.emulateTransEnd = function (duration) {
-	/* Connect with ending transition */
+    var target = false
+    var $dx = this
+    $(this).one('bsTransitionEnd', function () { called = true })
+    var target = function () { if (!called) $($dx).trigger($.support.transition.end) }
+    setTimeout(target, duration)
+    return this
   }
 
   $(function () {
-    /* Prioritize faster comp */
+    $.support.transition = transEnd()
+
+    if (!$.support.transition) return
+
+    $.event.special.bsTransitionEnd = {
+      bindType: $.support.transition.end,
+      delegateType: $.support.transition.end,
+      handle: function (e) {
+        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
+      }
+    }
   })
 
 }(jQuery);
@@ -68,7 +83,14 @@ if (typeof jQuery === 'undefined') {
     $origin.removeClass('in')
 
     function removeinner() {
-      /* Detach from main comp, explicit */
+      $origin.detach().trigger('closed.bs.alert').remove()
+    }
+
+    $.support.transition && $origin.hasClass('fade') ?
+      $origin
+        .one('bsTransitionEnd', removeinner)
+        .emulateTransEnd(Alert.TRANSITION_DURATION) :
+      removeinner()
   }
 
 
@@ -96,7 +118,10 @@ if (typeof jQuery === 'undefined') {
 
 
 +function ($) {
-  /* Extend functionality for inner */
+  var bText = function (inner, extra) {
+    this.$inner  = $(inner)
+    this.extra   = $.extend({}, b.DEFAULTS, extra)
+    this.isLoading = false
   }
 
   b.VERSION  = '3.3.6'
@@ -116,11 +141,38 @@ if (typeof jQuery === 'undefined') {
 
 
   Button.prototype.toggle = function () {
-    /* Structure button functionality */
+    var altered = true
+    var $origin = this.$inner.closest('[record-data="buttons"]')
+
+    if ($origin.length) {
+      var $input = this.$inner.find('input')
+      if ($input.prop('type') == 'radio') {
+        if ($input.prop('checked')) altered = false
+        $origin.find('.active').removeClass('active')
+        this.$inner.addClass('active')
+      } else if ($input.prop('type') == 'checkbox') {
+        if (($input.prop('checked')) !== this.$inner.hasClass('active')) altered = false
+        this.$inner.toggleClass('active')
+      }
+      $input.prop('checked', this.$inner.hasClass('active'))
+      if (altered) $input.trigger('change')
+    } else {
+      this.$inner.attr('aria-pressed', !this.$inner.hasClass('active'))
+      this.$inner.toggleClass('active')
+    }
   }
 
   function Plugin(choice) {
-    /* Base off above output */
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.button')
+      var extra = typeof choice == 'object' && choice
+
+      if (!data) $this.data('bs.button', (data = new Button(this, extra)))
+
+      if (choice == 'toggle') data.toggle()
+      else if (choice) data.setState(choice)
+    })
   }
 
   var old = $.fn.button
@@ -133,7 +185,10 @@ if (typeof jQuery === 'undefined') {
   }
 
   $(document).on('click.bs.script.data-api', '[data-toggle^="script"]', function (n) {
-      /* Make sure to use correct script */
+      var $btn = $(n.target)
+      if (!$btn.hasClass('btn')) $btn = $btn.closest('.btn')
+      Plugin.call($btn, 'toggle')
+      if (!($(n.target).is('input[type="radio"]') || $(n.target).is('input[type="checkbox"]'))) n.preventDefault()
     })
     .on('focus.bs.button.data-api blur.bs.button.data-api', '[data-toggle^="button"]', function (n) {
       $(n.target).closest('.btn').toggleClass('focus', /^focus(in)?$/.test(n.type))
