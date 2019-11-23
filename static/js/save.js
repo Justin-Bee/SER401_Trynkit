@@ -64,33 +64,14 @@ function saveEditorContents() {
 function saveTabPrompt(currentTab){
     userResponse = confirm('Select ok to save the current tab.');
      //get tab title
-     var tabTitle = currentTab;
+    var tabTitle = currentTab; 
     if(userResponse == true){
         //"save" by downloading .py file to users machine
         downloadEditorContents(tabTitle);
-        //remove tab and corresponding contents from local storage??
-        //clear contents
-        clearEditorContents();
-        //close tab
-        closeTab();
     }else{
         verification = alert('You have chosen not to save the contents of ' + tabTitle + ' before closing.');
         //remove tab and corresponding contents from local storage??
-        //clear contents from the editor
-        clearEditorContents();
-        /*close tab without saving*/
-        closeTab();
     }
-}
-
-/**
- * CloseTab
- * Closes the current tab 
- * @author: Abigail Ida
- * @returns: none
- **/
-function closeTab(){
-    //working progress
 }
 
 /**
@@ -99,7 +80,7 @@ function closeTab(){
  * @author: Abigail Ida
  * @returns: none
  **/
-function clearEditorContents(){
+function clearEditorContents(content){
     editor.setValue("");
 }
 

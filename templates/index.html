@@ -353,9 +353,9 @@
             })
             .on("click", "span", function () { //this is to handle the remove button
                     //todo prompt the user to save file
+                    saveTabPrompt(currentTab);
                     //TODO remove the code in the editor 
                     $(this).parent().remove(); //this removes the tab
-                    saveTabPrompt();
                    
                 });
             //This function handles the logic when you click add tab
