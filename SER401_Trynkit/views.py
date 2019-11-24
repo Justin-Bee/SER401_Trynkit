@@ -4,8 +4,12 @@ from django.shortcuts import render
 # @author: Justin Bee, Brian Carson
 # @date: 10/6/2019
 
+
 def index(request):
     return render(request, 'index.html')
+
+def main(request):
+    return render(request, 'main.html')
 
 def devices(request):
     return render(request, 'devices.html')
