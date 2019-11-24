@@ -20,13 +20,15 @@
  * @version November 2019
  */
 
+
 /**
  * saveEditorContents
- * Saves the contents of the text editor to a file of the user's choice.
+ * Saves the contents of the editor to a file of the user's choice.
  * @author: Andrew Fiorentino
- * @param: filename the name of the file to be saved
+ * @param: none
  * @returns: none
  **/
+
 function saveEditorContents() {
     if (document.getElementById('code').getAttribute('name') == '.py') {
         projectName = prompt('Please chose a name for your project: ', 'NewProject.py');
@@ -44,7 +46,6 @@ function saveEditorContents() {
         finalContent = finalContent + contentArray[i] + "\n";
     }
     console.log(finalContent);
-    //element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(document.getElementById('editor').innerText));
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(finalContent));
     element.setAttribute('download', projectName);
     element.style.display = 'none';
