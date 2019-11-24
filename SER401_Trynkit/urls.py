@@ -26,4 +26,5 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
+    path('main/', views.main),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
