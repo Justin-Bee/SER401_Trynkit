@@ -142,6 +142,7 @@
     </div>
     <body>
         <div id="menu">
+            <p></p>
             <button onclick="newFile()" id="nfBtn"><img type="image/svg+xml" id ="newFileBtn" src="/static/images/file-regular.svg" width="50" height="50"><figcaption> New File </figcaption></button>
             <p></p>
             <button onclick="newProject()" id="npBtn"><img type="image/svg+xml" id ="newProjectBtn" src="/static/images/folder-regular.svg" width="50" height="50"><figcaption> New Project </figcaption></button>
@@ -166,8 +167,10 @@
             <button onClick="consoleHide()" id="serialBtn"><img type="image/svg+xml"  src="/static/images/plug-solid.svg" width="50" height="50"><figcaption> Console </figcaption></button>
             <p></p>
             <button onclick="debugToggle()" id="debugBtn"><img type ="image/svg+xml" id="debuggerBtn" src="/static/images/bug-solid.svg" width="50" height="50"><figcaption> Debug </figcaption></button>
-       
-     <script>
+            <p></p>
+            <button onclick="document.getElementById('login').style.display='block'" id="loginBtn"><img type ="image/svg+xml" id="loginBtn" src="/static/images/login-regular.png" width="50" height="50"><figcaption> Login </figcaption></button>
+ 
+ <script>
         function consoleHide(){
             var x = document.getElementById('console');
             if (x.style.display ==="none"){
@@ -260,6 +263,43 @@
                   </div>
                 </div>
               </div>
+
+
+                <!-- login Modal -->
+                <div class="modal fade" id="loginsModal" role="dialog" style="display:none">
+                        <div class="modal-dialog">
+                          <!-- Modal content-->
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h4 class="modal-title">Login</h4>
+                            </div>
+                            <div class="modal-body">
+                                    <div class="container">
+                                            <label for="UserName"><b>Username</b></label>
+                                            <input type="username" user="Enter Username" name="userName" required>
+                                                    
+                                            <label for="Password"><b>Password</b></label>
+                                            <input type="password" placeholder="Enter Password" name="password" required>
+                                                            
+                                            <button type="submit">Login</button>
+                                            <label>
+                                                <input type="checkbox" checked="checked" name="remember"> Remember me
+                                            </label>
+                        
+                                            <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbtn">Cancel</button>
+                                            <span class="psw">Forgot <a href="#">password?</a></span>
+                                        </div>
+                                <div class="modal-footer">
+                                    <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbtn">Cancel</button>
+                                    <span class="psw">Forgot <a href="#">password?</a></span>
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                             </div>
+        
+                          </div>
+                        </div>
+                      </div>
     </body>
 
     <script>
