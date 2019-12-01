@@ -1,0 +1,16 @@
+########################################################
+#                                                      #
+# How to setup ESP32 for bluetooth                     #
+#                                                      #
+########################################################
+
+1. connect to device open REPL
+2. import ubluetooth
+3. from ubluetooth import BLE
+4. bt = BLE()
+5. bt.active(True)
+6.
+
+
+
+reference: https://forum.micropython.org/viewtopic.php?t=7221
