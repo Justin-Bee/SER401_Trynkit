@@ -168,8 +168,8 @@
             <p></p>
             <button onclick="debugToggle()" id="debugBtn"><img type ="image/svg+xml" id="debuggerBtn" src="/static/images/bug-solid.svg" width="50" height="50"><figcaption> Debug </figcaption></button>
             <p></p>
-            <button onclick="document.getElementById('login').style.display='block'" id="loginBtn"><img type ="image/svg+xml" id="loginBtn" src="/static/images/login-regular.png" width="50" height="50"><figcaption> Login </figcaption></button>
- 
+            <button data-toggle="modal" data-target="#loginModal" id="loginBtn"><img type="image/svg+xml" id ="loginBtn" src="/static/images/login-regular.png" width="50" height="50"><figcaption> Login </figcaption></button>
+
  <script>
         function consoleHide(){
             var x = document.getElementById('console');
@@ -266,7 +266,7 @@
 
 
                 <!-- login Modal -->
-                <div class="modal fade" id="loginsModal" role="dialog" style="display:none">
+                <div class="modal fade" id="loginModal" role="dialog" style="display:none">
                         <div class="modal-dialog">
                           <!-- Modal content-->
                           <div class="modal-content">
@@ -275,28 +275,25 @@
                               <h4 class="modal-title">Login</h4>
                             </div>
                             <div class="modal-body">
-                                    <div class="container">
-                                            <label for="UserName"><b>Username</b></label>
-                                            <input type="username" user="Enter Username" name="userName" required>
-                                                    
-                                            <label for="Password"><b>Password</b></label>
-                                            <input type="password" placeholder="Enter Password" name="password" required>
-                                                            
-                                            <button type="submit">Login</button>
-                                            <label>
-                                                <input type="checkbox" checked="checked" name="remember"> Remember me
-                                            </label>
-                        
-                                            <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbtn">Cancel</button>
-                                            <span class="psw">Forgot <a href="#">password?</a></span>
-                                        </div>
+                                <p>Please enter login credentials</p>
+                                <div class="container">
+                                    <label for="UserName"><b>Username</b></label>
+                                    <input type="username" placeholder="Enter Username" name="userName" required>
+                                    <p></p>          
+                                    <label for="Password"><b>Password</b></label>
+                                    <input type="password" placeholder="Enter Password" name="password" required>
+                                    <p></p>                   
+                                    <label>
+                                        <input type="checkbox" checked="checked" name="remember"> Remember me
+                                    </label>
+                                    <p></p>
+                                    <button type="submit">Login</button>
+                                </div>
                                 <div class="modal-footer">
                                     <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbtn">Cancel</button>
                                     <span class="psw">Forgot <a href="#">password?</a></span>
-                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 </div>
                              </div>
-        
                           </div>
                         </div>
                       </div>
