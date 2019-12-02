@@ -25,120 +25,6 @@
 
 
     </head>
-    
-    <script>
-       
-
-
-         /*   function loadTab() {
-                var t = document.createElement('button');
-                t.setAttribute('id', 'tab' + tabCount);
-                document.getElementById('tabs').insertBefore(t, document.getElementById('newTabBtn'));
-                t.innerText = 'Tab' + tabCount;
-                tabCount++;
-                t.style.backgroundColor = '#50B6E2';
-                var prevTab = document.getElementById('tab0');
-                prevTab.style.backgroundColor = '#D3D3D3';
-                for (i = 1; i < tabCount - 1; i++) {
-                    prevTab = document.getElementById('tab' + i);
-                    prevTab.style.backgroundColor = '#D3D3D3';
-                }
-                t.onclick = function() { //TODO refactor this function below because newTab also uses it
-                    localStorage.setItem(currentTab, editor.getValue());
-                    currentTab = t.id;
-                    editor.setValue(localStorage.getItem(currentTab.toString()));
-                    var iTab = document.getElementById('tab0');
-                    for (i = 0; i < tabCount; i++) {
-                        iTab = document.getElementById('tab' + i);
-                        iTab.style.backgroundColor = "#D3D3D3";
-                        iTab.disabled = false;
-                    }
-                    t.style.backgroundColor = "#50B6E2";
-                    t.disabled = true;
-                };
-            }
-            function newTab() {
-                var t = document.createElement('button');
-                t.setAttribute('id', "tab" + tabCount);
-                document.getElementById('tabs').insertBefore(t, document.getElementById('newTabBtn'));
-                t.innerText = "Tab" + tabCount; //TODO set the name of the innertext to the file name for other user story
-                tabCount++;
-                localStorage.setItem(t.id, "");
-				t.style.backgroundColor = "#50B6E2";
-				var prevTab = document.getElementById('tab0');
-				prevTab.style.backgroundColor = "#D3D3D3";
-				for (i = 1; i < tabCount - 1; i++) {
-					prevTab = document.getElementById('tab' + i);
-					prevTab.style.backgroundColor = "#D3D3D3";
-				}
-                t.onclick = function() {
-                    localStorage.setItem(currentTab, editor.getValue());
-                    currentTab = t.id;
-                    editor.setValue(localStorage.getItem(currentTab.toString()));
-					var iTab = document.getElementById('tab0');
-					for (i = 0; i < tabCount; i++) {
-						iTab = document.getElementById('tab' + i);
-						iTab.style.backgroundColor = '#D3D3D3';
-                        iTab.disabled = false;
-					}
-					t.style.backgroundColor = '#50B6E2';
-                    t.disabled = true;
-                };
-            }
-            function newTab1(id) {
-                var t = document.createElement('button');
-                t.setAttribute('id', "tab" + tabCount);
-                document.getElementById('tabs').insertBefore(t, document.getElementById('newTabBtn'));
-                t.innerText = id; //TODO set the name of the innertext to the file name for other user story
-                tabCount++;
-                localStorage.setItem(t.id, "");
-                t.style.backgroundColor = "#50B6E2";
-                var prevTab = document.getElementById('tab0');
-                prevTab.style.backgroundColor = "#D3D3D3";
-                for (i = 1; i < tabCount -1; i++) {
-                    prevTab = document.getElementById('tab' + i);
-                    prevTab.style.backgroundColor = "#D3D3D3";
-                }
-                t.onclick = function() {
-                    localStorage.setItem(currentTab, editor.getValue());
-                    currentTab = t.id;
-                    editor.setValue(localStorage.getItem(currentTab.toString()));
-                    var iTab = document.getElementById('tab0');
-                    for (i = 0; i < tabCount; i++) {
-                        iTab = document.getElementById('tab' + i);
-                        iTab.style.backgroundColor = "#D3D3D3";
-                        iTab.disabled = false
-                    }
-                    t.style.backgroundColor = "#50B6E2";
-                    t.disabled = true;
-                };
-            }
-            function switchTab0() {
-                localStorage.setItem(currentTab, editor.getValue());
-                editor.setValue(localStorage.getItem('tab0'));
-                currentTab = "tab0";
-				var iTab = document.getElementById('tab0');
-				for (i = 0; i < tabCount; i++) {
-					iTab = document.getElementById('tab' + i);
-					iTab.style.backgroundColor = '#D3D3D3';
-                    iTab.disabled = false;
-				}
-				iTab = document.getElementById('tab0');
-                iTab.disabled = true;
-				iTab.style.backgroundColor = '#50B6E2';
-            }
-            document.onreadystatechange = function() {
-                if (localStorage.length == 0) {
-                    document.getElementById('tab0').disabled = true;
-                } else {
-                    currentTab = "tab" + (localStorage.length - 1);
-                    editor.setValue(localStorage.getItem(currentTab).toString());
-                    for (i = 1; i < localStorage.length - 1; i++) {
-                        loadTab();
-                    }
-                }
-            } */
-        </script>
     </div>
     <body>
         <div id="menu">
@@ -200,8 +86,6 @@
         <div id="console" contenteditable="true" name="empty" style="display:none">Serial Console</div>
         <div id="devices" name="empty" style="display:none"></div>
 
-
-
                 <!-- Settings Modal -->
               <div class="modal fade" id="settingsModal" role="dialog" style="display:none">
                 <div class="modal-dialog">
@@ -227,11 +111,9 @@
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
                      </div>
-
                   </div>
                 </div>
               </div>
-
 
      <!-- Create/ load Project modal -->
               <div class="modal fade" id="onloadModal" role="dialog" style="display:none">
@@ -367,16 +249,14 @@
                  }catch(e){
                      console.error(e);
                  }
-                }
-            })
-            .on("click", "span", function () { //this is to handle the remove button
+             }
+        })
+        .on("click", "span", function () { //this is to handle the remove button
                     //todo prompt the user to save file
                     saveTabPrompt(currentTab);
                     //TODO remove the code in the editor 
                     $(this).parent().remove(); //this removes the tab
-                   
         });
-	        
             //This function handles the logic when you click add tab
             $('.add-tab').click(function (e) {
                 localStorage.setItem(currentTab, editor.getValue());
@@ -385,7 +265,7 @@
                     e.preventDefault();
                     var id = $(".nav-tabs").children().length; 
                     var tabId = 'tab_' + id;
-                    $(this).closest('li').before('<li class="active"><a href="#tab_' + id + '">"'+ projectName+'"</a> <span> x </span></li>');
+                    $(this).closest('li').before('<li class="active"><a href="#tab_' + id + '">'+ projectName+'</a> <span> x </span></li>');
                     currentTab = projectName; 
                     masterList.push(projectName); 
                     localStorage.setItem("tabList", masterList); /* add tab to the tab list */
@@ -408,14 +288,11 @@
                                 i--;
                                 k++;
                                 tabList = null;
+                                masterList.empty();
                             }
                         }
                     }
                 }
             });
-                
-            
     </script>
-
 </html>
-
