@@ -26,6 +26,7 @@
     </div>
     <body>
         <div id="menu">
+            <p></p>
             <button onclick="newFile()" id="nfBtn"><img type="image/svg+xml" id ="newFileBtn" src="/static/images/file-regular.svg" width="50" height="50"><figcaption> New File </figcaption></button>
             <p></p>
             <button onclick="newProject()" id="npBtn"><img type="image/svg+xml" id ="newProjectBtn" src="/static/images/folder-regular.svg" width="50" height="50"><figcaption> New Project </figcaption></button>
@@ -50,6 +51,9 @@
             <button onClick="consoleHide()" id="serialBtn"><img type="image/svg+xml"  src="/static/images/plug-solid.svg" width="50" height="50"><figcaption> Console </figcaption></button>
             <p></p>
             <button onclick="debugToggle()" id="debugBtn"><img type ="image/svg+xml" id="debuggerBtn" src="/static/images/bug-solid.svg" width="50" height="50"><figcaption> Debug </figcaption></button>
+            <p></p>
+            <button data-toggle="modal" data-target="#loginModal" id="loginBtn"><img type="image/svg+xml" id ="loginBtn" src="/static/images/login-regular.svg" width="50" height="50"><figcaption> Login </figcaption></button>
+
         </div>
 
         <div class="container">
@@ -133,6 +137,40 @@
                   </div>
                 </div>
               </div>
+
+
+                <!-- login Modal -->
+                <div class="modal fade" id="loginModal" role="dialog" style="display:none">
+                        <div class="modal-dialog">
+                          <!-- Modal content-->
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h4 class="modal-title">Login</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Please enter login credentials</p>
+                                <div class="container">
+                                    <label for="UserName"><b>Username</b></label>
+                                    <input type="username" placeholder="Enter Username" name="userName" required>
+                                    <p></p>          
+                                    <label for="Password"><b>Password</b></label>
+                                    <input type="password" placeholder="Enter Password" name="password" required>
+                                    <p></p>                   
+                                    <label>
+                                        <input type="checkbox" checked="checked" name="remember"> Remember me
+                                    </label>
+                                    <p></p>
+                                    <button type="submit">Login</button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbtn">Cancel</button>
+                                    <span class="psw">Forgot <a href="#">password?</a></span>
+                                </div>
+                             </div>
+                          </div>
+                        </div>
+                      </div>
     </body>
 
     <script>
