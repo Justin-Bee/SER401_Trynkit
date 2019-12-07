@@ -21,124 +21,8 @@
         <link rel="stylesheet" type="text/css" href="/static/css/material.css"/>
         <link rel="stylesheet" type="text/css" href="/static/css/elegant.css"/>
         <link rel="stylesheet" type="text/css" href="/static/css/rubyblue.css"/>
-
-
-
     </head>
-    
-    <script>
-       
 
-
-         /*   function loadTab() {
-                var t = document.createElement('button');
-                t.setAttribute('id', 'tab' + tabCount);
-                document.getElementById('tabs').insertBefore(t, document.getElementById('newTabBtn'));
-                t.innerText = 'Tab' + tabCount;
-                tabCount++;
-                t.style.backgroundColor = '#50B6E2';
-                var prevTab = document.getElementById('tab0');
-                prevTab.style.backgroundColor = '#D3D3D3';
-                for (i = 1; i < tabCount - 1; i++) {
-                    prevTab = document.getElementById('tab' + i);
-                    prevTab.style.backgroundColor = '#D3D3D3';
-                }
-                t.onclick = function() { //TODO refactor this function below because newTab also uses it
-                    localStorage.setItem(currentTab, editor.getValue());
-                    currentTab = t.id;
-                    editor.setValue(localStorage.getItem(currentTab.toString()));
-                    var iTab = document.getElementById('tab0');
-                    for (i = 0; i < tabCount; i++) {
-                        iTab = document.getElementById('tab' + i);
-                        iTab.style.backgroundColor = "#D3D3D3";
-                        iTab.disabled = false;
-                    }
-                    t.style.backgroundColor = "#50B6E2";
-                    t.disabled = true;
-                };
-            }
-            function newTab() {
-                var t = document.createElement('button');
-                t.setAttribute('id', "tab" + tabCount);
-                document.getElementById('tabs').insertBefore(t, document.getElementById('newTabBtn'));
-                t.innerText = "Tab" + tabCount; //TODO set the name of the innertext to the file name for other user story
-                tabCount++;
-                localStorage.setItem(t.id, "");
-				t.style.backgroundColor = "#50B6E2";
-				var prevTab = document.getElementById('tab0');
-				prevTab.style.backgroundColor = "#D3D3D3";
-				for (i = 1; i < tabCount - 1; i++) {
-					prevTab = document.getElementById('tab' + i);
-					prevTab.style.backgroundColor = "#D3D3D3";
-				}
-                t.onclick = function() {
-                    localStorage.setItem(currentTab, editor.getValue());
-                    currentTab = t.id;
-                    editor.setValue(localStorage.getItem(currentTab.toString()));
-					var iTab = document.getElementById('tab0');
-					for (i = 0; i < tabCount; i++) {
-						iTab = document.getElementById('tab' + i);
-						iTab.style.backgroundColor = '#D3D3D3';
-                        iTab.disabled = false;
-					}
-					t.style.backgroundColor = '#50B6E2';
-                    t.disabled = true;
-                };
-            }
-            function newTab1(id) {
-                var t = document.createElement('button');
-                t.setAttribute('id', "tab" + tabCount);
-                document.getElementById('tabs').insertBefore(t, document.getElementById('newTabBtn'));
-                t.innerText = id; //TODO set the name of the innertext to the file name for other user story
-                tabCount++;
-                localStorage.setItem(t.id, "");
-                t.style.backgroundColor = "#50B6E2";
-                var prevTab = document.getElementById('tab0');
-                prevTab.style.backgroundColor = "#D3D3D3";
-                for (i = 1; i < tabCount -1; i++) {
-                    prevTab = document.getElementById('tab' + i);
-                    prevTab.style.backgroundColor = "#D3D3D3";
-                }
-                t.onclick = function() {
-                    localStorage.setItem(currentTab, editor.getValue());
-                    currentTab = t.id;
-                    editor.setValue(localStorage.getItem(currentTab.toString()));
-                    var iTab = document.getElementById('tab0');
-                    for (i = 0; i < tabCount; i++) {
-                        iTab = document.getElementById('tab' + i);
-                        iTab.style.backgroundColor = "#D3D3D3";
-                        iTab.disabled = false
-                    }
-                    t.style.backgroundColor = "#50B6E2";
-                    t.disabled = true;
-                };
-            }
-            function switchTab0() {
-                localStorage.setItem(currentTab, editor.getValue());
-                editor.setValue(localStorage.getItem('tab0'));
-                currentTab = "tab0";
-				var iTab = document.getElementById('tab0');
-				for (i = 0; i < tabCount; i++) {
-					iTab = document.getElementById('tab' + i);
-					iTab.style.backgroundColor = '#D3D3D3';
-                    iTab.disabled = false;
-				}
-				iTab = document.getElementById('tab0');
-                iTab.disabled = true;
-				iTab.style.backgroundColor = '#50B6E2';
-            }
-            document.onreadystatechange = function() {
-                if (localStorage.length == 0) {
-                    document.getElementById('tab0').disabled = true;
-                } else {
-                    currentTab = "tab" + (localStorage.length - 1);
-                    editor.setValue(localStorage.getItem(currentTab).toString());
-                    for (i = 1; i < localStorage.length - 1; i++) {
-                        loadTab();
-                    }
-                }
-            } */
-        </script>
     </div>
     <body>
         <div id="menu">
@@ -169,16 +53,7 @@
             <button onclick="debugToggle()" id="debugBtn"><img type ="image/svg+xml" id="debuggerBtn" src="/static/images/bug-solid.svg" width="50" height="50"><figcaption> Debug </figcaption></button>
             <p></p>
             <button data-toggle="modal" data-target="#loginModal" id="loginBtn"><img type="image/svg+xml" id ="loginBtn" src="/static/images/login-regular.svg" width="50" height="50"><figcaption> Login </figcaption></button>
- <script>
-        function consoleHide(){
-            var x = document.getElementById('console');
-            if (x.style.display ==="none"){
-                x.style.display = "block";
-            }else{
-                x.style.display = "none";
-            }
-        }
-        </script>
+
         </div>
 
         <div class="container">
@@ -299,7 +174,13 @@
     </body>
 
     <script>
-        document.getElementById('code').setAttribute('name', '.py');
+        document.getElementById('code').setAttribute('name', 'main.py');
+        /**
+         * newProject()
+         * This function is to create a new project.
+         * It is called from the newPrjoect button or in the popup modal
+         * at the load of the page.
+         */
         function newProject() {
             //TODO this needs changed to reflect the new project code right now just creates a file
             var projectName = prompt("Creating a new project:", "NewProjectName.py");
@@ -317,10 +198,28 @@
             $(".add-tab").click();
         }
 
+        /**
+         * debugToggle()
+         * This function shows the debug console or if the console is shown
+         * then hide the console.
+         */
 		function debugToggle() {
 			var debugDiv = document.getElementById('debugger');
 			debugDiv.style.display = debugDiv.style.display == "none" ? "block" : "none";
 		}
+
+		/**
+         * consoleHide()
+         * This function shows or hides the serial console based on its current state.
+         */
+        function consoleHide(){
+            var x = document.getElementById('console');
+            if (x.style.display ==="none"){
+                x.style.display = "block";
+            }else{
+                x.style.display = "none";
+            }
+        }
 
 		/**
          * Code Mirror
@@ -365,6 +264,9 @@
 
         /**
          * This function is for the startup model to show only when the page loads
+         * It also checks to see if there is any data in local storage to be loaded,
+         * if it is there popluate the masterlist variable with file names and then
+         * call populate list function to add tabs accordingly.
          */
         var masterList = ["main.py"]; /* array variable to store the tab names */
         $(window).on('load',function(){
@@ -379,6 +281,11 @@
             
         });
 
+        /**
+         * populateTabs()
+         * This function populates the tabs with the tab names
+         * with the list of filenames that was loaded from local storage.
+         */
         function populateTabs(){
             for(i =1; i< masterList.length; i++){
                 $(".add-tab").closest('li').before('<li><a href="#tab_' + i + '">"'+ masterList[i].toString()+'"</a> <span> x </span></li>');
@@ -390,8 +297,12 @@
          * has the ability add new tabs and close tabs
          */
         var currentTab = "main.py";  /* used to determine the previous tab */
-        
         var tabList;
+
+        /**
+         * This function handles all of the logic when clicking on a tab
+         * it also saves the previous tabs contents into local storage.
+         */
          $(".nav-tabs").on("click", "a", function (e) {
             e.preventDefault();
              if (!$(this).hasClass('add-tab')) {
@@ -406,14 +317,18 @@
                 }
             })
             .on("click", "span", function () { //this is to handle the remove button
-                    //todo prompt the user to save file
                     saveTabPrompt(currentTab);
                     //TODO remove the code in the editor 
                     $(this).parent().remove(); //this removes the tab
                    
         });
 	        
-            //This function handles the logic when you click add tab
+            /**
+             * This function handles the logic for when you add a tab
+             * by clicking the add tab button. It prompts user for a filename,
+             * adds new tab with the filename. Saves it into local storage in masterlist variable,
+             * and sets the tab to be the open tab.
+             */
             $('.add-tab').click(function (e) {
                 localStorage.setItem(currentTab, editor.getValue());
                 var projectName = prompt("Creating a new file:", "NewProjectName.py");
@@ -431,8 +346,11 @@
                     //Don't do anything
                 }
         });
-	        //This function handles the logic when you click close all tabs
-            $('.remove-tabs').click(function(e) {
+        /**
+         * This function handles all of the logic when close all tabs button is clicked
+         *
+         */
+        $('.remove-tabs').click(function(e) {
                if (confirm("Would you like to close and save all tabs?")) {
                     var navTabsLength = $(".nav-tabs").children().length;
                     var k = 0;
