@@ -177,6 +177,10 @@ button{
     background-color: Transparent;
     border: none;
 }
+#loginBtn{
+    background-color: Transparent;
+    border: none;
+}
 
 .modal {
     overflow-y: auto;
