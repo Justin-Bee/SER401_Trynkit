@@ -1,0 +1,40 @@
+########################################################
+#                                                      #
+# How to setup ESP32 for bluetooth                     #
+#                                                      #
+########################################################
+
+Steps so far to get the bluetooth to work on device.
+1. connect to device open REPL
+2. import ubluetooth
+3. from ubluetooth import BLE
+4. bt = BLE()
+5. bt.active(True)  #or bt.active(1) doesnt matter which way you do it
+        |----> if this prints back "Gap procedure initiated: stop advertising" try it again
+                we want to see only "True" printed back
+# the value for below is in microseconds to stop advertising set to 'None'
+# can add a str param after for adv_data , str for resp_data, and bool for connectable
+# BLE.gap_advertise(interval_us, adv_data, resp_data, connectable)
+# have yet to confirm this is working, used nrf connect app for android but haven't seen the device advertise
+6. bt.gap_advertise(100000)
+        |-----> I used NRF connect android app to scan for bluetooth. I was able to see the device advertising
+                it will say N/A as we haven't programmed any information to advertise. Just make sure you know what all the other devices are to decipher which is dev board.
+7. bt.active(0) #now you should see the device removed from the list.
+8. repeat steps 5 & 6 and yo should see it in the list again.
+
+
+
+Notes
+need to research more and most likely will have to develop our own firmware to work with device
+as it stands some bluetooth functions work yet, for our implementation we want to set the bluetooth always on
+and set to advertise so we can pair with our webapp without having to manual set anything on the dev board to get
+the bluetooth to work.
+
+
+########################################################
+#  References
+#https://forum.micropython.org/viewtopic.php?t=7221
+#https://github.com/nkolban/ESP32_BLE_Arduino
+#https://github.com/nkolban/esp32-snippets
+#
+########################################################

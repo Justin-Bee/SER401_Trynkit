@@ -1,0 +1,22 @@
+Initial Procedure for loading the micro python firmware onto esp32 for linux
+
+First connect the dev board to your PC with micro USB cable.
+
+1. Download the esptool - pip install esptool  
+   Since this is a pip install everyone has to install this locally
+2. Hold down the boot button on the board and type into terminal:
+   sudo esptool.py --chip esp32 --port /dev/ttyUSB0 erase_flash
+3. After the erase task finishes open a terminal in folder with the firmware image
+4. Type the following into the terminal:
+        sudo esptool.py --chip esp32 --port /dev/ttyUSB0 --baud 460800 write_flash -z 0x1000 esp32-idf4-20191124-v1.11-586-g1530fda9c.bin
+   Note - you may need to hold down the boot button for the above process as well.
+5. After the firmware is written into flash, you can now connect to the device and access its REPL.
+6. You can use putty on linux serial /dev/ttyUSB0 with baud rate of 115200
+   I used picocom through terminal picocom -b 115200 /dev/ttyUSB0
+
+   to ensure this is working correctly ht enter and you should see ">>>" 
+   then type a python command and it should execute in the terminal 
+
+
+   For Windows installs I think the only difference in this setup is the ports so 
+   instead of /dev/ttyUSB0 you would use the com# of the usb port the dev board is plugged into
