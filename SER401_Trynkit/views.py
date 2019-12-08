@@ -4,6 +4,7 @@ from django.shortcuts import render
 # @author: Justin Bee, Brian Carson
 # @date: 10/6/2019
 
+@login_required(login_url='/accounts/login/')
 def index(request):
     return render(request, 'index.html')
 
