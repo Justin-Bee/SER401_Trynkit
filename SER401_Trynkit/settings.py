@@ -32,6 +32,7 @@ ALLOWED_HOSTS = [
         'asuser401group5.net',
         'www.asuser401group5.net',
         'ec2-35-163-112-93.us-west-2.compute.amazonaws.com',
+        'ec2-52-40-146-126.us-west-2.compute.amazonaws.com',
         '35.163.112.93',
         '172.31.10.63',
         'ser401-trynkit-dev.us-west-2.elasticbeanstalk.com',
