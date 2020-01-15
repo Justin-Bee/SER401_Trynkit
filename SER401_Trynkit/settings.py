@@ -28,11 +28,13 @@ DEBUG = True
 ALLOWED_HOSTS = [
         '127.0.0.1',
         'localhost',
-        'ser401trynkit-env.dpvfkpi7gs.us-west-2.elasticbeanstalk.com',
-        'ec2-52-12-196-187.us-west-2.compute.amazonaws.com',
-        'www.ser401trynkit-env.dpvfkpi7gs.us-west-2.elasticbeanstalk.com',
-        'ip-172-31-54-73.us-west-2.compute.internal',
         '0.0.0.0',
+        'ec2-52-35-141-74.us-west-2.compute.amazonaws.com',
+        '52.35.141.74',
+        '172.31.10.173',
+        'http://ser401-trynkit-dev.us-west-2.elasticbeanstalk.com/',
+        'ser401-trynkit-dev.us-west-2.elasticbeanstalk.com',
+        'asuser401group5.net'
         ]
 
 
