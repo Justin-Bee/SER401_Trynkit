@@ -33,8 +33,10 @@ ALLOWED_HOSTS = [
         '52.35.141.74',
         '172.31.10.173',
         'http://ser401-trynkit-dev.us-west-2.elasticbeanstalk.com/',
+        'www.ser401-trynkit-dev.us-west-2.elasticbeanstalk.com',
         'ser401-trynkit-dev.us-west-2.elasticbeanstalk.com',
-        'asuser401group5.net'
+        'asuser401group5.net',
+        'www.asuser401group5.net'
         ]
 
 
