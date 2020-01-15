@@ -27,7 +27,6 @@ The following repo will contain the firmware code we will be using for our proje
 
 https://github.com/Justin-Bee/micropython
 
-
 ## Copyright Info
 
 Copyright 2019 Justin Bee, Brian Carson, Andrew Fiorentino, Abigail Ida, and Vicente Ochoa. Code released under the [Apache 2.0](https://github.com/Justin-Bee/SER401_Trynkit/blob/master/LICENSE) license.

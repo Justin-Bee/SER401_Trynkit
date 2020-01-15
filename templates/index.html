@@ -336,7 +336,7 @@
                     e.preventDefault();
                     var id = $(".nav-tabs").children().length; 
                     var tabId = 'tab_' + id;
-                    $(this).closest('li').before('<li class="active"><a href="#tab_' + id + '">"'+ projectName+'"</a> <span> x </span></li>');
+                    $(this).closest('li').before('<li class="active"><a href="#tab_' + id + '">'+ projectName+'</a> <span> x </span></li>');
                     currentTab = projectName; 
                     masterList.push(projectName); 
                     localStorage.setItem("tabList", masterList); /* add tab to the tab list */
