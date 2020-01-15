@@ -36,7 +36,9 @@ ALLOWED_HOSTS = [
         'www.ser401-trynkit-dev.us-west-2.elasticbeanstalk.com',
         'ser401-trynkit-dev.us-west-2.elasticbeanstalk.com',
         'asuser401group5.net',
-        'www.asuser401group5.net'
+        'www.asuser401group5.net',
+        '54.69.114.30',
+        '52.37.55.13'
         ]
 
 
