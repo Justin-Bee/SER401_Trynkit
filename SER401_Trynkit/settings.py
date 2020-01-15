@@ -29,16 +29,12 @@ ALLOWED_HOSTS = [
         '127.0.0.1',
         'localhost',
         '0.0.0.0',
-        'ec2-52-35-141-74.us-west-2.compute.amazonaws.com',
-        '52.35.141.74',
-        '172.31.10.173',
-        'http://ser401-trynkit-dev.us-west-2.elasticbeanstalk.com/',
-        'www.ser401-trynkit-dev.us-west-2.elasticbeanstalk.com',
-        'ser401-trynkit-dev.us-west-2.elasticbeanstalk.com',
         'asuser401group5.net',
         'www.asuser401group5.net',
-        '54.69.114.30',
-        '52.37.55.13'
+        'ec2-35-163-112-93.us-west-2.compute.amazonaws.com',
+        '35.163.112.93',
+        '172.31.10.63',
+        'ser401-trynkit-dev.us-west-2.elasticbeanstalk.com'
         ]
 
 
