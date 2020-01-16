@@ -1,0 +1,29 @@
+##################################################################
+#                                                                #
+#    How to install all of the dependencies in Ubuntu            #
+#           and build the micropython firmware                   #
+##################################################################
+
+1. The ESD-IDF changes fequently so you need to have the latest commit hash for the 4.x version of the ESP-IDF
+    (our project requires 4.x for the bluetooth module) to get the latest commit hash run make without a configre ESPIDF
+2. $ git clone https://github.com/espressif/esp-idf.git
+3. $ git checkout <Current supported ESP-IDF commit hash> //i used hash: 310beae373446ceb9a4ad9b36b5428d7fdf2705f
+4. $ git submodule update --init --recursive
+5. Make sure you have all of the binary toolchain installed:
+   $ sudo apt-get install gcc git wget make libncurses-dev flex bison gperf python python-pip python-setuptools python-serial python-cryptography python-future python-pyparsing
+6. Download: https://dl.espressif.com/dl/xtensa-esp32-elf-linux64-1.22.0-80-g6c4433a-5.2.0.tar.gz
+7. $ mkdir -p ~/esp
+8. $ cd ~/esp
+9. $ tar -xzf ~/Downloads/xtensa-esp32-elf-linux64-1.22.0-80-g6c4433a-5.2.0.tar.gz
+10. set the PATH variable for this:
+    export PATH="$HOME/esp/xtensa-esp32-elf/bin:$PATH" //add to ~/.profile or ~/.bash_profile
+11. $ pip install pyserial 'pyparsing<2.4'
+12. To build the firmware, navigate to the root of the micropython project folder
+13. $ make -C mpy-cross
+14. $ cd ports/esp32
+15. $ make submodules
+16. $ make
+17. $ sudo adduser <username> dialout
+18. $ make erase
+19. $ make deploy
+
