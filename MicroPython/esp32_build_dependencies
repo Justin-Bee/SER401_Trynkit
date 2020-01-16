@@ -3,6 +3,9 @@
 #    How to install all of the dependencies in Ubuntu            #
 #           and build the micropython firmware                   #
 ##################################################################
+First of all make sure you clone the micropython repo i set up to hold our version of the code.
+$ git clone https://github.com/Justin-Bee/micropython.git
+
 
 1. The ESD-IDF changes fequently so you need to have the latest commit hash for the 4.x version of the ESP-IDF
     (our project requires 4.x for the bluetooth module) to get the latest commit hash run make without a configre ESPIDF
