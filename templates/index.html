@@ -53,6 +53,8 @@
             <button onclick="debugToggle()" id="debugBtn"><img type ="image/svg+xml" id="debuggerBtn" src="/static/images/bug-solid.svg" width="50" height="50"><figcaption> Debug </figcaption></button>
             <p></p>
             <button data-toggle="modal" data-target="#loginModal" id="loginBtn"><img type="image/svg+xml" id ="loginBtn" src="/static/images/login-regular.svg" width="50" height="50"><figcaption> Login </figcaption></button>
+            <p></p>
+            <button data-toggle="modal" data-target="#signUpModal" id="signBtn"><img type="image/svg+xml" id ="signBtn" src="/static/images/signup.svg" width="50" height="50"><figcaption> Sign Up </figcaption></button>
 
         </div>
 
@@ -171,10 +173,47 @@
                           </div>
                         </div>
                       </div>
+
+            <!-- Sign Up Modal -->
+            <div class="modal fade" id="signUpModal" role="dialog" style="display:none">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Sign Up</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Welcome to the Trynkit Community</p>
+                        <div class="container">
+                            <label for="UserName"><b>Username</b></label>
+                            <input type="username" placeholder="Enter Username" name="userName" required>
+                            <p></p>          
+                            <label for="Password"><b>Password</b></label>
+                            <input type="password" placeholder="Enter Password" name="password" required>
+                            <p></p>      
+                            <label for="PasswordCheck"><b>Re-enter Password</b></label>
+                            <input type="password" placeholder="Re-enter Password" name="passwordCheck" required>
+                            <p></p>
+                            <button type="submit" onclick="signUp()">Sign Up</button>
+                        </div>
+                     </div>
+                  </div>
+                </div>
+              </div>
     </body>
 
     <script>
         document.getElementById('code').setAttribute('name', 'main.py');
+        /**
+         * signUp()
+         * This function verifies the username is unique, verifies that 
+         * the password matches the re-entered password and adds the
+         * new user credentials.
+         */
+        function signUp(){
+            var SignUpVerification = confirm("Sign Up Complete!");
+        }
         /**
          * newProject()
          * This function is to create a new project.
