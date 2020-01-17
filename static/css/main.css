@@ -182,6 +182,11 @@ button{
     border: none;
 }
 
+#signBtn{
+    background-color: Transparent;
+    border: none;
+}
+
 .modal {
     overflow-y: auto;
 }
