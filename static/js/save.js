@@ -17,7 +17,8 @@
  * @file save.js
  * @author Andrew Fiorentino 
  * @author Abigail Ida
- * @version November 2019
+ * @author Brian Carson
+ * @version January 2020
  */
 
 
@@ -110,4 +111,34 @@ function downloadEditorContents(tabTitle) {
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
+}
+
+/**
+ * checkExistingFile
+ * Checks if there is an existing file name within the file save directory.
+ * Returns a boolean indicating if the file exists or not.
+ * @author: Brian Carson
+ * @param: fName
+ * @returns: boolean
+ **/
+function checkExistingFile(fName) {
+	"use strict";
+	var fileContent = document.getElementById('code');
+	var formData = new FormData();	
+	formData.append('username', 'default');
+	formData.append('avatar', fileContent.files[0]);
+	fetch(fName, {
+		method: 'PUT',
+		body: formData
+	})
+	
+	.then((response) => response.json())
+	.then((result) => {
+		console.log('File created:', result);
+		return False;
+	})
+	.catch((error) => {
+		console.log('File already exists:', error);
+		return True;
+	})
 }
