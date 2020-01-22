@@ -212,8 +212,50 @@
          * new user credentials.
          */
         function signUp(){
+            //verify the username is unique
+            if(usernameIsUnique() == false){
+              var SignUpVerification = confirm("Please try a different username.");
+              return;
+            }
+            //verify password matches the re-entered password
+            if(passwordMatches() == false){
+              var SignUpVerification = confirm("Passwords do not match.");
+              return;
+            }
+            //add user to the database 
+
             var SignUpVerification = confirm("Sign Up Complete!");
         }
+
+        /**
+         * usernameIsUnique()
+         * This function verifies that the username is unique by 
+         * ensuring it does not match any other usernames corresponding
+         * to another user.
+         */
+         function usernameIsUnique(){
+            //get username input 
+
+            //check username against usernames in the database
+
+              //if username matches a username in database -> return false
+
+              //else -> return true
+         }
+         /**
+          * passwordMatches()
+          * This function checks the two strings listed as password and 
+          * passwordCheck and verifies that they are the same string. 
+          * This serves as verification that the password was typed as 
+          * intended.
+          */
+          function passwordMatches(){
+            //get password and passwordCheck stings provided by user
+            
+            //password is the same string as password check -> return true
+
+            //else -> return false 
+          }
         /**
          * newProject()
          * This function is to create a new project.
