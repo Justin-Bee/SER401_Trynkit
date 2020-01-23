@@ -142,3 +142,21 @@ function checkExistingFile(fName) {
 		return True;
 	})
 }
+
+function exists(path) {
+	var loc = new XMLHttpRequest();
+	loc.open('HEAD', path, false);
+	loc.getResponseHeader(path);
+	loc.send();
+	return loc.status != 404;
+}
+
+function executeOnExist(url, callback) {
+	var req = new XMLHttpRequest()
+	req.onreadystatechange = function() {
+		if (this.readyState === this.DONE) {
+			callback()
+		}
+	}
+	req.open('HEAD', url)
+}
