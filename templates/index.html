@@ -212,17 +212,32 @@
          * new user credentials.
          */
         function signUp(){
+            var c1 = false;
+            var c2 = false;
             //verify the username is unique
             if(usernameIsUnique() == false){
-              var SignUpVerification = confirm("Please try a different username.");
-              return;
+                //username is not unique
+                var SignUpVerification = confirm("Please try a different username.");
+                return;
+            }else {
+                c1 = true;
             }
             //verify password matches the re-entered password
             if(passwordMatches() == false){
               var SignUpVerification = confirm("Passwords do not match.");
               return;
+            }else{
+                c2 = true;
             }
             //add user to the database 
+            if(c1 == true){
+                if(c2 == true){
+                    //add username to database 
+
+                    //add password to database 
+                    
+                }
+            }
 
             var SignUpVerification = confirm("Sign Up Complete!");
         }
