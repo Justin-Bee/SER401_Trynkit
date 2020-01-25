@@ -187,13 +187,13 @@
                         <p>Welcome to the Trynkit Community</p>
                         <div class="container">
                             <label for="UserName"><b>Username</b></label>
-                            <input type="username" placeholder="Enter Username" name="userName" required>
+                            <input id = "usrNm" type="username" placeholder="Enter Username" name="userName" required>
                             <p></p>          
                             <label for="Password"><b>Password</b></label>
-                            <input type="password" placeholder="Enter Password" name="password" required>
+                            <input id = "pswd" type="password" placeholder="Enter Password" name="password" required>
                             <p></p>      
                             <label for="PasswordCheck"><b>Re-enter Password</b></label>
-                            <input type="password" placeholder="Re-enter Password" name="passwordCheck" required>
+                            <input id = "pswdChk" type="password" placeholder="Re-enter Password" name="passwordCheck" required>
                             <p></p>
                             <button type="submit" onclick="signUp()">Sign Up</button>
                         </div>
@@ -212,8 +212,60 @@
          * new user credentials.
          */
         function signUp(){
+            //verify the username is unique
+            if(usernameIsUnique() == false){
+              var SignUpVerification = confirm("Please try a different username.");
+              return;
+            }
+            //verify password matches the re-entered password
+            if(passwordMatches() == false){
+              var SignUpVerification = confirm("Passwords do not match.");
+              return;
+            }
+            //add user to the database 
+
             var SignUpVerification = confirm("Sign Up Complete!");
         }
+
+        /**
+         * usernameIsUnique()
+         * This function verifies that the username is unique by 
+         * ensuring it does not match any other usernames corresponding
+         * to another user.
+         */
+         function usernameIsUnique(){
+            //get username input 
+            var userNameInput = document.getElementById("usrNm").value;
+            //check username against usernames in the database
+
+              //if username matches a username in database -> return false
+
+              //else -> return true
+         }
+         /**
+          * passwordMatches()
+          * This function checks the two strings listed as password and 
+          * passwordCheck and verifies that they are the same string. 
+          * This serves as verification that the password was typed as 
+          * intended.
+          */
+          function passwordMatches(){
+            var r1 = true;
+            var r2 = false;
+            //get password and passwordCheck stings provided by user
+            var passwordInput = document.getElementById("pswd").value;
+            var passwordCheckInput = document.getElementById("pswdChk").value;
+            //password is the same string as password check -> return true
+            var result = passwordInput.localeCompare(passwordCheckInput);
+            //testing checks
+            //var chk1 = confirm("string1 = " + passwordInput + " string2 = " + passwordCheckInput );
+            //var chk = confirm("result = " + result );
+            if(result == 0){
+              return r1;
+            }else {
+              return r2;
+            }
+          }
         /**
          * newProject()
          * This function is to create a new project.
