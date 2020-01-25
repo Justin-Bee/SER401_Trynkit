@@ -212,8 +212,15 @@
          * new user credentials.
          */
         function signUp(){
+            //get username & password input 
+            var unInput = document.getElementById("usrNm").value;
+            var pwdInput = document.getElementById("pswd").value;
             var c1 = false;
             var c2 = false;
+            //intialize database reference
+            //const sqlite = require('sqlite3').verbose()
+            //let db = new sqlite.Database('./db.sqlite3')
+            
             //verify the username is unique
             if(usernameIsUnique() == false){
                 //username is not unique
@@ -232,10 +239,8 @@
             //add user to the database 
             if(c1 == true){
                 if(c2 == true){
-                    //add username to database 
-
-                    //add password to database 
-                    
+                    //add username and password to database 
+                    //db.run('INSERT into Trynkit_user(id,username,password,email)values(0,unInput,pwdInput,"unknown")')
                 }
             }
 
