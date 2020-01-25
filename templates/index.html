@@ -31,7 +31,7 @@
             <p></p>
             <button onclick="newProject()" id="npBtn"><img type="image/svg+xml" id ="newProjectBtn" src="/static/images/folder-regular.svg" width="50" height="50"><figcaption> New Project </figcaption></button>
             <p></p>
-            <button onclick="saveTabPrompt(currentTab)" id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50"><figcaption> Save File </figcaption></button>
+            <button onclick="saveTabPrompt(currentTab, masterList)" id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50"><figcaption> Save File </figcaption></button>
             <p></p>
             <button id="loadFileBtn">
                 <img type="image/svg+xml" src="/static/images/cloud-upload-alt-solid.svg" width="50" height="50"><figcaption> Load File </figcaption>
@@ -317,7 +317,7 @@
                 }
             })
             .on("click", "span", function () { //this is to handle the remove button
-                    saveTabPrompt(currentTab);
+                    saveTabPrompt(currentTab, masterList);
                     //TODO remove the code in the editor 
                     $(this).parent().remove(); //this removes the tab
                    

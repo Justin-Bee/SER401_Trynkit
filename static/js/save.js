@@ -39,6 +39,7 @@ function saveEditorContents() {
         projectName = document.getElementById('code').getAttribute('name');
     }
 
+
     var element = document.createElement('a');
     var editorContent = editor.getValue();
     var contentArray = editorContent.split("\n");
@@ -58,18 +59,29 @@ function saveEditorContents() {
 
 /**
  * saveTabPrompt
- * Prompts the user to specify if they would like to save the tab they are closing 
- * @author: Abigail Ida
- * @param: TabTitle
+ * Prompts the user to specify if they would like to save the tab they are closing while checking
+ * for duplicate file name possibilities
+ * @author: Abigail Ida, Brian Carson
+ * @param: currentTab, masterList
  * @returns: none
  **/
-function saveTabPrompt(currentTab){
+function saveTabPrompt(currentTab, masterList){
     userResponse = confirm('Select ok to save the current tab.');
-     //get tab title
-    var tabTitle = currentTab; 
+     //get tab title and tab list
+    var tabTitle = currentTab;
+    var tList = masterList;
     if(userResponse == true){
+        // check for duplicate tab/file names
+        function chkDuplicates(arr) {
+            return (new Set(arr)).size !== arr.length;
+        }
+        if (chkDuplicates(tList)) {
+            alert("Two or more tabs are the same name! Please rename.");
+        }
         //"save" by downloading .py file to users machine
-        downloadEditorContents(tabTitle);
+        else {
+            downloadEditorContents(tabTitle);
+        }
     }else{
         verification = alert('You have chosen not to save the contents of ' + tabTitle + ' before closing.');
         //remove tab and corresponding contents from local storage??
