@@ -187,13 +187,13 @@
                         <p>Welcome to the Trynkit Community</p>
                         <div class="container">
                             <label for="UserName"><b>Username</b></label>
-                            <input type="username" placeholder="Enter Username" name="userName" required>
+                            <input id = "usrNm" type="username" placeholder="Enter Username" name="userName" required>
                             <p></p>          
                             <label for="Password"><b>Password</b></label>
-                            <input type="password" placeholder="Enter Password" name="password" required>
+                            <input id = "pswd" type="password" placeholder="Enter Password" name="password" required>
                             <p></p>      
                             <label for="PasswordCheck"><b>Re-enter Password</b></label>
-                            <input type="password" placeholder="Re-enter Password" name="passwordCheck" required>
+                            <input id = "pswdChk" type="password" placeholder="Re-enter Password" name="passwordCheck" required>
                             <p></p>
                             <button type="submit" onclick="signUp()">Sign Up</button>
                         </div>
@@ -235,7 +235,7 @@
          */
          function usernameIsUnique(){
             //get username input 
-
+            var userNameInput = document.getElementById("usrNm").value;
             //check username against usernames in the database
 
               //if username matches a username in database -> return false
@@ -250,11 +250,21 @@
           * intended.
           */
           function passwordMatches(){
+            var r1 = true;
+            var r2 = false;
             //get password and passwordCheck stings provided by user
-            
+            var passwordInput = document.getElementById("pswd").value;
+            var passwordCheckInput = document.getElementById("pswdChk").value;
             //password is the same string as password check -> return true
-
-            //else -> return false 
+            var result = passwordInput.localeCompare(passwordCheckInput);
+            //testing checks
+            //var chk1 = confirm("string1 = " + passwordInput + " string2 = " + passwordCheckInput );
+            //var chk = confirm("result = " + result );
+            if(result == 0){
+              return r1;
+            }else {
+              return r2;
+            }
           }
         /**
          * newProject()
