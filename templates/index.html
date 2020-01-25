@@ -31,7 +31,7 @@
             <p></p>
             <button onclick="newProject()" id="npBtn"><img type="image/svg+xml" id ="newProjectBtn" src="/static/images/folder-regular.svg" width="50" height="50"><figcaption> New Project </figcaption></button>
             <p></p>
-            <button onclick="saveTabPrompt(currentTab)" id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50"><figcaption> Save File </figcaption></button>
+            <button onclick="saveTabPrompt(currentTab, masterList)" id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50"><figcaption> Save File </figcaption></button>
             <p></p>
             <button id="loadFileBtn">
                 <img type="image/svg+xml" src="/static/images/cloud-upload-alt-solid.svg" width="50" height="50"><figcaption> Load File </figcaption>
@@ -53,6 +53,8 @@
             <button onclick="debugToggle()" id="debugBtn"><img type ="image/svg+xml" id="debuggerBtn" src="/static/images/bug-solid.svg" width="50" height="50"><figcaption> Debug </figcaption></button>
             <p></p>
             <button data-toggle="modal" data-target="#loginModal" id="loginBtn"><img type="image/svg+xml" id ="loginBtn" src="/static/images/login-regular.svg" width="50" height="50"><figcaption> Login </figcaption></button>
+            <p></p>
+            <button data-toggle="modal" data-target="#signUpModal" id="signBtn"><img type="image/svg+xml" id ="signBtn" src="/static/images/signup.svg" width="50" height="50"><figcaption> Sign Up </figcaption></button>
 
         </div>
 
@@ -171,10 +173,99 @@
                           </div>
                         </div>
                       </div>
+
+            <!-- Sign Up Modal -->
+            <div class="modal fade" id="signUpModal" role="dialog" style="display:none">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Sign Up</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Welcome to the Trynkit Community</p>
+                        <div class="container">
+                            <label for="UserName"><b>Username</b></label>
+                            <input id = "usrNm" type="username" placeholder="Enter Username" name="userName" required>
+                            <p></p>          
+                            <label for="Password"><b>Password</b></label>
+                            <input id = "pswd" type="password" placeholder="Enter Password" name="password" required>
+                            <p></p>      
+                            <label for="PasswordCheck"><b>Re-enter Password</b></label>
+                            <input id = "pswdChk" type="password" placeholder="Re-enter Password" name="passwordCheck" required>
+                            <p></p>
+                            <button type="submit" onclick="signUp()">Sign Up</button>
+                        </div>
+                     </div>
+                  </div>
+                </div>
+              </div>
     </body>
 
     <script>
         document.getElementById('code').setAttribute('name', 'main.py');
+        /**
+         * signUp()
+         * This function verifies the username is unique, verifies that 
+         * the password matches the re-entered password and adds the
+         * new user credentials.
+         */
+        function signUp(){
+            //verify the username is unique
+            if(usernameIsUnique() == false){
+              var SignUpVerification = confirm("Please try a different username.");
+              return;
+            }
+            //verify password matches the re-entered password
+            if(passwordMatches() == false){
+              var SignUpVerification = confirm("Passwords do not match.");
+              return;
+            }
+            //add user to the database 
+
+            var SignUpVerification = confirm("Sign Up Complete!");
+        }
+
+        /**
+         * usernameIsUnique()
+         * This function verifies that the username is unique by 
+         * ensuring it does not match any other usernames corresponding
+         * to another user.
+         */
+         function usernameIsUnique(){
+            //get username input 
+            var userNameInput = document.getElementById("usrNm").value;
+            //check username against usernames in the database
+
+              //if username matches a username in database -> return false
+
+              //else -> return true
+         }
+         /**
+          * passwordMatches()
+          * This function checks the two strings listed as password and 
+          * passwordCheck and verifies that they are the same string. 
+          * This serves as verification that the password was typed as 
+          * intended.
+          */
+          function passwordMatches(){
+            var r1 = true;
+            var r2 = false;
+            //get password and passwordCheck stings provided by user
+            var passwordInput = document.getElementById("pswd").value;
+            var passwordCheckInput = document.getElementById("pswdChk").value;
+            //password is the same string as password check -> return true
+            var result = passwordInput.localeCompare(passwordCheckInput);
+            //testing checks
+            //var chk1 = confirm("string1 = " + passwordInput + " string2 = " + passwordCheckInput );
+            //var chk = confirm("result = " + result );
+            if(result == 0){
+              return r1;
+            }else {
+              return r2;
+            }
+          }
         /**
          * newProject()
          * This function is to create a new project.
@@ -317,7 +408,7 @@
                 }
             })
             .on("click", "span", function () { //this is to handle the remove button
-                    saveTabPrompt(currentTab);
+                    saveTabPrompt(currentTab, masterList);
                     //TODO remove the code in the editor 
                     $(this).parent().remove(); //this removes the tab
                    
@@ -336,7 +427,7 @@
                     e.preventDefault();
                     var id = $(".nav-tabs").children().length; 
                     var tabId = 'tab_' + id;
-                    $(this).closest('li').before('<li class="active"><a href="#tab_' + id + '">"'+ projectName+'"</a> <span> x </span></li>');
+                    $(this).closest('li').before('<li class="active"><a href="#tab_' + id + '">'+ projectName+'</a> <span> x </span></li>');
                     currentTab = projectName; 
                     masterList.push(projectName); 
                     localStorage.setItem("tabList", masterList); /* add tab to the tab list */
