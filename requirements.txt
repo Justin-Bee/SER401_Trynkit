@@ -6,9 +6,9 @@ cement==2.8.2
 certifi==2019.9.11
 chardet==3.0.4
 colorama==0.3.9
-Django==2.1.11
+Django==3.0.02
 django-secure==1.0.1
-django-sslserver==0.21
+django-sslserver==0.22
 docker==3.7.3
 docker-compose==1.23.2
 docker-pycreds==0.4.0
@@ -26,7 +26,7 @@ pytz==2019.3
 PyYAML==5.1
 requests==2.20.1
 semantic-version==2.5.0
-six==1.11.0
+six==1.12.0
 sqlparse==0.3.0
 termcolor==1.1.0
 texttable==0.9.1
