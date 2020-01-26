@@ -423,7 +423,7 @@
             $('.add-tab').click(function (e) {
                 localStorage.setItem(currentTab, editor.getValue());
                 var projectName = prompt("Creating a new file:", "NewProjectName.py");
-                if(projectName){
+                if(projectName && (masterList.indexOf(projectName) == -1)){
                     e.preventDefault();
                     var id = $(".nav-tabs").children().length; 
                     var tabId = 'tab_' + id;
@@ -434,7 +434,7 @@
                     editor.setValue("");
                     $('.nav-tabs li:nth-child(' + id + ') a').click();
                 }else{
-                    //Don't do anything
+                    alert("File name already exists.");
                 }
         });
         /**
