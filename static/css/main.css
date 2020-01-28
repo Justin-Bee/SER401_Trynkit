@@ -70,6 +70,19 @@
     font-weight: bold;
 }
 
+@media only screen and (max-width: 1000px) {
+    #dText, #console {
+        width: 700px;
+    }
+
+    #debugger {
+        width: 715px;
+    }
+
+    #debugger, #console {
+        margin-left: 115px;
+    }
+}
 
 body{
     background-color: #616e89;
@@ -121,7 +134,7 @@ button{
     
 }
 .close-tabs  li {
-    position: fixed;
+    position: absolute;
     top: 11px;
     height: 40px;
     width: 150px;
