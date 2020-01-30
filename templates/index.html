@@ -15,6 +15,7 @@
         <script src="/static/js/codemirror.js" type="text/javascript"></script>
         <script src="/static/js/python.js" type="text/javascript"></script>
         <script src="/static/js/bluetooth.js" type="text/javascript"></script>
+	<script src="/static/js/jquery.contextMenu.js" type="text/javascript"></script>
         <link rel="stylesheet" type="text/css" href="/static/css/codemirror.css"/>
         <link rel="stylesheet" type="text/css" href="/static/css/ambiance.css"/>
         <link rel="stylesheet" type="text/css" href="/static/css/darcula.css"/>
@@ -60,7 +61,7 @@
 
         <div class="container">
             <ul class="nav nav-tabs" role="tablist">
-                <li class="active"><a href="#tab_01" data-toggle="tab">main.py</a><span>x</span>
+		    <li class="active"><a href="#tab_01" data-toggle="tab">main.py</a><span>x</span>
                 </li>
                 <li><a href="javascript:void(0)" class="add-tab">+ New File</a>
                 </li> 
@@ -327,7 +328,7 @@
          */
         function populateTabs(){
             for(i =1; i< masterList.length; i++){
-                $(".add-tab").closest('li').before('<li><a href="#tab_' + i + '">"'+ masterList[i].toString()+'"</a> <span> x </span></li>');
+						  $(".add-tab").closest('li').before('<li><a href="#tab_' + i + '">"'+ masterList[i].toString()+'"</a> <span> x </span></li>');
             }
         }
 
@@ -361,7 +362,6 @@
                     $(this).parent().remove(); //this removes the tab
                    
         });
-	        
             /**
              * This function handles the logic for when you add a tab
              * by clicking the add tab button. It prompts user for a filename,
@@ -375,7 +375,7 @@
                     e.preventDefault();
                     var id = $(".nav-tabs").children().length; 
                     var tabId = 'tab_' + id;
-                    $(this).closest('li').before('<li class="active"><a href="#tab_' + id + '">'+ projectName+'</a> <span> x </span></li>');
+		    $(this).closest('li').before('<li class="active"><a href="#tab_' + id + '">'+ projectName+'</a> <span> x </span></li>');
                     currentTab = projectName; 
                     masterList.push(projectName); 
                     localStorage.setItem("tabList", masterList); /* add tab to the tab list */
@@ -406,13 +406,13 @@
                     }
                 }
             });
-	    /**
-	    * This function handles the renaming of tabs
-	    *
-	    */
+	    //**
+	    /* This function handles the renaming of tabs
+	    /*
+	    /*/
 	    $('.rename-current-tab').click(function(e) {
 	    	var newTabName = prompt("Enter a new name for the current tab: ", ".py");
-		document.getElementByTagName('a').[id].innerHTML = newTabName;
+		document.getElementByTagName('a')[id].innerHTML = newTabName;
 	});
                 
             
