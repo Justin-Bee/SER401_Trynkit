@@ -406,6 +406,14 @@
                     }
                 }
             });
+	    /**
+	    * This function handles the renaming of tabs
+	    *
+	    */
+	    $('.rename-current-tab').click(function(e) {
+	    	var newTabName = prompt("Enter a new name for the current tab: ", ".py");
+		document.getElementByTagName('a').[id].innerHTML = newTabName;
+	});
                 
             
     </script>

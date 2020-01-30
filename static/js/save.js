@@ -111,16 +111,3 @@ function downloadEditorContents(tabTitle) {
     element.click();
     document.body.removeChild(element);
 }
-
-/**
- * changeTabTitle
- * Sets the name for the current tab or renames it
- * @author: Andrew Fiorentino
- * @param: currentTab
- * @returns: none
- **/
-function changeTabTitle(currentTab) {
-	newTabTitle = prompt("Please choose a name for the current tab: ", ".py");
-	document.getElementById(currentTab).innerText = newTabTitle;
-}
-
