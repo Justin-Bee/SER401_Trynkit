@@ -239,14 +239,43 @@
          function usernameIsUnique(){
             //get username input 
             var userNameInput = document.getElementById("usrNm").value;
+            var usrNmResult = true;
+            //need to research the django forums and the crf token for database access
+            //import sqlite3 
+            const sqlite3 = require('sqlite3').verbose();
+            //create database object (open connection & returns dataBase object or error message)
+            let dataBase = new sqlite3.Database(':memory:', (err) => {
+              if(err){
+                return console.error(err.message);
+              }
+              console.log('Connected to the database.');
+              var one = confirm("DB Connected!");
+            });
             //implement database check from US#247 using squlite3 database and node.js
             //table title: Trynkit_user
             //values: id,username,password,email
+            //sql query
+            let query = 'SELECT *, FROM Trynkit_user';
             //check username against usernames in the database
-
+            dataBase.each(query,[userNameInput], (err,row) => {
+              if(err){
+                throw err;
+              }
+              var two = confirm(row.username);
               //if username matches a username in database -> return false
-
-              //else -> return true
+              if(row.username == userNameInput){
+                usrNmResult = false;
+              }
+            });
+            //close database 
+            dataBase.close((err) => {
+              if(err){
+                return console.error(err.message);
+              }
+              var three = confirm("DB Closing!");
+              console.log('Database connection closing.');
+            });
+            return usrNmResult;
          }
          /**
           * passwordMatches()
