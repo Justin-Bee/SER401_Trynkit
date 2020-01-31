@@ -60,7 +60,7 @@
 
         <div class="container">
             <ul class="nav nav-tabs" role="tablist">
-                <li class="active"><a href="#tab_01" data-toggle="tab">main.py</a><span>x</span>
+                <li class="active"><a href="#tab_1" data-toggle="tab">main.py</a><span>x</span>
                 </li>
                 <li><a href="javascript:void(0)" class="add-tab">+ New File</a>
                 </li> 
@@ -408,9 +408,21 @@
                 }
             })
             .on("click", "span", function () { //this is to handle the remove button
-                    saveTabPrompt(currentTab, masterList);
-                    //TODO remove the code in the editor 
-                    $(this).parent().remove(); //this removes the tab
+                    /** this is to check the parent text for main.py */
+                    var parentEl = $(this).parent().clone();
+                    parentEl.children('span').remove();
+                    var text = parentEl.text();
+                    var result = text.includes('main.py');
+                    console.log(result);
+
+                    if(result){
+                    }
+                    else {
+                        saveTabPrompt(currentTab, masterList);
+                        //TODO remove the code in the editor
+                        $(this).parent().remove(); //this removes the tab
+                    }
+
                    
         });
 	        
@@ -447,6 +459,7 @@
                     var k = 0;
                     if (navTabsLength > 1 ) {
                         for (var i=0; i < navTabsLength +1; i++){
+
                             if ($(".nav-tabs").children().eq(i).hasClass('active')) {
                                 downloadEditorContents(masterList[k]);
                                 $(".nav-tabs").children().eq(i).remove();
