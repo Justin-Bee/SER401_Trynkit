@@ -12,6 +12,33 @@
   direction: ltr;
 }
 
+@media only screen and (max-width: 1000px) and (orientation : landscape) {
+    .CodeMirror {
+        height: 350px;
+    }
+}
+
+
+@media only screen and (max-width: 1000px) and (orientation : portrait) {
+    .CodeMirror {
+        height: 1475px;
+    }
+}
+
+
+@media only screen and (min-width: 1920px) {
+    .CodeMirror {
+        width: 1475px;
+    }
+}
+
+@media only screen and (min-width: 2560px) {
+    .CodeMirror {
+      height: 1000px;
+      width: 2000px;
+    }
+}
+
 /* PADDING */
 
 .CodeMirror-lines {

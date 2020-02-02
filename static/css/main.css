@@ -13,7 +13,18 @@
 
 }
 
+@media only screen and (max-width: 1000px) and (orientation : landscape) {
+    #editor {
+        height: 350px;
+    }
+}
 
+
+@media only screen and (max-width: 1000px) and (orientation : portrait) {
+    #editor {
+        height: 1475px;
+    }
+}
 
 #console {
     background-color: #ccd1db;
@@ -70,6 +81,7 @@
     font-weight: bold;
 }
 
+
 @media only screen and (max-width: 1000px) {
     #dText, #console {
         width: 700px;
@@ -81,6 +93,16 @@
 
     #debugger, #console {
         margin-left: 115px;
+    }
+}
+
+@media only screen and (min-width: 2560px) {
+    #dText, #console {
+        width: 2000px;
+    }
+
+    #debugger {
+        width: 2015px;
     }
 }
 
@@ -133,6 +155,8 @@ button{
     display: inline-block;
     
 }
+
+
 .close-tabs  li {
     position: absolute;
     top: 11px;
@@ -142,6 +166,26 @@ button{
     text-align: center;
     background-color:white; 
     border-block-color: black;
+}
+
+
+@media only screen and (min-width: 1920px) {
+    .close-tabs  li {
+        right: 100px;
+    }
+}
+
+
+@media only screen and (min-width: 2560px) {
+    .close-tabs  li {
+        right: 170px;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .close-tabs  li {
+        right: 25px;
+    }
 }
 
 
@@ -199,6 +243,33 @@ button{
     background-color: Transparent;
     border: none;
 }
+
+/*
+@media only screen and (max-width: 1000px) and (orientation : landscape) {
+    #nfBtn, #npBtn, #sBtn, #loadFileBtn, 
+    #bBtn, #settingsBtn, #serialBtn, 
+    #debugBtn, #loginBtn, #signBtn, 
+    #newFileBtn, #newProjectBtn,
+    #saveFileBtn, #lFileBtn, #devicesBtn, 
+    #settBtn, #serBtn, #debuggerBtn, 
+    #logBtn, #siBtn {
+        width: 30px;
+        height: 30px;
+    }
+
+    #nfBtn, #npBtn, #sBtn, 
+    #loadFileBtn, #bBtn, #settingsBtn, 
+    #serialBtn, #debugBtn, #loginBtn, 
+    #signBtn figcaption {
+        display: none;
+    }
+
+    #loginBtn, #logBtn {
+        top: 30px;
+    }
+
+}
+*/
 
 .modal {
     overflow-y: auto;
