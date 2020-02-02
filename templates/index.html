@@ -15,22 +15,12 @@
         <script src="/static/js/codemirror.js" type="text/javascript"></script>
         <script src="/static/js/python.js" type="text/javascript"></script>
         <script src="/static/js/bluetooth.js" type="text/javascript"></script>
-	<script src="/static/js/jquery-1.4.2.min.js" type="text/javascript"></script>
-	<script src="/static/js/jquery.contextMenu.js" type="text/javascript"></script>
         <link rel="stylesheet" type="text/css" href="/static/css/codemirror.css"/>
         <link rel="stylesheet" type="text/css" href="/static/css/ambiance.css"/>
         <link rel="stylesheet" type="text/css" href="/static/css/darcula.css"/>
         <link rel="stylesheet" type="text/css" href="/static/css/material.css"/>
         <link rel="stylesheet" type="text/css" href="/static/css/elegant.css"/>
         <link rel="stylesheet" type="text/css" href="/static/css/rubyblue.css"/>
-
-	<script type="text/javascript">
-		$(document).ready( function() {
-			$("div").contextMenu({
-				menu : 'tabMenu'
-			});
-		});
-	</script>
     </head>
 
     </div>
@@ -67,10 +57,18 @@
             <button data-toggle="modal" data-target="#signUpModal" id="signBtn"><img type="image/svg+xml" id ="signBtn" src="/static/images/signup.svg" width="50" height="50"><figcaption> Sign Up </figcaption></button>
 
         </div>
-
+	<!-- this is the context menu -->
+        <!-- note the string to=0 where the 0 is the digit to be replaced -->
+        <div id="div-context-menu" class="cls-context-menu">
+		<ul>
+                    <li><a href="#to=0">link-to=0 -item-1 </a></li>
+                    <li><a href="#to=0">link-to=0 -item-2 </a></li>
+                    <li><a href="#to=0">link-to=0 -item-3 </a></li>
+                </ul>
+        </div>
         <div class="container">
             <ul class="nav nav-tabs" role="tablist">
-		    <li class="active"><a href="#tab_01" data-toggle="tab">main.py</a><span>x</span>
+		    <li class="active cls-context-menu-link"><a href="#tab_01" data-toggle="tab">main.py</a><span>x</span>
                 </li>
                 <li><a href="javascript:void(0)" class="add-tab">+ New File</a>
                 </li> 
@@ -384,7 +382,7 @@
                     e.preventDefault();
                     var id = $(".nav-tabs").children().length; 
                     var tabId = 'tab_' + id;
-		    $(this).closest('li').before('<li class="active"><a href="#tab_' + id + '">'+ projectName+'</a> <span> x </span></li>');
+		    $(this).closest('li').before('<li class="active cls-context-menu-link"><a href="#tab_' + id + '">'+ projectName+'</a> <span> x </span></li>');
                     currentTab = projectName; 
                     masterList.push(projectName); 
                     localStorage.setItem("tabList", masterList); /* add tab to the tab list */
@@ -423,8 +421,34 @@
 	    	var newTabName = prompt("Enter a new name for the current tab: ", ".py");
 		document.getElementByTagName('a')[id].innerHTML = newTabName;
 	});
-                
-            
+	
+	var rgtClickContextMenu = document.getElementById('div-context-menu');
+	
+	/** close the right click context menu on click anywhere else in the page*/
+	document.onclick = function(e){
+	rgtClickContextMenu.style.display = 'none';
+	}
+	
+	/**
+        * present the right click context menu ONLY for the elements having the right class
+        * by replacing the 0 or any digit after the "to-" string with the element id , which
+        * triggered the event
+        */
+	
+	document.oncontextmenu = function(e){
+	//alert(e.target.id)
+	var elmnt = e.target
+	if ( elmnt.className.startsWith ( "cls-context-menu")) {
+		e.preventDefault();
+		var eid = elmnt.id.replace(/link-/,"")
+                rgtClickContextMenu.style.left = e.pageX + 'px'
+                rgtClickContextMenu.style.top = e.pageY + 'px'
+                rgtClickContextMenu.style.display = 'block'
+                var toRepl = "to=" + eid.toString()
+                rgtClickContextMenu.innerHTML = rgtClickContextMenu.innerHTML.replace(/to=\d+/g,toRepl)
+                //alert(rgtClickContextMenu.innerHTML.toString())
+		}
+	}
     </script>
 
 </html>
