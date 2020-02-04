@@ -244,32 +244,6 @@ button{
     border: none;
 }
 
-/*
-@media only screen and (max-width: 1000px) and (orientation : landscape) {
-    #nfBtn, #npBtn, #sBtn, #loadFileBtn, 
-    #bBtn, #settingsBtn, #serialBtn, 
-    #debugBtn, #loginBtn, #signBtn, 
-    #newFileBtn, #newProjectBtn,
-    #saveFileBtn, #lFileBtn, #devicesBtn, 
-    #settBtn, #serBtn, #debuggerBtn, 
-    #logBtn, #siBtn {
-        width: 30px;
-        height: 30px;
-    }
-
-    #nfBtn, #npBtn, #sBtn, 
-    #loadFileBtn, #bBtn, #settingsBtn, 
-    #serialBtn, #debugBtn, #loginBtn, 
-    #signBtn figcaption {
-        display: none;
-    }
-
-    #loginBtn, #logBtn {
-        top: 30px;
-    }
-
-}
-*/
 
 .modal {
     overflow-y: auto;
