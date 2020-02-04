@@ -195,12 +195,6 @@ button{
     overflow-y: auto;
 }
 
-.cls-context-menu-link {
-               display:block;
-               padding:20px;
-               background:#ECECEC;
-}
-
 .cls-context-menu { position:absolute; display:none; }
 
 .cls-context-menu ul, #context-menu li {
