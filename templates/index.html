@@ -212,12 +212,14 @@
          * signUp()
          * This function verifies the username is unique, verifies that 
          * the password matches the re-entered password and adds the
-         * new user credentials.
+         * new user credentials. If the passwords do not match or the username
+         * is already in use then the user will be prompted to re-enter or
+         * choose different credentials.
          */
         function signUp(){
             //verify the username is unique
             if(usernameIsUnique() == false){
-              var SignUpVerification = confirm("Please try a different username.");
+              var SignUpVerification = confirm("Username unavailable. Please enter a different username.");
               return;
             }
             //verify password matches the re-entered password
