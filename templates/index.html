@@ -438,6 +438,19 @@
                     $('.nav-tabs li:nth-child(' + id + ') a').click();
                 }else{
                     alert("File name already exists.");
+                    localStorage.setItem(currentTab, editor.getValue());
+                    var projectName = prompt("Resending:", "NewProjectName.py");
+                    if(projectName && (masterList.indexOf(projectName) == -1)){
+                      e.preventDefault();
+                      var id = $(".nav-tabs").children().length; 
+                      var tabId = 'tab_' + id;
+                      $(this).closest('li').before('<li class="active"><a href="#tab_' + id + '">'+ projectName+'</a> <span> x </span></li>');
+                      currentTab = projectName; 
+                      masterList.push(projectName); 
+                      localStorage.setItem("tabList", masterList);
+                      editor.setValue("");
+                      $('.nav-tabs li:nth-child(' + id + ') a').click();
+                    }
                 }
         });
         /**
