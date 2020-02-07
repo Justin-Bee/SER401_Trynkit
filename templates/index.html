@@ -61,7 +61,7 @@
         <!-- note the string to=0 where the 0 is the digit to be replaced -->
         <div id="div-context-menu" class="cls-context-menu">
 		<ul>
-                    <li><a href="#to=0">link-to=0 -item-1 </a></li>
+                    <li><a href="javascript:void(0)" class="rename-tab">Rename Tab </a></li>
                 </ul>
         </div>
         <div class="container">
@@ -381,7 +381,7 @@
                     var id = $(".nav-tabs").children().length; 
                     var tabId = 'tab_' + id;
 		    $(this).closest('li').before('<li class="active"><a href="#tab_' + id + '">'+ projectName+'</a> <span> x </span></li>');
-                    currentTab = projectName; 
+		    currentTab = projectName; 
                     masterList.push(projectName); 
                     localStorage.setItem("tabList", masterList); /* add tab to the tab list */
                     editor.setValue("");
@@ -411,14 +411,14 @@
                     }
                 }
             });
-	    //**
-	    /* This function handles the renaming of tabs
-	    /*
-	    /*/
-	    $('.rename-current-tab').click(function(e) {
-	    	var newTabName = prompt("Enter a new name for the current tab: ", ".py");
-		document.getElementByTagName('a')[id].innerHTML = newTabName;
+	    $('.rename-tab').click(function(e) {
+	    var newTabName = prompt("Enter a new name for the current tab: ", ".py");
+	    var selectedTab = sessionStorage.getItem('selectedTab');
+            document.querySelectorAll("a[href=selectedTab]").innerHTML = newTabName;
 	});
+	$(document).click(function(event) {
+		var text = $(event.target).text();
+    	});
 	
 	//
 	var rgtClickContextMenu = document.getElementById('div-context-menu');
@@ -437,13 +437,14 @@
 	var elmnt = e.target	
 	if ( elmnt.toString().includes("tab")) {
 		e.preventDefault();
-		var eid = elmnt.id
+		//var eid = elmnt.id;
+		sessionStorage.setItem("selectedTab", elmnt.toString().replace("https://127.0.0.1:8000/", " "));
 
-                rgtClickContextMenu.style.left = e.pageX + 'px'
-                rgtClickContextMenu.style.top = e.pageY + 'px'
-                rgtClickContextMenu.style.display = 'block'
-                var toRepl = "to=" + eid.toString()
-                rgtClickContextMenu.innerHTML = rgtClickContextMenu.innerHTML.replace(/to=\d+/g,toRepl)
+                rgtClickContextMenu.style.left = e.pageX + 'px';
+                rgtClickContextMenu.style.top = e.pageY + 'px';
+                rgtClickContextMenu.style.display = 'block';
+                //var toRepl = "to=" + eid.toString();
+                //rgtClickContextMenu.innerHTML = rgtClickContextMenu.innerHTML.replace(/to=\d+/g,toRepl);
 		}
 	}
     </script>
