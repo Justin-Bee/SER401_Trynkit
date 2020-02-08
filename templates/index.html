@@ -333,7 +333,7 @@
          */
         function populateTabs(){
             for(i =1; i< masterList.length; i++){
-						  $(".add-tab").closest('li').before('<li><a href="#tab_' + i + '">"'+ masterList[i].toString()+'"</a> <span> x </span></li>');
+						  $(".add-tab").closest('li').before('<li><a href="#tab_' + i + '">'+ masterList[i].toString()+'</a> <span> x </span></li>');
             }
         }
 
@@ -413,8 +413,14 @@
             });
 	    $('.rename-tab').click(function(e) {
 	    var newTabName = prompt("Enter a new name for the current tab: ", ".py");
-	    var selectedTab = sessionStorage.getItem('selectedTab');
-            document.querySelectorAll("a[href=selectedTab]").innerHTML = newTabName;
+	    var selectedTabIndex = sessionStorage.getItem('selectedTabIndex');
+	    window.sessionStorage.removeItem('selectedTabIndex');
+	    var oldTabName = document.getElementsByTagName('a')[selectedTabIndex].innerHTML;
+	    localStorage.setItem('tabList',localStorage.getItem('tabList').replace(oldTabName, newTabName));
+	    localStorage.setItem(newTabName, localStorage.getItem(oldTabName));
+            window.localStorage.removeItem(oldTabName);
+            oldTabName = null;
+	    document.getElementsByTagName('a')[selectedTabIndex].innerHTML = newTabName;
 	});
 	$(document).click(function(event) {
 		var text = $(event.target).text();
@@ -437,14 +443,13 @@
 	var elmnt = e.target	
 	if ( elmnt.toString().includes("tab")) {
 		e.preventDefault();
-		//var eid = elmnt.id;
-		sessionStorage.setItem("selectedTab", elmnt.toString().replace("https://127.0.0.1:8000/", " "));
-
+		var selectedTabIndex= elmnt.toString().replace('https://127.0.0.1:8000/#tab_', ' '); //keep uncommented for local testing/develpment
+		//var selectedTabIndex = elmnt.toString().replace('https://www.asuser401group5.net:8000/#tab_', ' '); //uncomment for live
+		selectedTabIndex++;
+		sessionStorage.setItem("selectedTabIndex", selectedTabIndex);
                 rgtClickContextMenu.style.left = e.pageX + 'px';
                 rgtClickContextMenu.style.top = e.pageY + 'px';
                 rgtClickContextMenu.style.display = 'block';
-                //var toRepl = "to=" + eid.toString();
-                //rgtClickContextMenu.innerHTML = rgtClickContextMenu.innerHTML.replace(/to=\d+/g,toRepl);
 		}
 	}
     </script>
