@@ -208,6 +208,8 @@
 
     <script>
         document.getElementById('code').setAttribute('name', 'main.py');
+        //Create XMLHttp Request object
+        //var xhttpReq = new XMLHttpRequest();
         /**
          * signUp()
          * This function verifies the username is unique, verifies that 
@@ -240,20 +242,10 @@
             //get username input 
             var userNameInput = document.getElementById("usrNm").value;
             var usrNmResult = true;
-            //connect to database 
-            var connect = mysql.createConnection({
-              host : 'localhost',
-              user : 'root',
-              password : '',
-              databse : 'db.sqlit3'
-            });
-            connect.connect(function(err){
-              if(err) {
-                throw err;
-              }else{
-                console.log('Connected to database...');
-              }
-            })            
+            //open database connection 
+           // xhttp.open("Get", "user_vals.php", true);
+
+                      
             //table title: Trynkit_user
             //values: id,username,password,email
             //let query = 'SELECT *, FROM Trynkit_user WHERE username = userNameInput';
