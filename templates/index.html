@@ -65,18 +65,18 @@
                 </ul>
         </div>
         <div class="container">
-            <ul class="nav nav-tabs" role="tablist">
-		    <li class="active"><a href="#tab_01" id="tab01" data-toggle="tab">main.py</a><span>x</span>
+            <ul class="nav nav-tabs" role="tablist" id="nav-tab list">
+		    <li class="active"><a href="#tab_1" id="tab1" data-toggle="tab">main.py</a><span>x</span>
                 </li>
                 <li><a href="javascript:void(0)" class="add-tab">+ New File</a>
-                </li> 
+		</li>
             </ul>
             <ul class="nav close-tabs">
                 <li><a href="javascript:void(0)" class="remove-tabs">- Close All Tabs</a>
                 </li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane active" id="tab_01"><textarea id="code"> </textarea></div>
+                <div class="tab-pane active" id="tab_1"><textarea id="code"> </textarea></div>
             </div>
         </div>
 
@@ -333,7 +333,7 @@
          */
         function populateTabs(){
             for(i =1; i< masterList.length; i++){
-						  $(".add-tab").closest('li').before('<li><a href="#tab_' + i + '">'+ masterList[i].toString()+'</a> <span> x </span></li>');
+						  $(".add-tab").closest('li').before('<li><a href="#tab_' + i + '" id="tab'+(i+1)+'">'+ masterList[i].toString()+'</a> <span> x </span></li>');
             }
         }
 
@@ -379,8 +379,7 @@
                 if(projectName){
                     e.preventDefault();
                     var id = $(".nav-tabs").children().length; 
-                    var tabId = 'tab_' + id;
-		    $(this).closest('li').before('<li class="active"><a href="#tab_' + id + '">'+ projectName+'</a> <span> x </span></li>');
+		    $(this).closest('li').before('<li class="active"><a href="#tab_' + id + '" id="tab'+id+'">'+ projectName+'</a> <span> x </span></li>');
 		    currentTab = projectName; 
                     masterList.push(projectName); 
                     localStorage.setItem("tabList", masterList); /* add tab to the tab list */
@@ -413,14 +412,14 @@
             });
 	    $('.rename-tab').click(function(e) {
 	    var newTabName = prompt("Enter a new name for the current tab: ", ".py");
-	    var selectedTabIndex = sessionStorage.getItem('selectedTabIndex');
-	    window.sessionStorage.removeItem('selectedTabIndex');
-	    var oldTabName = document.getElementsByTagName('a')[selectedTabIndex].innerHTML;
+	    var selectedTab = sessionStorage.getItem('selectedTab');
+	    window.sessionStorage.removeItem('selectedTab');
+	    var oldTabName = document.getElementById(selectedTab).innerText;
 	    localStorage.setItem('tabList',localStorage.getItem('tabList').replace(oldTabName, newTabName));
 	    localStorage.setItem(newTabName, localStorage.getItem(oldTabName));
             window.localStorage.removeItem(oldTabName);
             oldTabName = null;
-	    document.getElementsByTagName('a')[selectedTabIndex].innerHTML = newTabName;
+	    document.getElementById(selectedTab).innerText = newTabName;
 	});
 	$(document).click(function(event) {
 		var text = $(event.target).text();
@@ -443,10 +442,10 @@
 	var elmnt = e.target	
 	if ( elmnt.toString().includes("tab")) {
 		e.preventDefault();
-		var selectedTabIndex= elmnt.toString().replace('https://127.0.0.1:8000/#tab_', ' '); //keep uncommented for local testing/develpment
+		var selectedTab = elmnt.id;
+		//var selectedTabIndex= elmnt.toString().replace('https://127.0.0.1:8000/#tab_', ' '); //keep uncommented for local testing/develpment
 		//var selectedTabIndex = elmnt.toString().replace('https://www.asuser401group5.net:8000/#tab_', ' '); //uncomment for live
-		selectedTabIndex++;
-		sessionStorage.setItem("selectedTabIndex", selectedTabIndex);
+		sessionStorage.setItem("selectedTab", selectedTab);
                 rgtClickContextMenu.style.left = e.pageX + 'px';
                 rgtClickContextMenu.style.top = e.pageY + 'px';
                 rgtClickContextMenu.style.display = 'block';
