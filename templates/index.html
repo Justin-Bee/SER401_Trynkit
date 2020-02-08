@@ -186,11 +186,13 @@
                     <div class="modal-body">
                         <p>Welcome to the Trynkit Community</p>
                         <div class="container">
+                            <form method ="POST" id="post-form">
+                            {% csrf_token %}
                             <label for="UserName"><b>Username</b></label>
-                            <input id = "usrNm" type="username" placeholder="Enter Username" name="userName" required>
+                            <input id = "username" type="username" placeholder="Enter Username" name="username" required>
                             <p></p>          
                             <label for="Password"><b>Password</b></label>
-                            <input id = "pswd" type="password" placeholder="Enter Password" name="password" required>
+                            <input id = "password" type="password" placeholder="Enter Password" name="password" required>
                             <p></p>      
                             <label for="PasswordCheck"><b>Re-enter Password</b></label>
                             <input id = "pswdChk" type="password" placeholder="Re-enter Password" name="passwordCheck" required>
@@ -198,13 +200,42 @@
                             <label for="Email"><b>Email</b></label>
                             <input id = "email" type="email" placeholder="Email" name="email" required>
                             <p></p>
-                            <button type="submit" onclick="signUp()">Sign Up</button>
+                            <button type="submit">Sign Up</button>
+                            </form>
                         </div>
                      </div>
                   </div>
                 </div>
               </div>
     </body>
+
+    <script>
+        $(document).on('submit', '#post-form', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url:'{%  url "create_user" %}',
+                data:{
+                    username:$('#username').val(),
+                    password:$('#password').val(),
+                    email:$('#email').val(),
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                    action: 'post'
+                },
+                success:function(json){
+                   console.log("POSTED!!!!");
+                   console.log(json.username);
+                },
+                error: function(xhr, errmsg, err){
+                    console.log(xhr.status + ": " + xhr.responseText);
+                }
+            });
+
+        });
+
+
+
+    </script>
 
     <script>
         document.getElementById('code').setAttribute('name', 'main.py');
