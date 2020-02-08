@@ -240,41 +240,35 @@
             //get username input 
             var userNameInput = document.getElementById("usrNm").value;
             var usrNmResult = true;
-            //need to research the django forums and the crf token for database access
-            //import sqlite3 
-            const sqlite3 = require('sqlite3').verbose();
-            //create database object (open connection & returns dataBase object or error message)
-            let dataBase = new sqlite3.Database(':memory:', (err) => {
-              if(err){
-                return console.error(err.message);
-              }
-              console.log('Connected to the database.');
-              var one = confirm("DB Connected!");
+            //connect to database 
+            var connect = mysql.createConnection({
+              host : 'localhost',
+              user : 'root',
+              password : '',
+              databse : 'db.sqlit3'
             });
-            //implement database check from US#247 using squlite3 database and node.js
+            connect.connect(function(err){
+              if(err) {
+                throw err;
+              }else{
+                console.log('Connected to database...');
+              }
+            })            
             //table title: Trynkit_user
             //values: id,username,password,email
-            //sql query
-            let query = 'SELECT *, FROM Trynkit_user';
+            //let query = 'SELECT *, FROM Trynkit_user WHERE username = userNameInput';
             //check username against usernames in the database
-            dataBase.each(query,[userNameInput], (err,row) => {
-              if(err){
-                throw err;
-              }
-              var two = confirm(row.username);
+           // if(userNameInput!=''){
+              //user POST when passing a user input to the database 
+              //$.post('user_vals.php',{username:userNameInput})
+            //}else{
+
+            //}
               //if username matches a username in database -> return false
-              if(row.username == userNameInput){
-                usrNmResult = false;
-              }
-            });
-            //close database 
-            dataBase.close((err) => {
-              if(err){
-                return console.error(err.message);
-              }
-              var three = confirm("DB Closing!");
-              console.log('Database connection closing.');
-            });
+            
+            //close database connection
+            connect.end();
+            
             return usrNmResult;
          }
          /**
