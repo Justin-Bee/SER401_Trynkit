@@ -57,20 +57,26 @@
             <button data-toggle="modal" data-target="#signUpModal" id="signBtn"><img type="image/svg+xml" id ="siBtn" src="/static/images/signup.svg" width="50" height="50"><figcaption> Sign Up </figcaption></button>
 
         </div>
-
+	<!-- this is the context menu -->
+        <!-- note the string to=0 where the 0 is the digit to be replaced -->
+        <div id="div-context-menu" class="cls-context-menu">
+		<ul>
+                    <li><a href="javascript:void(0)" class="rename-tab">Rename Tab </a></li>
+                </ul>
+        </div>
         <div class="container">
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="active"><a href="#tab_1" data-toggle="tab">main.py</a><span>x</span>
+            <ul class="nav nav-tabs" role="tablist" id="nav-tab list">
+		    <li class="active"><a href="#tab_1" id="tab1" data-toggle="tab">main.py</a><span>x</span>
                 </li>
                 <li><a href="javascript:void(0)" class="add-tab">+ New File</a>
-                </li> 
+		</li>
             </ul>
             <ul class="nav close-tabs">
                 <li><a href="javascript:void(0)" class="remove-tabs">- Close All Tabs</a>
                 </li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane active" id="tab_01"><textarea id="code"> </textarea></div>
+                <div class="tab-pane active" id="tab_1"><textarea id="code"> </textarea></div>
             </div>
         </div>
 
@@ -382,7 +388,7 @@
          */
         function populateTabs(){
             for(i =1; i< masterList.length; i++){
-                $(".add-tab").closest('li').before('<li><a href="#tab_' + i + '">"'+ masterList[i].toString()+'"</a> <span> x </span></li>');
+						  $(".add-tab").closest('li').before('<li><a href="#tab_' + i + '" id="tab'+(i+1)+'">'+ masterList[i].toString()+'</a> <span> x </span></li>');
             }
         }
 
@@ -428,7 +434,6 @@
 
                    
         });
-	        
             /**
              * This function handles the logic for when you add a tab
              * by clicking the add tab button. It prompts user for a filename,
@@ -441,9 +446,8 @@
                 if(projectName && (masterList.indexOf(projectName) == -1)){
                     e.preventDefault();
                     var id = $(".nav-tabs").children().length; 
-                    var tabId = 'tab_' + id;
-                    $(this).closest('li').before('<li class="active"><a href="#tab_' + id + '">'+ projectName+'</a> <span> x </span></li>');
-                    currentTab = projectName; 
+		    $(this).closest('li').before('<li class="active"><a href="#tab_' + id + '" id="tab'+id+'">'+ projectName+'</a> <span> x </span></li>');
+		    currentTab = projectName; 
                     masterList.push(projectName); 
                     localStorage.setItem("tabList", masterList); /* add tab to the tab list */
                     editor.setValue("");
@@ -475,8 +479,47 @@
                     }
                 }
             });
-                
-            
+	    $('.rename-tab').click(function(e) {
+	    var newTabName = prompt("Enter a new name for the current tab: ", ".py");
+	    var selectedTab = sessionStorage.getItem('selectedTab');
+	    window.sessionStorage.removeItem('selectedTab');
+	    var oldTabName = document.getElementById(selectedTab).innerText;
+	    localStorage.setItem('tabList',localStorage.getItem('tabList').replace(oldTabName, newTabName));
+	    localStorage.setItem(newTabName, localStorage.getItem(oldTabName));
+            window.localStorage.removeItem(oldTabName);
+            oldTabName = null;
+	    document.getElementById(selectedTab).innerText = newTabName;
+	});
+	$(document).click(function(event) {
+		var text = $(event.target).text();
+    	});
+	
+	//
+	var rgtClickContextMenu = document.getElementById('div-context-menu');
+	
+	document.onclick = function(e){
+	rgtClickContextMenu.style.display = 'none';
+	}
+	
+	//**
+        /* present the right click context menu ONLY for the elements having the right class
+        /* by replacing the 0 or any digit after the "to-" string with the element id , which
+        /* triggered the event
+        /*/
+	
+	document.oncontextmenu = function(e){
+	var elmnt = e.target	
+	if ( elmnt.toString().includes("tab")) {
+		e.preventDefault();
+		var selectedTab = elmnt.id;
+		//var selectedTabIndex= elmnt.toString().replace('https://127.0.0.1:8000/#tab_', ' '); //keep uncommented for local testing/develpment
+		//var selectedTabIndex = elmnt.toString().replace('https://www.asuser401group5.net:8000/#tab_', ' '); //uncomment for live
+		sessionStorage.setItem("selectedTab", selectedTab);
+                rgtClickContextMenu.style.left = e.pageX + 'px';
+                rgtClickContextMenu.style.top = e.pageY + 'px';
+                rgtClickContextMenu.style.display = 'block';
+		}
+	}
     </script>
 
 </html>
