@@ -31,5 +31,5 @@ from Trynkit.views import create_user
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
-    path('', create_user, name="create_user"),
+    path('Trynkit/', views.create_user, name="create_user"),
 ]

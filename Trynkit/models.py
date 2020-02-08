@@ -4,6 +4,7 @@
 #
 # For use with the sqlite3 db
 
+import django.db
 from django.db import models
 
 
