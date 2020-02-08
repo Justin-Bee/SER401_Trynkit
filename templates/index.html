@@ -34,7 +34,7 @@
             <button onclick="saveTabPrompt(currentTab, masterList)" id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50"><figcaption> Save File </figcaption></button>
             <p></p>
             <button id="loadFileBtn">
-                <img type="image/svg+xml" src="/static/images/cloud-upload-alt-solid.svg" width="50" height="50"><figcaption> Load File </figcaption>
+                <img type="image/svg+xml" id="lFileBtn" src="/static/images/cloud-upload-alt-solid.svg" width="50" height="50"><figcaption> Load File </figcaption>
 
             </button>
             <span id="spnFilePath"></span>
@@ -46,15 +46,15 @@
 
             <button onClick="bluetooth()" id="bBtn"><img type="image/svg+xml" id ="devicesBtn" src="/static/images/bluetooth-b-brands.svg" width="50" height="50"><figcaption> Bluetooth </figcaption></button>
             <p></p>
-            <button data-toggle="modal" data-target="#settingsModal" id="settingsBtn"><img type="image/svg+xml" id ="settingsBtn" src="/static/images/cogs-solid.svg" width="50" height="50"><figcaption> Settings </figcaption></button>
+            <button data-toggle="modal" data-target="#settingsModal" id="settingsBtn"><img type="image/svg+xml" id ="settBtn" src="/static/images/cogs-solid.svg" width="50" height="50"><figcaption> Settings </figcaption></button>
              <p></p>
-            <button onClick="consoleHide()" id="serialBtn"><img type="image/svg+xml"  src="/static/images/plug-solid.svg" width="50" height="50"><figcaption> Console </figcaption></button>
+            <button onClick="consoleHide()" id="serialBtn"><img type="image/svg+xml"  id="serBtn" src="/static/images/plug-solid.svg" width="50" height="50"><figcaption> Console </figcaption></button>
             <p></p>
             <button onclick="debugToggle()" id="debugBtn"><img type ="image/svg+xml" id="debuggerBtn" src="/static/images/bug-solid.svg" width="50" height="50"><figcaption> Debug </figcaption></button>
             <p></p>
-            <button data-toggle="modal" data-target="#loginModal" id="loginBtn"><img type="image/svg+xml" id ="loginBtn" src="/static/images/login-regular.svg" width="50" height="50"><figcaption> Login </figcaption></button>
+            <button data-toggle="modal" data-target="#loginModal" id="loginBtn"><img type="image/svg+xml" id ="logBtn" src="/static/images/login-regular.svg" width="50" height="50"><figcaption> Login </figcaption></button>
             <p></p>
-            <button data-toggle="modal" data-target="#signUpModal" id="signBtn"><img type="image/svg+xml" id ="signBtn" src="/static/images/signup.svg" width="50" height="50"><figcaption> Sign Up </figcaption></button>
+            <button data-toggle="modal" data-target="#signUpModal" id="signBtn"><img type="image/svg+xml" id ="siBtn" src="/static/images/signup.svg" width="50" height="50"><figcaption> Sign Up </figcaption></button>
 
         </div>
 
@@ -194,6 +194,9 @@
                             <p></p>      
                             <label for="PasswordCheck"><b>Re-enter Password</b></label>
                             <input id = "pswdChk" type="password" placeholder="Re-enter Password" name="passwordCheck" required>
+                            <p></p>
+                            <label for="Email"><b>Email</b></label>
+                            <input id = "email" type="email" placeholder="Email" name="email" required>
                             <p></p>
                             <button type="submit" onclick="signUp()">Sign Up</button>
                         </div>

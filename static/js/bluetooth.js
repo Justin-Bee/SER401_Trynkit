@@ -29,10 +29,13 @@ function bluetooth(){
      
      z.innerHTML= z.innerHTML + "\n"+ ('Requesting Bluetooth Devices');
      navigator.bluetooth.requestDevice({
+      // acceptAllDevices: true
      filters:[{
-     name: 'pyBoard'}]
-     })
+     name: 'MicroTrynkit'
+          }]
+    })
      .then(device=>{
+     z.innerHTML = z.innerHTML + "\n"+  ("Connected to: ");
      z.innerHTML= z.innerHTML +"\n"+  (">Name:" + device.name);
      z.innerHTML= z.innerHTML + "\n"+ (">id:" + device.id);
      })
