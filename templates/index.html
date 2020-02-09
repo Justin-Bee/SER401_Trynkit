@@ -192,8 +192,10 @@
                     <div class="modal-body">
                         <p>Welcome to the Trynkit Community</p>
                         <div class="container">
+                            <form method ="POST" id="post-form">
+                            {% csrf_token %}
                             <label for="UserName"><b>Username</b></label>
-                            <input id = "usrNm" type="username" placeholder="Enter Username" name="userName" required>
+                            <input id = "usNm" type="username" placeholder="Enter Username" name="username" required>
                             <p></p>          
                             <label for="Password"><b>Password</b></label>
                             <input id = "pswd" type="password" placeholder="Enter Password" name="password" required>
@@ -205,12 +207,40 @@
                             <input id = "email" type="email" placeholder="Email" name="email" required>
                             <p></p>
                             <button type="submit" onclick="signUp()">Sign Up</button>
+                            </form>
                         </div>
                      </div>
                   </div>
                 </div>
               </div>
     </body>
+
+    <script>
+        $(document).on('submit', '#post-form', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: "{% url "create_user" %}",
+                data:{
+                    username:$('#usNm').val(),
+                    password:$('#pswd').val(),
+                    email:$('#email').val(),
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                    action: 'post'
+                },
+                success:function(){
+
+                },
+                error: function(){
+                    console.log("error!");
+                }
+            });
+
+        });
+
+
+
+    </script>
 
     <script>
         document.getElementById('code').setAttribute('name', 'main.py');

@@ -10,6 +10,8 @@
     <collation id="3" parent="1" name="BINARY"/>
     <collation id="4" parent="1" name="NOCASE"/>
     <collation id="5" parent="1" name="RTRIM"/>
+<<<<<<< HEAD
+=======
     <table id="6" parent="2" name="Trynkit_user"/>
     <table id="7" parent="2" name="auth_group"/>
     <table id="8" parent="2" name="auth_group_permissions"/>
@@ -518,5 +520,6 @@ model</ColNames>
     <column id="116" parent="18" name="seq">
       <Position>2</Position>
     </column>
+>>>>>>> dev
   </database-model>
 </dataSource>
