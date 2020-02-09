@@ -319,6 +319,16 @@
             //NOTE: upon saving the newFile is intented to be saved within a folder titled with the projectName variable
         }
 
+	 /**
+         * verifyPass()
+         * called by the submit button
+         * checks entered password with db password
+         */
+	function verifyPass() {
+        	var db = openDataBase('db', '1.0', 'first', 2 * 1024 * 1024);
+          
+        }
+	    
         /**
          * newFile()
          * called by the create new file button
