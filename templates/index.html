@@ -237,9 +237,25 @@
             });
 
         });
-
-
-
+    </script>
+    <script>
+      $("username").change(function(){
+        var us = $(this).val();
+        $.ajax({
+          type: 'GET',
+          url: "{% url 'user_validation' %}",
+          data: {
+            'username': username },
+          success: function(){
+            if(!response["valid"]){
+              console.log("Username Unavailable!");
+            }
+          },
+          error:function(){
+            console.log("error!");
+          }
+        })
+      });
     </script>
 
     <script>

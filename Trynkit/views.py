@@ -33,3 +33,12 @@ def create_user(request):
         )
 
     return render(request, 'index.html', {'posts': posts})
+
+def user_validation(request):
+    if request.is_ajax and request.method == "GET":
+        username = request.GET.get("username", None)
+        if User.objects.filter(username = username).exists():
+            return JsonResponse({"valid": False}, status = 200)
+        else:
+            return JsonResponse({"valid": True}, status = 200)
+    return JsonResponse({}, status = 400 )
