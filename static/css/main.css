@@ -13,7 +13,18 @@
 
 }
 
+@media only screen and (max-width: 1000px) and (orientation : landscape) {
+    #editor {
+        height: 350px;
+    }
+}
 
+
+@media only screen and (max-width: 1000px) and (orientation : portrait) {
+    #editor {
+        height: 1475px;
+    }
+}
 
 #console {
     background-color: #ccd1db;
@@ -71,6 +82,30 @@
 }
 
 
+@media only screen and (max-width: 1000px) {
+    #dText, #console {
+        width: 700px;
+    }
+
+    #debugger {
+        width: 715px;
+    }
+
+    #debugger, #console {
+        margin-left: 115px;
+    }
+}
+
+@media only screen and (min-width: 2560px) {
+    #dText, #console {
+        width: 2000px;
+    }
+
+    #debugger {
+        width: 2015px;
+    }
+}
+
 body{
     background-color: #616e89;
 }
@@ -120,8 +155,10 @@ button{
     display: inline-block;
     
 }
+
+
 .close-tabs  li {
-    position: fixed;
+    position: absolute;
     top: 11px;
     height: 40px;
     width: 150px;
@@ -129,6 +166,26 @@ button{
     text-align: center;
     background-color:white; 
     border-block-color: black;
+}
+
+
+@media only screen and (min-width: 1920px) {
+    .close-tabs  li {
+        right: 100px;
+    }
+}
+
+
+@media only screen and (min-width: 2560px) {
+    .close-tabs  li {
+        right: 170px;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .close-tabs  li {
+        right: 25px;
+    }
 }
 
 
@@ -187,10 +244,33 @@ button{
     border: none;
 }
 
+
 .modal {
     overflow-y: auto;
 }
 
 .modal-open {
     overflow-y: auto;
+}
+
+.cls-context-menu { position:absolute; display:none; }
+
+.cls-context-menu ul, #context-menu li {
+	list-style:none;
+        margin:0; padding:0;
+        background:white;
+}
+
+.cls-context-menu { border:solid 1px #CCC;z-index:3;}
+.cls-context-menu li { border-bottom:solid 1px #CCC; }
+.cls-context-menu li:last-child { border:none; }
+.cls-context-menu li a {
+	display:block;
+        padding:5px 10px;
+        text-decoration:none;
+        color:blue;
+}
+.cls-context-menu li a:hover {
+	background:blue;
+        color:#FFF;
 }
