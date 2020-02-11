@@ -441,19 +441,23 @@
             $('.add-tab').click(function (e) {
                 localStorage.setItem(currentTab, editor.getValue());
                 var projectName = prompt("Creating a new file:", "NewProjectName.py");
-                if(projectName && (masterList.indexOf(projectName) == -1)){
-                    e.preventDefault();
-                    var id = $(".nav-tabs").children().length; 
-		    $(this).closest('li').before('<li class="active"><a href="#tab_' + id + '" id="tab'+id+'">'+ projectName+'</a> <span> x </span></li>');
-		    currentTab = projectName; 
-                    masterList.push(projectName); 
-                    localStorage.setItem("tabList", masterList); /* add tab to the tab list */
-                    editor.setValue("");
-                    $('.nav-tabs li:nth-child(' + id + ') a').click();
-                }else{
-                    alert("File name already exists.");
-                    $(".add-tab").click();
-                }
+                if(projectName){
+			if (masterList.indexOf(projectName) == -1) {
+				e.preventDefault();
+                    		var id = $(".nav-tabs").children().length; 
+		    		$(this).closest('li').before('<li class="active"><a href="#tab_' + id + '" id="tab'+id+'">'+ projectName+'</a> <span> x </span></li>');
+		    		currentTab = projectName; 
+                    		masterList.push(projectName); 
+                    		localStorage.setItem("tabList", masterList); /* add tab to the tab list */
+                    		editor.setValue("");
+                    		$('.nav-tabs li:nth-child(' + id + ') a').click();
+                		}else{
+                    			alert("File name already exists.");
+                    			$(".add-tab").click();
+                		}
+			} else {
+			//Do nothing
+		}
         });
         /**
          * This function handles all of the logic when close all tabs button is clicked
