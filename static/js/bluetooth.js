@@ -16,13 +16,15 @@ let device;
 let bleserver;
 /* variable for the object transfer service */
 let objservice;
+
 /*
  * bluetooth()
  * Function for the web bluetooth functionality
  * this opens a popup window automatically that shows devices
  * and allows the user to select and pair.
+ *
+ * Author: Justin Bee
  */
-
 function bluetooth(){
 
      if (!navigator.bluetooth) {
@@ -37,10 +39,10 @@ function bluetooth(){
      
      z.innerHTML= z.innerHTML + "\n"+ ('Requesting Bluetooth Devices');
      navigator.bluetooth.requestDevice({
-      // acceptAllDevices: true
      filters:[{
-     name: 'MicroTrynkit'
-          }]
+     name: 'MicroTrynkit',
+          }],
+          optionalServices: [service]
     })
      .then(device=>{
      z.innerHTML = z.innerHTML + "\n"+  ("Connected to: ");
@@ -48,12 +50,21 @@ function bluetooth(){
      z.innerHTML= z.innerHTML + "\n"+ (">id:" + device.id);
      isConnected = 1;
      device = device;
+     return device.gatt.connect();
      })
          .then(server=>{
-             bleserver = server.getPrimaryService(service);
+             bleserver = server;
+             return server.getPrimaryService(service);
          })
-         .then(service =>{
-           //  objservice = service.get
+         .then(service => {
+             return service.getCharacteristic(RX_char).then(characteristic => {
+                 RX_characteristic = characteristic;
+                 return service.getCharacteristic(TX_char);
+             })
+         })
+         .then(characteristic => {
+             TX_characteristic = characteristic;
+             return service.getCharacteristic(TX_char);
          })
      .catch(error=> {
      z.innerHTML= z.innerHTML + "\n"+ (error);
@@ -70,24 +81,17 @@ function bluetooth(){
 function bleSend() {
     /* check if the device is connected if true send file*/
     let encoder = new TextEncoder('utf-8');
-    //  TX_characteristic.writeValue(encoder.encode('value'));
-    navigator.bluetooth.requestDevice({
-     filters:[{
-     name: 'MicroTrynkit'
-          }]
-    })
-     .then(device=>device.gatt.connect())
-        .then(server=>{
-             bleserver = server.getPrimaryService(service);
-            })
-         .then(service =>{
-            TX_characteristic = service.getCharacteristic(TX_char);
-            RX_characteristic = service.getCharacteristic(RX_char);
-            RX_characteristic.writeValue(encoder.encode('value'));
-         })
-     .catch(error=> {
-     z.innerHTML= z.innerHTML + "\n"+ (error);
-     });
+
+    if(isConnected){
+        /* get the contents of the editor that is in use */
+        let editorContents = editor.getValue();
+        console.log(editorContents);
+        /* send the contents to the device */
+        RX_characteristic.writeValue(encoder.encode(editorContents));
+     }else{
+        const x = document.getElementById('console');
+        alert("MicroTrynkit device not connected. Please pair it first.");
+     }
 
 
 }
@@ -103,7 +107,7 @@ function bleConsole(){
     const y = document.getElementById('serial')
     /* check if the device is connected if true send file*/
      if(isConnected){
-
+         RX_characteristic.writeValue(encoder.encode('value'));
      }else{
          const x = document.getElementById('console');
          x.style.display ="none";
