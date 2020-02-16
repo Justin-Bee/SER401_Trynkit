@@ -32,4 +32,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
     path('Trynkit/', views.create_user, name="create_user"),
+    path('Trynkit/', views.update_password, name="update_password"),
 ]

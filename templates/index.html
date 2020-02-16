@@ -118,7 +118,7 @@
                         <div for="NewPasswordCheck">Re-enter New Password</div>
                         <input type="password" placeholder="Enter Password" name="password" required>
                       </p><p>
-                        <button type= "button">Update Password</button>
+                        <button type= "">Update Password</button>
                       </p>
                       <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -226,8 +226,7 @@
                 </div>
               </div>
     </body>
-
- <script>
+  <script>
         $(document).on('submit', '#post-form', function (e) {
             e.preventDefault();
             $.ajax({
@@ -247,12 +246,30 @@
                     console.log("error!");
                 }
             });
-
         });
-
-
-
-    </script>
+  </script>
+  <script>
+    //PUT Command overwrites everthing and therefore is not good for updating a password because it will replace all user information
+    //Use PATCH to make a partial update
+    $(document).on('button', '#post-form', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'PATCH',
+                url: "{% url "update_password" %}",
+                data:{
+                    password:$('#pswd').val(),
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                    action: 'patch'
+                },
+                success:function(){
+                  console.log("password updated.");
+                },
+                error: function(){
+                  console.log("error!");
+                }
+            });
+        });
+  </script>
     <script>
         document.getElementById('code').setAttribute('name', 'main.py');
         /**

@@ -17,6 +17,9 @@ def devices(request):
 def console(request):
     return render(request, 'console.html')
 
+def update_password(request):
+    response_data = {}
+    return render(request, 'index.html')
 
 def create_user(request):
     posts = User.objects.all()
