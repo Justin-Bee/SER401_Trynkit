@@ -24,6 +24,7 @@ from django.conf.urls.static import static
 import Trynkit
 from Trynkit import views
 from Trynkit.views import create_user
+from Trynkit.views import login_user
 
 
 
@@ -31,5 +32,6 @@ from Trynkit.views import create_user
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
-    path('Trynkit/', views.create_user, name="create_user"),
+    path('Trynkit/', create_user, name="create_user"),
+    path('Trynkit/', login_user, name="login_user"),
 ]

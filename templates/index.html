@@ -171,22 +171,26 @@
                             <div class="modal-body">
                                 <p>Please enter login credentials</p>
                                 <div class="container">
+                                      <form method ="GET" id="login-form">
+                                         {% csrf_token %}
                                     <label for="UserName"><b>Username</b></label>
-                                    <input type="username" placeholder="Enter Username" name="userName" required>
+                                    <input id='un' type="username" placeholder="Enter Username" name="userName" required>
                                     <p></p>
                                     <label for="Password"><b>Password</b></label>
-                                    <input type="password" placeholder="Enter Password" name="password" required>
+                                    <input id='pw' type="password" placeholder="Enter Password" name="password" required>
                                     <p></p>
                                     <label>
                                         <input type="checkbox" checked="checked" name="remember"> Remember me
                                     </label>
                                     <p></p>
                                     <button type="submit">Login</button>
+                            </form>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbtn">Cancel</button>
                                     <span class="psw">Forgot <a href="#">password?</a></span>
                                 </div>
+
                              </div>
                           </div>
                         </div>
@@ -243,14 +247,37 @@
                 success:function(){
 
                 },
-                error: function(){
-                    console.log("error!");
-                }
+                error: function(e){
+                    console.log(e);
+                },
             });
 
         });
 
+        $(document).on('submit', '#login-form', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'GET',
+                url: "{% url "login_user" %}",
+                data:{
+                    username:$('#un').val(),
+                    password:$('#pw').val(),
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                    action: 'get',
+                },
+                success:function(data){
+                    printStuff(data)
+                },
+                error: function(data){
+                    console.log(data);
+                },
+            });
 
+        });
+
+        function printStuff(data){
+            console.log(data);
+        }
 
     </script>
     <script>
@@ -285,7 +312,7 @@
          */
          function usernameIsUnique(){
             //get username input
-            var userNameInput = document.getElementById("usrNm").value;
+            var userNameInput = document.getElementById("usNm").value;
             //check username against usernames in the database
 
               //if username matches a username in database -> return false

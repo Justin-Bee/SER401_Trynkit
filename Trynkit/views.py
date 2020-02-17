@@ -1,6 +1,6 @@
 
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from .models import User
 
 # Create your views here.
@@ -18,6 +18,13 @@ def console(request):
     return render(request, 'console.html')
 
 
+def login_user(request):
+    response_data = {}
+    if request.GET.get('action') == 'get':
+        response_data['login'] = "True"
+        return JsonResponse('True')
+
+
 def create_user(request):
     posts = User.objects.all()
     response_data = {}
@@ -33,3 +40,6 @@ def create_user(request):
         )
 
     return render(request, 'index.html', {'posts': posts})
+
+
+
