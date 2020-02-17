@@ -51,6 +51,7 @@
     margin-left: 100px;
     font-family: "Arial";
     white-space: pre-line;
+    overflow:auto;
 	
 }
 
@@ -240,6 +241,11 @@ button{
 }
 
 #signBtn{
+    background-color: Transparent;
+    border: none;
+}
+
+#uploadBtn{
     background-color: Transparent;
     border: none;
 }
