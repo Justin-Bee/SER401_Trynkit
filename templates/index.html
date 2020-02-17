@@ -46,6 +46,8 @@
 
             <button onClick="bluetooth()" id="bBtn"><img type="image/svg+xml" id ="devicesBtn" src="/static/images/bluetooth-b-brands.svg" width="50" height="50"><figcaption> Bluetooth </figcaption></button>
             <p></p>
+            <button onClick="bleSend()" id="uploadBtn"><img type="image/svg+xml" id ="uploadBtn" src="/static/images/upload.svg" width="50" height="50"><figcaption> Upload </figcaption></button>
+            <p></p>
             <button data-toggle="modal" data-target="#settingsModal" id="settingsBtn"><img type="image/svg+xml" id ="settBtn" src="/static/images/cogs-solid.svg" width="50" height="50"><figcaption> Settings </figcaption></button>
              <p></p>
             <button onClick="consoleHide()" id="serialBtn"><img type="image/svg+xml"  id="serBtn" src="/static/images/plug-solid.svg" width="50" height="50"><figcaption> Console </figcaption></button>
@@ -62,6 +64,7 @@
         <div id="div-context-menu" class="cls-context-menu">
 		<ul>
                     <li><a href="javascript:void(0)" class="rename-tab">Rename Tab </a></li>
+		    <li><a href="javascript:void(0)" class="remove-tabs">- Close All Tabs</a></li>
                 </ul>
         </div>
         <div class="container">
@@ -71,19 +74,15 @@
                 <li><a href="javascript:void(0)" class="add-tab">+ New File</a>
 		</li>
             </ul>
-            <ul class="nav close-tabs">
-                <li><a href="javascript:void(0)" class="remove-tabs">- Close All Tabs</a>
-                </li>
-            </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_1"><textarea id="code"> </textarea></div>
             </div>
         </div>
 
-       
-		<div id="debugger" contenteditable="false" name="empty" style="display:none"><input type="text" id="dText" value="Debugger output here." readonly></div>
+
+
+		<div id="debugger" contenteditable="false" name="empty" style="display:none">Debug Content Here</div>
         <div id="console" contenteditable="true" name="empty" style="display:none">Serial Console</div>
-        <div id="devices" name="empty" style="display:none"></div>
 
 
 
@@ -108,7 +107,20 @@
                                 <option>rubyblue</option>
                             </select></p>
                       </div>
-                        <div class="modal-footer">
+                      <p><b>Update Password</b></p>
+                      <p>
+                        <div for="OldPassword">Current Password</div>
+                        <input type="password" placeholder="Enter Password" name="password" required>
+                      </p><p>
+                        <div for="NewPassword">New Password</div>
+                        <input type="password" placeholder="Enter Password" name="password" required>
+                      </p><p>
+                        <div for="NewPasswordCheck">Re-enter New Password</div>
+                        <input type="password" placeholder="Enter Password" name="password" required>
+                      </p><p>
+                        <button type= "button">Update Password</button>
+                      </p>
+                      <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
                      </div>
@@ -161,10 +173,10 @@
                                 <div class="container">
                                     <label for="UserName"><b>Username</b></label>
                                     <input type="username" placeholder="Enter Username" name="userName" required>
-                                    <p></p>          
+                                    <p></p>
                                     <label for="Password"><b>Password</b></label>
                                     <input type="password" placeholder="Enter Password" name="password" required>
-                                    <p></p>                   
+                                    <p></p>
                                     <label>
                                         <input type="checkbox" checked="checked" name="remember"> Remember me
                                     </label>
@@ -196,10 +208,10 @@
                             {% csrf_token %}
                             <label for="UserName"><b>Username</b></label>
                             <input id = "usNm" type="username" placeholder="Enter Username" name="username" required>
-                            <p></p>          
+                            <p></p>
                             <label for="Password"><b>Password</b></label>
                             <input id = "pswd" type="password" placeholder="Enter Password" name="password" required>
-                            <p></p>      
+                            <p></p>
                             <label for="PasswordCheck"><b>Re-enter Password</b></label>
                             <input id = "pswdChk" type="password" placeholder="Re-enter Password" name="passwordCheck" required>
                             <p></p>
@@ -215,7 +227,7 @@
               </div>
     </body>
 
-    <script>
+ <script>
         $(document).on('submit', '#post-form', function (e) {
             e.preventDefault();
             $.ajax({
@@ -241,12 +253,11 @@
 
 
     </script>
-
     <script>
         document.getElementById('code').setAttribute('name', 'main.py');
         /**
          * signUp()
-         * This function verifies the username is unique, verifies that 
+         * This function verifies the username is unique, verifies that
          * the password matches the re-entered password and adds the
          * new user credentials.
          */
@@ -261,19 +272,19 @@
               var SignUpVerification = confirm("Passwords do not match.");
               return;
             }
-            //add user to the database 
+            //add user to the database
 
             var SignUpVerification = confirm("Sign Up Complete!");
         }
 
         /**
          * usernameIsUnique()
-         * This function verifies that the username is unique by 
+         * This function verifies that the username is unique by
          * ensuring it does not match any other usernames corresponding
          * to another user.
          */
          function usernameIsUnique(){
-            //get username input 
+            //get username input
             var userNameInput = document.getElementById("usrNm").value;
             //check username against usernames in the database
 
@@ -283,9 +294,9 @@
          }
          /**
           * passwordMatches()
-          * This function checks the two strings listed as password and 
-          * passwordCheck and verifies that they are the same string. 
-          * This serves as verification that the password was typed as 
+          * This function checks the two strings listed as password and
+          * passwordCheck and verifies that they are the same string.
+          * This serves as verification that the password was typed as
           * intended.
           */
           function passwordMatches(){
@@ -349,6 +360,8 @@
             }else{
                 x.style.display = "none";
             }
+            /* once console is displayed try the device REPL */
+            bleConsole();
         }
 
 		/**
@@ -408,7 +421,7 @@
             }catch(error){
                 console.error(error);
             }
-            
+
         });
 
         /**
@@ -462,7 +475,7 @@
                         $(this).parent().remove(); //this removes the tab
                     }
 
-                   
+
         });
             /**
              * This function handles the logic for when you add a tab
@@ -473,19 +486,23 @@
             $('.add-tab').click(function (e) {
                 localStorage.setItem(currentTab, editor.getValue());
                 var projectName = prompt("Creating a new file:", "NewProjectName.py");
-                if(projectName && (masterList.indexOf(projectName) == -1)){
-                    e.preventDefault();
-                    var id = $(".nav-tabs").children().length; 
-		    $(this).closest('li').before('<li class="active"><a href="#tab_' + id + '" id="tab'+id+'">'+ projectName+'</a> <span> x </span></li>');
-		    currentTab = projectName; 
-                    masterList.push(projectName); 
-                    localStorage.setItem("tabList", masterList); /* add tab to the tab list */
-                    editor.setValue("");
-                    $('.nav-tabs li:nth-child(' + id + ') a').click();
-                }else{
-                    alert("File name already exists.");
-                    $(".add-tab").click();
-                }
+                if(projectName){
+			if (masterList.indexOf(projectName) == -1) {
+				e.preventDefault();
+                    		var id = $(".nav-tabs").children().length;
+		    		$(this).closest('li').before('<li class="active"><a href="#tab_' + id + '" id="tab'+id+'">'+ projectName+'</a> <span> x </span></li>');
+		    		currentTab = projectName;
+                    		masterList.push(projectName);
+                    		localStorage.setItem("tabList", masterList); /* add tab to the tab list */
+                    		editor.setValue("");
+                    		$('.nav-tabs li:nth-child(' + id + ') a').click();
+                		}else{
+                    			alert("File name already exists.");
+                    			$(".add-tab").click();
+                		}
+			} else {
+			//Do nothing
+		}
         });
         /**
          * This function handles all of the logic when close all tabs button is clicked
@@ -523,22 +540,22 @@
 	$(document).click(function(event) {
 		var text = $(event.target).text();
     	});
-	
+
 	//
 	var rgtClickContextMenu = document.getElementById('div-context-menu');
-	
+
 	document.onclick = function(e){
 	rgtClickContextMenu.style.display = 'none';
 	}
-	
+
 	//**
         /* present the right click context menu ONLY for the elements having the right class
         /* by replacing the 0 or any digit after the "to-" string with the element id , which
         /* triggered the event
         /*/
-	
+
 	document.oncontextmenu = function(e){
-	var elmnt = e.target	
+	var elmnt = e.target
 	if ( elmnt.toString().includes("tab")) {
 		e.preventDefault();
 		var selectedTab = elmnt.id;

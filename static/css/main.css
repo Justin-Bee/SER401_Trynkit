@@ -261,6 +261,11 @@ button{
     border: none;
 }
 
+#uploadBtn{
+    background-color: Transparent;
+    border: none;
+}
+
 
 .modal {
     overflow-y: auto;
