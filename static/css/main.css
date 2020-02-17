@@ -37,7 +37,6 @@
     font-family: "Arial";
     white-space: pre-line;
     overflow:auto;
-
 }
 
 
@@ -51,8 +50,6 @@
     margin-left: 100px;
     font-family: "Arial";
     white-space: pre-line;
-    overflow:auto;
-	
 }
 
 #dText {
@@ -84,26 +81,45 @@
 
 
 @media only screen and (max-width: 1000px) {
-    #dText, #console {
-        width: 700px;
-    }
-
-    #debugger {
-        width: 715px;
+    #dText {
+        width: 705px;
     }
 
     #debugger, #console {
-        margin-left: 115px;
+        width: 720px;
+        margin-left: 113px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    #dText {
+        width: 1130px;
+    }
+
+    #debugger, #console {
+        width: 1145px;
+        margin-left: 113px;
+    }
+}
+
+@media only screen and (min-width: 1920px) {
+    #dText {
+        width: 1462px;
+    }
+
+    #debugger, #console {
+        width: 1477px;
+        margin-left: 113px;
     }
 }
 
 @media only screen and (min-width: 2560px) {
-    #dText, #console {
-        width: 2000px;
+    #dText {
+        width: 1990px;
     }
 
-    #debugger {
-        width: 2015px;
+    #debugger, #console {
+        width: 2003px;
     }
 }
 
