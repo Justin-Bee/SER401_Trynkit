@@ -172,7 +172,6 @@
                                 <p>Please enter login credentials</p>
                                 <div class="container">
                                       <form method ="GET" id="login-form">
-                                         {% csrf_token %}
                                     <label for="UserName"><b>Username</b></label>
                                     <input id='un' type="username" placeholder="Enter Username" name="userName" required>
                                     <p></p>
@@ -183,7 +182,7 @@
                                         <input type="checkbox" checked="checked" name="remember"> Remember me
                                     </label>
                                     <p></p>
-                                    <button type="submit">Login</button>
+                                    <button type="submit" >Login</button>
                             </form>
                                 </div>
                                 <div class="modal-footer">
@@ -209,7 +208,6 @@
                         <p>Welcome to the Trynkit Community</p>
                         <div class="container">
                             <form method ="POST" id="post-form">
-                            {% csrf_token %}
                             <label for="UserName"><b>Username</b></label>
                             <input id = "usNm" type="username" placeholder="Enter Username" name="username" required>
                             <p></p>
@@ -236,16 +234,16 @@
             e.preventDefault();
             $.ajax({
                 type: 'POST',
+                dataType: 'json',
                 url: "{% url "create_user" %}",
                 data:{
                     username:$('#usNm').val(),
                     password:$('#pswd').val(),
                     email:$('#email').val(),
-                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
                     action: 'post'
                 },
                 success:function(){
-
+                    $('#signUpModal').modal('hide');
                 },
                 error: function(e){
                     console.log(e);
@@ -258,26 +256,30 @@
             e.preventDefault();
             $.ajax({
                 type: 'GET',
-                url: "{% url "login_user" %}",
+                dataType: 'json',
+                url: "{% url "create_user" %}",
                 data:{
                     username:$('#un').val(),
                     password:$('#pw').val(),
-                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
                     action: 'get',
                 },
                 success:function(data){
-                    printStuff(data)
+                    if(data.login === "True"){
+                        $('#loginModal').modal('hide');
+                        alert("Login Successful!!!!");
+                    }else{
+                        alert("Login Unsuccessful!!!! Please Try Again");
+                    }
                 },
                 error: function(data){
                     console.log(data);
                 },
             });
 
+
         });
 
-        function printStuff(data){
-            console.log(data);
-        }
+
 
     </script>
     <script>
