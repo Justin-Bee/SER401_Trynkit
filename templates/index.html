@@ -64,6 +64,7 @@
         <div id="div-context-menu" class="cls-context-menu">
 		<ul>
                     <li><a href="javascript:void(0)" class="rename-tab">Rename Tab </a></li>
+                    <li><a href="javascript:void(0)" class="save-tab">Save Tab </a></li>
 		    <li><a href="javascript:void(0)" class="remove-tabs">- Close All Tabs</a></li>
                 </ul>
         </div>
@@ -536,7 +537,28 @@
             window.localStorage.removeItem(oldTabName);
             oldTabName = null;
 	    document.getElementById(selectedTab).innerText = newTabName;
-	});
+  });
+
+  /*
+  * This function handles saving when using the context menu
+  */
+  $('.save-tab').click(function(e) {
+    var elmnt = e.target;
+    var selected = elmnt.id;
+
+    localStorage.setItem(currentTab, e.target);
+    currentTab = selected.anchor;
+    if (editor.setOption == true) {
+      localStorage.setItem(currentTab, localStorage.getItem(previous));
+    }
+    try {
+        editor.setValue(localStorage.getItem(currentTab).toString());
+        saveTabPrompt(selected, masterList);
+    }catch(e){
+        console.error(e);
+    }
+  });
+  
 	$(document).click(function(event) {
 		var text = $(event.target).text();
     	});
