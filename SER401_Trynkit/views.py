@@ -12,3 +12,4 @@ def devices(request):
 
 def console(request):
     return render(request, 'console.html')
+
