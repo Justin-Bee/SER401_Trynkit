@@ -29,13 +29,17 @@ def create_user(request):
         psword = request.POST.get('password')
         eml = request.POST.get('email')
 
-        User.objects.create(
-            username=uname,
-            password=psword,
-            email=eml,
-        )
-        response_data['login'] = "False"
-        return JsonResponse(response_data)
+        if User.objects.filter(username=uname, email=eml).exists():
+            response_data = "False"
+        else:
+            User.objects.create(
+                username=uname,
+                password=psword,
+                email=eml,
+            )
+            response_data = "True"
+
+        return response_data
 
     elif request.GET.get('action') == 'get':
         uname = request.GET.get('username')
