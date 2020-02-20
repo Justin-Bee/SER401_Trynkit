@@ -24,25 +24,26 @@ def console(request):
 def create_user(request):
     posts = User.objects.all()
     response_data = {}
+
+    response = ""
+    
     if request.POST.get('action') == 'post':
         uname = request.POST.get('username')
         psword = request.POST.get('password')
         eml = request.POST.get('email')
-
-        print('username ' + uname)
-        print('email ' + eml)
         
         if User.objects.filter(username=uname, email=eml).exists():
-            response_data = "False"
+            response = "False"
+            response_data['login'] = 'False'
         else:
             User.objects.create(
                 username=uname,
                 password=psword,
                 email=eml,
             )
-            response_data = "True"
+            response = "True"
+            response_data['login'] = 'True'
 
-        return response_data
 
     elif request.GET.get('action') == 'get':
         uname = request.GET.get('username')
@@ -52,7 +53,9 @@ def create_user(request):
         else:
             response_data['login'] = 'False'
 
-        return JsonResponse(response_data)
+     
+    print(response)
+    return JsonResponse(response_data)
 
 
 
