@@ -233,7 +233,7 @@
  <script>
         $(document).on('click', '#signmeup', function (e) {
             e.preventDefault();
-            alert("Sorry, that email already exists.");
+            
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
@@ -245,8 +245,13 @@
                     action: 'post'
                 },
                 success:function(result){
-                    alert(result);
-                    //$('#signUpModal').modal('hide');
+                    $('#signUpModal').modal('hide');
+                    if(result.login == 'False'){
+                      alert("Sorry, that email already exists.");
+                    } else {
+                      alert("User added");
+                    }
+
                 },
                 error: function(e){
                     console.log(e);
