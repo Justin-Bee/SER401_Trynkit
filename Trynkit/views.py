@@ -18,7 +18,10 @@ def console(request):
     return render(request, 'console.html')
 
 def update_password(request):
+    posts = User.objects.all()
     response_data = {}
+    if request.PATCH.get('action') == 'patch':
+        
     return render(request, 'index.html')
 
 def create_user(request):

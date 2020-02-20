@@ -255,10 +255,10 @@
             e.preventDefault();
             $.ajax({
                 type: 'PATCH',
+                dataType: 'json'
                 url: "{% url "update_password" %}",
                 data:{
                     password:$('#pswd').val(),
-                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
                     action: 'patch'
                 },
                 success:function(){
