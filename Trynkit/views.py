@@ -29,6 +29,9 @@ def create_user(request):
         psword = request.POST.get('password')
         eml = request.POST.get('email')
 
+        print('username ' + uname)
+        print('email ' + eml)
+        
         if User.objects.filter(username=uname, email=eml).exists():
             response_data = "False"
         else:
