@@ -33,8 +33,11 @@ def create_user(request):
         eml = request.POST.get('email')
         
         if User.objects.filter(username=uname, email=eml).exists():
-            response = "False"
-            response_data['login'] = 'False'
+            response = "FalseU"
+            response_data['login'] = 'FalseU'
+        elif User.objects.filter(email=eml).exists():
+            response = "FalseE"
+            response_data['login'] = 'FalseE'
         else:
             User.objects.create(
                 username=uname,
