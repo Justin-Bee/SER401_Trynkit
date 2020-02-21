@@ -221,7 +221,7 @@
                             <label for="Email"><b>Email</b></label>
                             <input id = "email" type="email" placeholder="Email" name="email" required>
                             <p></p>
-                            <button type="submit" onclick="signUp()">Sign Up</button>
+                            <button id="signmeup">Sign Up</button>
                             </form>
                         </div>
                      </div>
@@ -242,6 +242,7 @@
          */
         $(document).on('submit', '#post-form', function (e) {
             e.preventDefault();
+            
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
@@ -252,8 +253,18 @@
                     email:$('#email').val(),
                     action: 'post'
                 },
-                success:function(){
+                success:function(result){
                     $('#signUpModal').modal('hide');
+                    if(result.login == 'FalseE'){
+                      alert("Sorry, that email already exists.");
+                    } 
+                    else if(result.login == 'FalseU'){
+                      alert("Sorry, that username already exists.");
+                    }
+		    else {
+                      alert("User added");
+                    }
+
                 },
                 error: function(e){
                     console.log(e);
