@@ -246,9 +246,13 @@
                 },
                 success:function(result){
                     $('#signUpModal').modal('hide');
-                    if(result.login == 'False'){
+                    if(result.login == 'FalseE'){
                       alert("Sorry, that email already exists.");
-                    } else {
+                    } 
+                    else if(result.login == 'FalseU'){
+                      alert("Sorry, that username already exists.");
+                    }
+		    else {
                       alert("User added");
                     }
 
