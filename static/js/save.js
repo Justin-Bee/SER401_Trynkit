@@ -70,6 +70,17 @@ function saveTabPrompt(currentTab, masterList){
      //get tab title and tab list
     var tabTitle = currentTab;
     var tList = masterList;
+    var mResponse = masterList[0];
+    var strContent = '';
+    if (mResponse.chkDuplicates() == false) {
+        var element = document.createElement('m');
+        element.setAttribute('save', tabTitle);
+        if (document.getElementById('context').getAttribute('name') == '.txt') {
+            for (var i = 0; i < tList.length; i++) {
+                strContent = strContent + tList[i] + "\n";
+            }
+        }
+    }
     if(userResponse == true){
         // check for duplicate tab/file names
         function chkDuplicates(arr) {

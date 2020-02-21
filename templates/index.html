@@ -551,12 +551,23 @@
     if (editor.setOption == true) {
       localStorage.setItem(currentTab, localStorage.getItem(previous));
     }
+    var navTabsLength;
+    navTabsLength = $(".nav-tabs").children().length;
+    for (var i=0; i < navTabsLength +1; i++){
+      if ($(".nav-tabs").children().eq(i).hasClass('active')) {
+        var projectName = prompt("Saving file...", currentTab);
+        navTabsLength = $(".nav-tabs").children().length;
+        localStorage.setItem(currentTab, editor.getValue());
+      }
+    }
     try {
         editor.setValue(localStorage.getItem(currentTab).toString());
         saveTabPrompt(selected, masterList);
     }catch(e){
         console.error(e);
     }
+
+
   });
   
 	$(document).click(function(event) {
