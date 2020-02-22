@@ -249,17 +249,14 @@
         });
   </script>
   <script>
-    //PUT Command overwrites everthing and therefore is not good for updating a password because it will replace all user information
-    //Use PATCH to make a partial update
     $(document).on('button', '#post-form', function (e) {
             e.preventDefault();
             $.ajax({
-                type: 'PATCH',
-                dataType: 'json'
+                type: 'POST',
                 url: "{% url "update_password" %}",
                 data:{
                     password:$('#pswd').val(),
-                    action: 'patch'
+                    action: 'post'
                 },
                 success:function(){
                   console.log("password updated.");

@@ -18,10 +18,10 @@ def console(request):
     return render(request, 'console.html')
 
 def update_password(request):
-    posts = User.objects.all()
-    response_data = {}
-    if request.PATCH.get('action') == 'patch':
-        
+    if request.POST.get('action') == 'post':
+        pUpdate = PasswordChangeForm(data=request.POST, user= request.user)
+        if pUpdate.is_valid():
+            pUpdate.save()        
     return render(request, 'index.html')
 
 def create_user(request):
