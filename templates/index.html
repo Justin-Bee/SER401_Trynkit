@@ -173,6 +173,7 @@
                                 <p>Please enter login credentials</p>
                                 <div class="container">
                                       <form method ="GET" id="login-form">
+                                          {%  csrf_token %}
                                     <label for="UserName"><b>Username</b></label>
                                     <input id='un' type="username" placeholder="Enter Username" name="userName" required>
                                     <p></p>
@@ -209,6 +210,7 @@
                         <p>Welcome to the Trynkit Community</p>
                         <div class="container">
                             <form method ="POST" id="post-form">
+                                {% csrf_token %}
                             <label for="UserName"><b>Username</b></label>
                             <input id = "usNm" type="username" placeholder="Enter Username" name="username" required>
                             <p></p>
