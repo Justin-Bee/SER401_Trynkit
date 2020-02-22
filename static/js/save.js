@@ -66,25 +66,31 @@ function saveEditorContents() {
  * @returns: none
  **/
 function saveTabPrompt(currentTab, masterList){
-    userResponse = confirm('Select ok to save the current tab.');
-     //get tab title and tab list
-    var tabTitle = currentTab;
-    var tList = masterList;
-    if(userResponse == true){
-        // check for duplicate tab/file names
-        function chkDuplicates(arr) {
-            return (new Set(arr)).size !== arr.length;
+    if(login == null){
+        alert("Please Login first.");
+    }
+    else {
+        userResponse = confirm('Select ok to save the current tab.');
+        //get tab title and tab list
+        var tabTitle = currentTab;
+        var tList = masterList;
+        if (userResponse == true) {
+            // check for duplicate tab/file names
+            function chkDuplicates(arr) {
+                return (new Set(arr)).size !== arr.length;
+            }
+
+            if (chkDuplicates(tList)) {
+                alert("Two or more tabs are the same name! Please rename.");
+            }
+            //"save" by downloading .py file to users machine
+            else {
+                downloadEditorContents(tabTitle);
+            }
+        } else {
+            verification = alert('You have chosen not to save the contents of ' + tabTitle + ' before closing.');
+            //remove tab and corresponding contents from local storage??
         }
-        if (chkDuplicates(tList)) {
-            alert("Two or more tabs are the same name! Please rename.");
-        }
-        //"save" by downloading .py file to users machine
-        else {
-            downloadEditorContents(tabTitle);
-        }
-    }else{
-        verification = alert('You have chosen not to save the contents of ' + tabTitle + ' before closing.');
-        //remove tab and corresponding contents from local storage??
     }
 }
 
