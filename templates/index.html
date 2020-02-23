@@ -9,6 +9,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}" />
+	<link rel="shortcut icon" type="image/png" href="/static/images/favicon.png"/>
 
         <script src="/static/js/loadFile.js" type="text/javascript"></script>
         <script src="/static/js/save.js" type="text/javascript"></script>
@@ -107,7 +108,20 @@
                                 <option>rubyblue</option>
                             </select></p>
                       </div>
-                        <div class="modal-footer">
+                      <p><b>Update Password</b></p>
+                      <p>
+                        <div for="OldPassword">Current Password</div>
+                        <input type="password" placeholder="Enter Password" name="password" required>
+                      </p><p>
+                        <div for="NewPassword">New Password</div>
+                        <input type="password" placeholder="Enter Password" name="password" required>
+                      </p><p>
+                        <div for="NewPasswordCheck">Re-enter New Password</div>
+                        <input type="password" placeholder="Enter Password" name="password" required>
+                      </p><p>
+                        <button type= "button">Update Password</button>
+                      </p>
+                      <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
                      </div>
@@ -158,22 +172,26 @@
                             <div class="modal-body">
                                 <p>Please enter login credentials</p>
                                 <div class="container">
+                                      <form method ="GET" id="login-form">
+                                          {%  csrf_token %}
                                     <label for="UserName"><b>Username</b></label>
-                                    <input type="username" placeholder="Enter Username" name="userName" required>
+                                    <input id='un' type="username" placeholder="Enter Username" name="userName" required>
                                     <p></p>
                                     <label for="Password"><b>Password</b></label>
-                                    <input type="password" placeholder="Enter Password" name="password" required>
+                                    <input id='pw' type="password" placeholder="Enter Password" name="password" required>
                                     <p></p>
                                     <label>
                                         <input type="checkbox" checked="checked" name="remember"> Remember me
                                     </label>
                                     <p></p>
-                                    <button type="submit">Login</button>
+                                    <button type="submit" >Login</button>
+                            </form>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbtn">Cancel</button>
                                     <span class="psw">Forgot <a href="#">password?</a></span>
                                 </div>
+
                              </div>
                           </div>
                         </div>
@@ -192,7 +210,7 @@
                         <p>Welcome to the Trynkit Community</p>
                         <div class="container">
                             <form method ="POST" id="post-form">
-                            {% csrf_token %}
+                                {% csrf_token %}
                             <label for="UserName"><b>Username</b></label>
                             <input id = "usNm" type="username" placeholder="Enter Username" name="username" required>
                             <p></p>
@@ -205,7 +223,7 @@
                             <label for="Email"><b>Email</b></label>
                             <input id = "email" type="email" placeholder="Email" name="email" required>
                             <p></p>
-                            <button type="submit" onclick="signUp()">Sign Up</button>
+                            <button id="signmeup">Sign Up</button>
                             </form>
                         </div>
                      </div>
@@ -215,25 +233,80 @@
     </body>
 
  <script>
+
+     /* This is a variable we can use for login, once logged in save username there, null if logged out */
+     var login = null;
+
+        /*
+         * This function gets the data input in the use creation form
+         * then POSTs it to the database, on success it hides the modal
+         * TODO on success send email to user
+         */
         $(document).on('submit', '#post-form', function (e) {
             e.preventDefault();
+            
             $.ajax({
                 type: 'POST',
+                dataType: 'json',
                 url: "{% url "create_user" %}",
                 data:{
                     username:$('#usNm').val(),
                     password:$('#pswd').val(),
                     email:$('#email').val(),
-                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
                     action: 'post'
                 },
-                success:function(){
+                success:function(result){
+                    $('#signUpModal').modal('hide');
+                    if(result.login == 'FalseE'){
+                      alert("Sorry, that email already exists.");
+                    } 
+                    else if(result.login == 'FalseU'){
+                      alert("Sorry, that username already exists.");
+                    }
+		    else {
+                      alert("User added");
+                    }
 
                 },
-                error: function(){
-                    console.log("error!");
-                }
+                error: function(e){
+                    console.log(e);
+                },
             });
+
+        });
+
+        /*
+         * This function gets the data from the login form and sends GET request
+         * to the server for the views.py function to process
+         * on success, set the var login to the username and alert user they are logged in
+         * on fail alert them to try again
+         */
+        $(document).on('submit', '#login-form', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: "{% url "create_user" %}",
+                data:{
+                    username:$('#un').val(),
+                    password:$('#pw').val(),
+                    action: 'get',
+                },
+                success:function(data){
+                    if(data.login === "True"){
+                        $('#loginModal').modal('hide');
+                        alert("Login Successful!!!!");
+                        login = $('#un').val();
+                        console.log(login);
+                    }else{
+                        alert("Login Unsuccessful!!!! Please Try Again");
+                    }
+                },
+                error: function(data){
+                    console.log(data);
+                },
+            });
+
 
         });
 
@@ -272,7 +345,7 @@
          */
          function usernameIsUnique(){
             //get username input
-            var userNameInput = document.getElementById("usrNm").value;
+            var userNameInput = document.getElementById("usNm").value;
             //check username against usernames in the database
 
               //if username matches a username in database -> return false
