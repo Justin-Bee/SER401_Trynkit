@@ -110,16 +110,19 @@
                       </div>
                       <p><b>Update Password</b></p>
                       <p>
-                        <div for="OldPassword">Current Password</div>
-                        <input type="password" placeholder="Enter Password" name="password" required>
-                      </p><p>
-                        <div for="NewPassword">New Password</div>
-                        <input type="password" placeholder="Enter Password" name="password" required>
-                      </p><p>
-                        <div for="NewPasswordCheck">Re-enter New Password</div>
-                        <input type="password" placeholder="Enter Password" name="password" required>
-                      </p><p>
-                        <button type= "updatePswd">Update Password</button>
+                        <form method ="GET" id="update-form">
+                          {%  csrf_token %}
+                          <div for="OldPassword">Current Password</div>
+                          <input type="password" placeholder="Enter Password" name="OldPassword" required>
+                        </p><p>
+                          <div for="NewPassword">New Password</div>
+                          <input type="password" placeholder="Enter Password" name="NewPassword" required>
+                        </p><p>
+                          <div for="NewPasswordCheck">Re-enter New Password</div>
+                          <input type="password" placeholder="Enter Password" name="NewPasswordCheck" required>
+                        </p><p>
+                          <button type= "updatePswd">Update Password</button>
+                      </form>
                       </p>
                       <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -275,7 +278,7 @@
         });
   </script>
   <script>
-    $(document).on('updatePswd', '#post-form', function (e) {
+    $(document).on('submit', '#update-form', function (e) {
             e.preventDefault();
             $.ajax({
                 type: 'POST',
@@ -285,10 +288,18 @@
                     action: 'post'
                 },
                 success:function(){
-                  console.log("password updated.");
+                  if(NewPassword == NewPasswordCheck){
+                    alert("Password check approved.");
+
+                  }else if(OldPassword == NewPassword){
+                    alert("New password matches old password.");
+
+                  }else{
+                    alert("Password Updated!");
+                  }
                 },
-                error: function(){
-                  console.log("error!");
+                error: function(e){
+                  console.log(e);
                 }
             });
         });
