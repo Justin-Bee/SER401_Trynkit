@@ -31,6 +31,7 @@ function bluetooth(){
         return alert('Web Bluetooth API is not available in this browser. Please use chrome.');
      }
      const z = document.getElementById('debugger');
+     const y = document.getElementById('serial')
 
      if (z.style.display ==="none"){
          z.style.display = "block";
@@ -64,13 +65,29 @@ function bluetooth(){
          })
          .then(characteristic => {
              TX_characteristic = characteristic;
+             /* add an event listener to the TX characteristic */
+             TX_characteristic.addEventListener('valueUpdate', handleValueUpdated);
+
              return service.getCharacteristic(TX_char);
+         })
+         .then( value =>{
+             /* try to read from the device and print to console */
+             y.innerText = value.getUint8(0);
          })
      .catch(error=> {
      z.innerHTML= z.innerHTML + "\n"+ (error);
      });
-     }
+}
 
+/*
+ * handleValueUpdated
+ *
+ */
+function handleValueUpdated(event) {
+  console.log(event.isReadResponse) /* Returns true if stored value comes from a read operation */
+  console.log(event.target.value); /* Characteristic value */
+  bleConsole(event.target.value);
+}
 /*
  * bleSend()
  * This function is to send files to the ESP32 device.
@@ -85,7 +102,6 @@ function bleSend() {
     if(isConnected){
         /* get the contents of the editor that is in use */
         let editorContents = editor.getValue();
-        console.log(editorContents);
         /* send the contents to the device */
         RX_characteristic.writeValue(encoder.encode(editorContents));
      }else{
@@ -103,11 +119,15 @@ function bleSend() {
  *
  * Author: Justin Bee
  */
-function bleConsole(){
+function bleConsole(value){
     const y = document.getElementById('serial')
     /* check if the device is connected if true send file*/
      if(isConnected){
-         RX_characteristic.writeValue(encoder.encode('value'));
+         /* need to read the value of the TX_char
+          * may need some kind of loop or trigger to watch if new data comes in????
+          * not sure what I want to implement for this yet....
+          */
+       //  y.innerText = TX_characteristic.readValue(); TODO does not work
      }else{
          const x = document.getElementById('console');
          x.style.display ="none";
