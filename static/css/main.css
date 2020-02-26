@@ -67,7 +67,7 @@
 
 
 #menu {
-    width: 100px;
+    width: 105px;
     height: 100%;
     position: fixed;
     left:0;
@@ -78,6 +78,7 @@
     color: #000000;
     font-family: "Arial";
     font-weight: bold;
+    overflow-y:auto;
 }
 
 
@@ -265,6 +266,11 @@ button{
 #uploadBtn{
     background-color: Transparent;
     border: none;
+}
+
+#helpBtn{
+	background-color: Transparent;
+	border: none;
 }
 
 
