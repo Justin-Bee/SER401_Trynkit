@@ -13,6 +13,10 @@
 
 }
 
+.tab-content {
+	border-radius: 15px 50px;
+}
+
 @media only screen and (max-width: 1000px) and (orientation : landscape) {
     #editor {
         height: 350px;
@@ -155,9 +159,11 @@ button{
 }
 .nav-tabs > li {
     position:relative;
+    border-radius: 7px 7px 0px 0px;
 }
 .nav-tabs > li > a {
     display:inline-block;
+    border-radius: 7px 7px 0px 0px;
     
 }
 
@@ -168,7 +174,6 @@ button{
     right: 6px;
     top: 8px;
     color: red;
-    
 }
 .nav-tabs > li:hover > span {
     display: inline-block;
