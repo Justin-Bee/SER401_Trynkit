@@ -30,8 +30,6 @@
             <p></p>
             <button onclick="newFile()" id="nfBtn"><img type="image/svg+xml" id ="newFileBtn" src="/static/images/file-regular.svg" width="50" height="50"><figcaption> New File </figcaption></button>
             <p></p>
-            <button onclick="newProject()" id="npBtn"><img type="image/svg+xml" id ="newProjectBtn" src="/static/images/folder-regular.svg" width="50" height="50"><figcaption> New Project </figcaption></button>
-            <p></p>
             <button onclick="saveTabPrompt(currentTab, masterList)" id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50"><figcaption> Save File </figcaption></button>
             <p></p>
             <button id="loadFileBtn">
@@ -376,19 +374,6 @@
               return r2;
             }
           }
-        /**
-         * newProject()
-         * This function is to create a new project.
-         * It is called from the newPrjoect button or in the popup modal
-         * at the load of the page.
-         */
-        function newProject() {
-            //TODO this needs changed to reflect the new project code right now just creates a file
-            var projectName = prompt("Creating a new project:", "NewProjectName.py");
-            document.getElementById('code').setAttribute('name', projectName);
-            newFile();
-            //NOTE: upon saving the newFile is intented to be saved within a folder titled with the projectName variable
-        }
 
         /**
          * newFile()
