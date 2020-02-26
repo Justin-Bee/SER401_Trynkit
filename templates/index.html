@@ -482,9 +482,7 @@
             }catch(error){
                 console.error(error);
             }
-
-        });
-
+	});
         /**
          * populateTabs()
          * This function populates the tabs with the tab names
@@ -627,6 +625,15 @@
                 rgtClickContextMenu.style.top = e.pageY + 'px';
                 rgtClickContextMenu.style.display = 'block';
 		}
+	}
+	/**
+	* This function handles the logic for logging out the user
+	*/
+	function logout() {
+		alert("User logged out");
+		localStorage.clear();
+		sessionStorage.clear();
+		location.reload();
 	}
     </script>
 
