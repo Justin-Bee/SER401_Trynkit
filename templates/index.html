@@ -628,6 +628,13 @@
                 rgtClickContextMenu.style.display = 'block';
 		}
 	}
+	function logout() {
+		alert("User logged out");
+		localStorage.clear();
+		sessionStorage.clear();
+		location.reload();
+	}
+	
     </script>
 
 </html>
