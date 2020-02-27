@@ -310,7 +310,36 @@
 
         });
 
+        /*
+         * This function gets the data from the update form and 
+         * processes it to update the password to the new password 
+         * provided by the user.
+         */
+        $(document).on('submit', '#update-form', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: "{% url "update_password" %}",
+                    data:{
+                        password:$('#pswd').val(),
+                        action: 'post'
+                    },
+                    success:function(){
+                      if(NewPassword == NewPasswordCheck){
+                        alert("Password check approved.");
 
+                      }else if(OldPassword == NewPassword){
+                        alert("New password matches old password.");
+
+                      }else{
+                        alert("Password Updated!");
+                      }
+                    },
+                    error: function(e){
+                      console.log(e);
+                    }
+                });
+            });
 
     </script>
     <script>

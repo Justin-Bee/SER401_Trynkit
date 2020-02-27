@@ -60,6 +60,11 @@ def create_user(request):
     print(response)
     return JsonResponse(response_data)
 
-
+def update_password(request):
+    if request.POST.get('action') == 'post':
+        pUpdate = PasswordChangeForm(data=request.POST, user= request.user)
+        if pUpdate.is_valid():
+            pUpdate.save()        
+    return render(request, 'index.html')
 
 
