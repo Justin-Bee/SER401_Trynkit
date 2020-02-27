@@ -10,7 +10,7 @@ $ git clone https://github.com/Justin-Bee/micropython.git
 1. The ESD-IDF changes fequently so you need to have the latest commit hash for the 4.x version of the ESP-IDF
     (our project requires 4.x for the bluetooth module) to get the latest commit hash run make without a configre ESPIDF
 2. $ git clone https://github.com/espressif/esp-idf.git
-3. $ git checkout <Current supported ESP-IDF commit hash> //i used hash: 310beae373446ceb9a4ad9b36b5428d7fdf2705f
+3. $ git checkout <Current supported ESP-IDF commit hash> //i used hash: v4.0 - 463a9d8b7f9af8205222b80707f9bdbba7c530e1 v 3.3.1 - 143d26aa49df524e10fb8e41a71d12e731b9b71d
 4. $ git submodule update --init --recursive
 5. Make sure you have all of the binary toolchain installed:
    $ sudo apt-get install gcc git wget make libncurses-dev flex bison gperf python python-pip python-setuptools python-serial python-cryptography python-future python-pyparsing
@@ -30,3 +30,5 @@ $ git clone https://github.com/Justin-Bee/micropython.git
 18. $ make erase
 19. $ make deploy
 
+**** make -C mpy-cross clean
+     make submodules clean
