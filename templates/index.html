@@ -433,7 +433,7 @@
          */
         var masterList = ["main.py"]; /* array variable to store the tab names */
         $(window).on('load',function(){
-            $('#log').modal('show');
+            $('#loginModal').modal('show');
             try{
                 masterList = localStorage.getItem("tabList").toString();
                 masterList = masterList.split(",");
@@ -585,15 +585,18 @@
                 rgtClickContextMenu.style.display = 'block';
 		}
 	}
+
 	/**
 	* This function handles the logic for logging out the user
 	*/
+
 	function logout() {
 		alert("User logged out");
 		localStorage.clear();
 		sessionStorage.clear();
 		location.reload();
 	}
+
     </script>
 
 </html>
