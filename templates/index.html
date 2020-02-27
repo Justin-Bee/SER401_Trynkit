@@ -30,8 +30,6 @@
             <p></p>
             <button onclick="newFile()" id="nfBtn"><img type="image/svg+xml" id ="newFileBtn" src="/static/images/file-regular.svg" width="50" height="50"><figcaption> New File </figcaption></button>
             <p></p>
-            <button onclick="newProject()" id="npBtn"><img type="image/svg+xml" id ="newProjectBtn" src="/static/images/folder-regular.svg" width="50" height="50"><figcaption> New Project </figcaption></button>
-            <p></p>
             <button onclick="saveTabPrompt(currentTab, masterList)" id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50"><figcaption> Save File </figcaption></button>
             <p></p>
             <button id="loadFileBtn">
@@ -131,33 +129,7 @@
               </div>
 
 
-     <!-- Create/ load Project modal -->
-              <div class="modal fade" id="onloadModal" role="dialog" style="display:none">
-                <div class="modal-dialog">
-                  <!-- Modal content-->
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Create or Load Project</h4>
-                    </div>
-                    <div class="modal-body">
-                      <p>Choose to either create a new project or load an existing project</p>
-                      <div class="dropdown">
-                           <button id="cBtn" data-dismiss="modal" onclick="newProject()">Create Project</button>
-                          <button id="lBtn" data-dismiss="modal">Load Project</button>
-                           <span id="spnFilePath1"></span>
-            <input type="file" id="file1" style="display: none" />
-            <script type="text/javascript">
-                window.onload = loadProject();
-            </script>
-               </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                     </div>
-                  </div>
-                </div>
-              </div>
+
 
 
                 <!-- login Modal -->
@@ -376,19 +348,6 @@
               return r2;
             }
           }
-        /**
-         * newProject()
-         * This function is to create a new project.
-         * It is called from the newPrjoect button or in the popup modal
-         * at the load of the page.
-         */
-        function newProject() {
-            //TODO this needs changed to reflect the new project code right now just creates a file
-            var projectName = prompt("Creating a new project:", "NewProjectName.py");
-            document.getElementById('code').setAttribute('name', projectName);
-            newFile();
-            //NOTE: upon saving the newFile is intented to be saved within a folder titled with the projectName variable
-        }
 
         /**
          * newFile()
@@ -473,7 +432,7 @@
          */
         var masterList = ["main.py"]; /* array variable to store the tab names */
         $(window).on('load',function(){
-            $('#onloadModal').modal('show');
+            $('#log').modal('show');
             try{
                 masterList = localStorage.getItem("tabList").toString();
                 masterList = masterList.split(",");
