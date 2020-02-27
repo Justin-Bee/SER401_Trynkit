@@ -51,12 +51,13 @@
              <p></p>
             <button onClick="consoleHide()" id="serialBtn"><img type="image/svg+xml"  id="serBtn" src="/static/images/plug-solid.svg" width="50" height="50"><figcaption> Console </figcaption></button>
             <p></p>
-            <button onclick="debugToggle()" id="debugBtn"><img type ="image/svg+xml" id="debuggerBtn" src="/static/images/bug-solid.svg" width="50" height="50"><figcaption> Debug </figcaption></button>
+            <button onClick="debugToggle()" id="debugBtn"><img type ="image/svg+xml" id="debuggerBtn" src="/static/images/bug-solid.svg" width="50" height="50"><figcaption> Debug </figcaption></button>
             <p></p>
             <button data-toggle="modal" data-target="#loginModal" id="loginBtn"><img type="image/svg+xml" id ="logBtn" src="/static/images/login-regular.svg" width="50" height="50"><figcaption> Login </figcaption></button>
             <p></p>
-            <button data-toggle="modal" data-target="#signUpModal" id="signBtn"><img type="image/svg+xml" id ="siBtn" src="/static/images/signup.svg" width="50" height="50"><figcaption> Sign Up </figcaption></button>
-
+	    <button onClick="logout()" id="logoutBtn"><img type="image/svg+xml" id="lgoutBtn" src="/static/images/logout.svg" width="50" height="50"><figcaption> Logout </figcaption></button><p><p>
+	    <button data-toggle="modal" data-target="#signUpModal" id="signBtn"><img type="image/svg+xml" id ="siBtn" src="/static/images/signup.svg" width="50" height="50"><figcaption> Sign Up </figcaption></button><p><p> 
+	    <button onClick="(window.open('index.html', '_blank')" id="helpBtn"><img type="image/svg+xml" id ="hlpBtn" src="/static/images/help.svg" width="50" height="50"><figcaption> Help </figcaption></button>
         </div>
 	<!-- this is the context menu -->
         <!-- note the string to=0 where the 0 is the digit to be replaced -->
@@ -161,7 +162,8 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbtn">Cancel</button>
-                                    <span class="psw">Forgot <a href="#">password?</a></span>
+				    <span class="psw">Forgot <a href="#">password?</a></span><p>
+				    <span class="sgnUp"> Or create <a href="#">an account</a></span>
                                 </div>
 
                              </div>
@@ -203,7 +205,6 @@
                 </div>
               </div>
     </body>
-
  <script>
 
      /* This is a variable we can use for login, once logged in save username there, null if logged out */
@@ -440,9 +441,7 @@
             }catch(error){
                 console.error(error);
             }
-
-        });
-
+	});
         /**
          * populateTabs()
          * This function populates the tabs with the tab names
@@ -585,6 +584,15 @@
                 rgtClickContextMenu.style.top = e.pageY + 'px';
                 rgtClickContextMenu.style.display = 'block';
 		}
+	}
+	/**
+	* This function handles the logic for logging out the user
+	*/
+	function logout() {
+		alert("User logged out");
+		localStorage.clear();
+		sessionStorage.clear();
+		location.reload();
 	}
     </script>
 
