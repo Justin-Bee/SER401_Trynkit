@@ -60,7 +60,7 @@ function bluetooth(){
          .then(service => {
              return service.getCharacteristic(RX_char).then(characteristic => {
                  RX_characteristic = characteristic;
-                 return service.getCharacteristic(TX_char);
+                 return service.getCharacteristic(RX_char);
              })
          })
          .then(characteristic => {
@@ -103,6 +103,7 @@ function bleSend() {
         /* get the contents of the editor that is in use */
         let editorContents = editor.getValue();
         /* send the contents to the device */
+        //TODO make it able to send 1024 bytes
         RX_characteristic.writeValue(encoder.encode(editorContents));
      }else{
         const x = document.getElementById('console');
