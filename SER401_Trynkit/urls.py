@@ -26,5 +26,6 @@ from Trynkit import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
+    path('', views.help),
     path('Trynkit/', views.create_user, name="create_user"),
 ]
