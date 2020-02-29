@@ -594,6 +594,7 @@
 
 	function logout() {
 		alert("User logged out");
+		//The following lines will need to be changes when app uses database instead of local/session storage
 		localStorage.clear();
 		sessionStorage.clear();
 		location.reload();
