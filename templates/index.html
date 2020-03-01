@@ -437,7 +437,8 @@
         $(window).on('load',function(){
             $('#loginModal').modal('show');
             try{
-                masterList = localStorage.getItem("tabList").toString();
+		//TODO use sqlite3 database to create the masterlist
+                //masterList = localStorage.getItem("tabList").toString();
                 masterList = masterList.split(",");
                 populateTabs();
             }catch(error){
@@ -469,11 +470,13 @@
          $(".nav-tabs").on("click", "a", function (e) {
             e.preventDefault();
              if (!$(this).hasClass('add-tab')) {
-                 localStorage.setItem(currentTab, editor.getValue());
+	         //TODO local storage assignments should use sqlite3 database
+                 //localStorage.setItem(currentTab, editor.getValue());
                  $(this).tab('show');
                  currentTab = this.innerText;
                  try {
-                     editor.setValue(localStorage.getItem(currentTab).toString());
+                     //editor.setValue(localStorage.getItem(currentTab).toString());
+		     editor.setValue('this should be using the sqlite3 database');
                  }catch(e){
                      console.error(e);
                  }
@@ -504,7 +507,8 @@
              * and sets the tab to be the open tab.
              */
             $('.add-tab').click(function (e) {
-                localStorage.setItem(currentTab, editor.getValue());
+		//TODO change local storage assignments to use sqlite database
+                //localStorage.setItem(currentTab, editor.getValue());
                 var projectName = prompt("Creating a new file:", "NewProjectName.py");
                 if(projectName){
 			if (masterList.indexOf(projectName) == -1) {
@@ -513,7 +517,7 @@
 		    		$(this).closest('li').before('<li class="active"><a href="#tab_' + id + '" id="tab'+id+'">'+ projectName+'</a> <span> x </span></li>');
 		    		currentTab = projectName;
                     		masterList.push(projectName);
-                    		localStorage.setItem("tabList", masterList); /* add tab to the tab list */
+                    		//localStorage.setItem("tabList", masterList); /* add tab to the tab list */
                     		editor.setValue("");
                     		$('.nav-tabs li:nth-child(' + id + ') a').click();
                 		}else{
@@ -546,10 +550,11 @@
                     }
                 }
             });
+	    //TODO change commened out code to use sqlite3 database for renaming tabs
 	    $('.rename-tab').click(function(e) {
 	    var newTabName = prompt("Enter a new name for the current tab: ", ".py");
-	    var selectedTab = sessionStorage.getItem('selectedTab');
-	    window.sessionStorage.removeItem('selectedTab');
+	    //var selectedTab = sessionStorage.getItem('selectedTab');
+	    //window.sessionStorage.removeItem('selectedTab');
 	    var oldTabName = document.getElementById(selectedTab).innerText;
 	    localStorage.setItem('tabList',localStorage.getItem('tabList').replace(oldTabName, newTabName));
 	    localStorage.setItem(newTabName, localStorage.getItem(oldTabName));
@@ -595,8 +600,8 @@
 	function logout() {
 		alert("User logged out");
 		//The following lines will need to be changes when app uses database instead of local/session storage
-		localStorage.clear();
-		sessionStorage.clear();
+		//localStorage.clear();
+		//sessionStorage.clear();
 		location.reload();
 	}
 
