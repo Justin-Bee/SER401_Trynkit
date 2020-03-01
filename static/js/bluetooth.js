@@ -100,7 +100,12 @@ function bleSend() {
     let encoder = new TextEncoder('utf-8');
 
     if(isConnected){
-        /* get the contents of the editor that is in use */
+        /* send an erase command so that the file gets started fresh */
+        RX_characteristic.writeValue(encoder.encode("erase"));
+         for(let a = 0; a<2000; a++){
+                console.log("")
+            }
+         /* get the contents of the editor that is in use */
         let editorContents = editor.getValue();
         /* send the contents to the device */
         //split the editor contents into newlines.
