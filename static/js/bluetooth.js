@@ -11,7 +11,7 @@ let RX_characteristic;
 var isConnected = 0;
 
 /* variable for the device */
-let device;
+let bledevice;
 /* variable for the ble server */
 let bleserver;
 /* variable for the object transfer service */
@@ -50,7 +50,7 @@ function bluetooth(){
      z.innerHTML= z.innerHTML +"\n"+  (">Name:" + device.name);
      z.innerHTML= z.innerHTML + "\n"+ (">id:" + device.id);
      isConnected = 1;
-     device = device;
+     bledevice = device;
      return device.gatt.connect();
      })
          .then(server=>{
@@ -60,7 +60,7 @@ function bluetooth(){
          .then(service => {
              return service.getCharacteristic(RX_char).then(characteristic => {
                  RX_characteristic = characteristic;
-                 return service.getCharacteristic(RX_char);
+                 return service.getCharacteristic(TX_char);
              })
          })
          .then(characteristic => {
@@ -103,14 +103,24 @@ function bleSend() {
         /* get the contents of the editor that is in use */
         let editorContents = editor.getValue();
         /* send the contents to the device */
-        //TODO make it able to send 1024 bytes
-        RX_characteristic.writeValue(encoder.encode(editorContents));
+        //split the editor contents into newlines.
+        temp = editorContents.split(/\n/);
+        for(let i=0; i<temp.length; i++ )
+        {
+            //console.log(temp[i]);
+            RX_characteristic.writeValue(encoder.encode(temp[i]));
+            // delay to allow the device to handle the write
+            for(let a = 0; a<2000; a++){
+                console.log("")
+            }
+        }
+        alert("File Uploaded!")
      }else{
         const x = document.getElementById('console');
         alert("MicroTrynkit device not connected. Please pair it first.");
      }
-
-
+    //disconnect required for the device, device sees the disconnect then reboots which causes the code to run
+    bledevice.gatt.disconnect();
 }
 
 /*
@@ -136,3 +146,4 @@ function bleConsole(value){
      }
 
 }
+
