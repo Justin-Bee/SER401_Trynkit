@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from django.core.mail import send_mail
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,6 +25,14 @@ SECRET_KEY = 'o80$ej2q0$b=vlko6q9h11guz*i^iq19#nlg^6)rdwo4_57ylz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+send_mail(
+    'Test Message',
+    'This is a test.',
+    'vdochoa@asu.edu',
+    ['vicente8alorenzo@gmail.com'],
+    fail_silently=False,
+)
 
 ALLOWED_HOSTS = [
         '127.0.0.1',
