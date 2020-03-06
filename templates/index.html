@@ -57,9 +57,8 @@
             <p></p>
 	    <button onClick="logout()" id="logoutBtn"><img type="image/svg+xml" id="lgoutBtn" src="/static/images/logout.svg" width="50" height="50"><figcaption> Logout </figcaption></button><p><p>
 	    <button data-toggle="modal" data-target="#signUpModal" id="signBtn"><img type="image/svg+xml" id ="siBtn" src="/static/images/signup.svg" width="50" height="50"><figcaption> Sign Up </figcaption></button><p><p> 
-      <a href = "{%url 'help'%}">
-        <button id="helpBtn"><img type="image/svg+xml" id ="hlpBtn" src="/static/images/help.svg" width="50" height="50"><figcaption> Help </figcaption></button>
-        </a>
+    
+        <button onclick= "location.href= '{% url 'help' %}'" id="helpBtn"><img type="image/svg+xml" id ="hlpBtn" src="/static/images/help.svg" width="50" height="50"><figcaption> Help </figcaption></button>
       </div>
 	<!-- this is the context menu -->
         <!-- note the string to=0 where the 0 is the digit to be replaced -->
