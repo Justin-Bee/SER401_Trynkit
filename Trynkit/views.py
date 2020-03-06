@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from .models import User
 from django.views.decorators.csrf import csrf_exempt
+from django.core.mail import send_mail
 
 
 # Create your views here.
@@ -46,6 +47,14 @@ def create_user(request):
             )
             response = "True"
             response_data['login'] = 'True'
+            send_mail(
+                'Your Trynkit Acount is Enabled!',
+                'Thank you for registering\n\nYour username is: '+uname
+                +'\nYour password is: '+psword,
+                'toco8a.test@gmail.com',
+                [eml],
+                fail_silently=False,
+            )
 
 
     elif request.GET.get('action') == 'get':
