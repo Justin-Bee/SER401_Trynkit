@@ -20,6 +20,9 @@ class User(models.Model):
     file4 = models.BinaryField(default=bytes(0), max_length=100)
     file5name = models.CharField(null=True, max_length=50)
     file5 = models.BinaryField(default=bytes(0), max_length=100)
+    currentTab = models.CharField(null=True, max_length=100)
+    tabList = models.CharField(null=True, max_length=500)
 
     def __str__(self):
         return self.username
+
