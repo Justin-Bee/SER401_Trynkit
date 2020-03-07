@@ -21,10 +21,13 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 import Trynkit
-from Trynkit import views
+from Trynkit import views 
+#from views import *
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
+    path("help/",help, name='help'),
     path('Trynkit/', views.create_user, name="create_user"),
 ]

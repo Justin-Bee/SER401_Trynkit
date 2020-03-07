@@ -55,10 +55,13 @@
             <p></p>
             <button data-toggle="modal" data-target="#loginModal" id="loginBtn"><img type="image/svg+xml" id ="logBtn" src="/static/images/login-regular.svg" width="50" height="50"><figcaption> Login </figcaption></button>
             <p></p>
-	    <button onClick="logout()" id="logoutBtn"><img type="image/svg+xml" id="lgoutBtn" src="/static/images/logout.svg" width="50" height="50"><figcaption> Logout </figcaption></button><p><p>
-	    <button data-toggle="modal" data-target="#signUpModal" id="signBtn"><img type="image/svg+xml" id ="siBtn" src="/static/images/signup.svg" width="50" height="50"><figcaption> Sign Up </figcaption></button><p><p> 
-	    <button onClick="(window.open('index.html', '_blank')" id="helpBtn"><img type="image/svg+xml" id ="hlpBtn" src="/static/images/help.svg" width="50" height="50"><figcaption> Help </figcaption></button>
-        </div>
+            <button onClick="logout()" id="logoutBtn"><img type="image/svg+xml" id="lgoutBtn" src="/static/images/logout.svg" width="50" height="50"><figcaption> Logout </figcaption></button>
+            <p><p>
+            <button data-toggle="modal" data-target="#signUpModal" id="signBtn"><img type="image/svg+xml" id ="siBtn" src="/static/images/signup.svg" width="50" height="50"><figcaption> Sign Up </figcaption></button>
+            <p><p> 
+            <button data-toggle="modal" data-target="#helpModal" id="helpBtn"><img type="image/svg+xml" id ="hlpBtn" src="/static/images/help.svg" width="50" height="50"><figcaption> Help </figcaption></button>
+            <p></p>
+          </div>
 	<!-- this is the context menu -->
         <!-- note the string to=0 where the 0 is the digit to be replaced -->
         <div id="div-context-menu" class="cls-context-menu">
@@ -206,6 +209,37 @@
                   </div>
                 </div>
               </div>
+
+                <!-- Help Modal -->
+                <div class="modal fade" id="helpModal" role="dialog" style="display:none">
+                  <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Help</h4>
+                      </div>
+                      <div class="modal-body">
+                        <p><strong>Getting Started</strong></p>
+                        <p>This page can provide you with any relevant information regarding the use of your Trynkit device and our editor.</p>
+                        <p><strong>Device Management</strong></p>
+                        <p> The device can be connected through bluetooth.You must pair your device before uploading any code to your device.</p>
+                        <p><strong>Managing My Account</strong></p>
+                        <p>Account seetings and password changes can be completed in the setting section. This can be found under the settings tab on the main menu.</p>
+                        <p><strong>Questions and Answers</strong></p>
+                        <div>
+                            <li>How to I connect to my device?</li>
+                              <p>Select the bluetooth button to pair your device with the editor.</p>
+                            <li>How do I change my password?</li>
+                              <p> Select the "Settings" tab on the main menu and fill in the necessary information the selet "Update Password".</p>
+                            <li>How do I save my files?</li>
+                              <p>Select the "Save" icon on the main menu.</p>
+                        </div>
+                       </div>
+  
+                    </div>
+                  </div>
+                </div>
     </body>
  <script>
 
@@ -217,11 +251,11 @@
          * then POSTs it to the database, on success it hides the modal
          * TODO on success send email to user
          */
-        $(document).on('submit', '#post-form', function (e) {
+        $(document).on('submit', '#post-form', function (0e) {
             e.preventDefault();
             
             $.ajax({
-                type: 'POST',
+  0              type: 'POST',
                 dataType: 'json',
                 url: "{% url "create_user" %}",
                 data:{
@@ -290,6 +324,15 @@
     </script>
     <script>
         document.getElementById('code').setAttribute('name', 'main.py');
+        /*
+        * This function is used to open the help.html (provides the
+        * user with any relevant information necessary for device and editor
+        * use) when the help button is selected. 
+        */
+        function helpWindow(){
+          window.open("help.html");
+        }
+
         /**
          * signUp()
          * This function verifies the username is unique, verifies that
