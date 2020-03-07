@@ -11,8 +11,6 @@ from django.views.decorators.csrf import csrf_exempt
 def index(request):
     return render(request, 'index.html')
 
-def help(request):
-    return render(request, 'help.html')
 
 def devices(request):
     return render(request, 'devices.html')
