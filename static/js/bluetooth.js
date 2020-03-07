@@ -65,14 +65,15 @@ function bluetooth(){
          })
          .then(characteristic => {
              TX_characteristic = characteristic;
+             console.log(TX_characteristic.readValue());
              /* add an event listener to the TX characteristic */
              TX_characteristic.addEventListener('valueUpdate', handleValueUpdated);
-
              return service.getCharacteristic(TX_char);
          })
          .then( value =>{
              /* try to read from the device and print to console */
              y.innerText = value.getUint8(0);
+             console.log(value);
          })
      .catch(error=> {
      z.innerHTML= z.innerHTML + "\n"+ (error);
@@ -119,7 +120,7 @@ function bleSend() {
                 console.log("")
             }
         }
-        alert("File Uploaded!")
+        alert("File Uploaded!");
      }else{
         const x = document.getElementById('console');
         alert("MicroTrynkit device not connected. Please pair it first.");
@@ -143,7 +144,7 @@ function bleConsole(value){
           * may need some kind of loop or trigger to watch if new data comes in????
           * not sure what I want to implement for this yet....
           */
-       //  y.innerText = TX_characteristic.readValue(); TODO does not work
+         y.innerText = TX_characteristic.readValue();
      }else{
          const x = document.getElementById('console');
          x.style.display ="none";
