@@ -13,6 +13,10 @@
 
 }
 
+.tab-content {
+	border-radius: 15px 50px;
+}
+
 @media only screen and (max-width: 1000px) and (orientation : landscape) {
     #editor {
         height: 350px;
@@ -67,7 +71,7 @@
 
 
 #menu {
-    width: 100px;
+    width: 105px;
     height: 100%;
     position: fixed;
     left:0;
@@ -78,6 +82,7 @@
     color: #000000;
     font-family: "Arial";
     font-weight: bold;
+    overflow-y:auto;
 }
 
 
@@ -154,9 +159,11 @@ button{
 }
 .nav-tabs > li {
     position:relative;
+    border-radius: 7px 7px 0px 0px;
 }
 .nav-tabs > li > a {
     display:inline-block;
+    border-radius: 7px 7px 0px 0px;
     
 }
 
@@ -167,7 +174,6 @@ button{
     right: 6px;
     top: 8px;
     color: red;
-    
 }
 .nav-tabs > li:hover > span {
     display: inline-block;
@@ -262,9 +268,19 @@ button{
     border: none;
 }
 
+#logoutBtn{
+	background-color: Transparent;
+	border: none;
+}
+
 #uploadBtn{
     background-color: Transparent;
     border: none;
+}
+
+#helpBtn{
+	background-color: Transparent;
+	border: none;
 }
 
 
@@ -296,4 +312,17 @@ button{
 .cls-context-menu li a:hover {
 	background:blue;
         color:#FFF;
+}
+
+#menu::-webkit-scrollbar {
+	width: 1em;
+}
+
+#menu::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+#menu::-webkit-scrollbar-thumb {
+	background-color: darkgrey;
+	outline: 1px solid slategray;
 }

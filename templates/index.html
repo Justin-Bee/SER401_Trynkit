@@ -30,8 +30,6 @@
             <p></p>
             <button onclick="newFile()" id="nfBtn"><img type="image/svg+xml" id ="newFileBtn" src="/static/images/file-regular.svg" width="50" height="50"><figcaption> New File </figcaption></button>
             <p></p>
-            <button onclick="newProject()" id="npBtn"><img type="image/svg+xml" id ="newProjectBtn" src="/static/images/folder-regular.svg" width="50" height="50"><figcaption> New Project </figcaption></button>
-            <p></p>
             <button onclick="saveTabPrompt(currentTab, masterList)" id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50"><figcaption> Save File </figcaption></button>
             <p></p>
             <button id="loadFileBtn">
@@ -53,13 +51,14 @@
              <p></p>
             <button onClick="consoleHide()" id="serialBtn"><img type="image/svg+xml"  id="serBtn" src="/static/images/plug-solid.svg" width="50" height="50"><figcaption> Console </figcaption></button>
             <p></p>
-            <button onclick="debugToggle()" id="debugBtn"><img type ="image/svg+xml" id="debuggerBtn" src="/static/images/bug-solid.svg" width="50" height="50"><figcaption> Debug </figcaption></button>
+            <button onClick="debugToggle()" id="debugBtn"><img type ="image/svg+xml" id="debuggerBtn" src="/static/images/bug-solid.svg" width="50" height="50"><figcaption> Debug </figcaption></button>
             <p></p>
             <button data-toggle="modal" data-target="#loginModal" id="loginBtn"><img type="image/svg+xml" id ="logBtn" src="/static/images/login-regular.svg" width="50" height="50"><figcaption> Login </figcaption></button>
             <p></p>
-            <button data-toggle="modal" data-target="#signUpModal" id="signBtn"><img type="image/svg+xml" id ="siBtn" src="/static/images/signup.svg" width="50" height="50"><figcaption> Sign Up </figcaption></button>
-
-        </div>
+	    <button onClick="logout()" id="logoutBtn"><img type="image/svg+xml" id="lgoutBtn" src="/static/images/logout.svg" width="50" height="50"><figcaption> Logout </figcaption></button><p><p>
+	    <button data-toggle="modal" data-target="#signUpModal" id="signBtn"><img type="image/svg+xml" id ="siBtn" src="/static/images/signup.svg" width="50" height="50"><figcaption> Sign Up </figcaption></button><p><p>
+	   <button data-toggle="modal" data-target="#helpModal" id="helpBtn"><img type="image/svg+xml" id ="hlpBtn" src="/static/images/help.svg" width="50" height="50"><figcaption> Help </figcaption></button>
+	        </div>
 	<!-- this is the context menu -->
         <!-- note the string to=0 where the 0 is the digit to be replaced -->
         <div id="div-context-menu" class="cls-context-menu">
@@ -131,33 +130,7 @@
               </div>
 
 
-     <!-- Create/ load Project modal -->
-              <div class="modal fade" id="onloadModal" role="dialog" style="display:none">
-                <div class="modal-dialog">
-                  <!-- Modal content-->
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Create or Load Project</h4>
-                    </div>
-                    <div class="modal-body">
-                      <p>Choose to either create a new project or load an existing project</p>
-                      <div class="dropdown">
-                           <button id="cBtn" data-dismiss="modal" onclick="newProject()">Create Project</button>
-                          <button id="lBtn" data-dismiss="modal">Load Project</button>
-                           <span id="spnFilePath1"></span>
-            <input type="file" id="file1" style="display: none" />
-            <script type="text/javascript">
-                window.onload = loadProject();
-            </script>
-               </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                     </div>
-                  </div>
-                </div>
-              </div>
+
 
 
                 <!-- login Modal -->
@@ -188,8 +161,11 @@
                             </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbtn">Cancel</button>
+
+                                    <button type="button"  class="cancelbtn" data-dismiss="modal">Cancel</button>
                                     <span class="psw">Forgot <a href="#">password?</a></span>
+				                            <span class="sgnUp"> Or create <a href="#">an account</a></span>
+
                                 </div>
 
                              </div>
@@ -230,8 +206,38 @@
                   </div>
                 </div>
               </div>
-    </body>
 
+         <!-- Help Modal -->
+                <div class="modal fade" id="helpModal" role="dialog" style="display:none">
+                  <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Help</h4>
+                      </div>
+                      <div class="modal-body">
+                        <p><strong>Getting Started</strong></p>
+                        <p>This page can provide you with any relevant information regarding the use of your Trynkit device and our editor.</p>
+                        <p><strong>Device Management</strong></p>
+                        <p> The device can be connected through bluetooth.You must pair your device before uploading any code to your device.</p>
+                        <p><strong>Managing My Account</strong></p>
+                        <p>Account seetings and password changes can be completed in the setting section. This can be found under the settings tab on the main menu.</p>
+                        <p><strong>Questions and Answers</strong></p>
+                        <div>
+                            <li>How to I connect to my device?</li>
+                              <p>Select the bluetooth button to pair your device with the editor.</p>
+                            <li>How do I change my password?</li>
+                              <p> Select the "Settings" tab on the main menu and fill in the necessary information the selet "Update Password".</p>
+                            <li>How do I save my files?</li>
+                              <p>Select the "Save" icon on the main menu.</p>
+                        </div>
+                       </div>
+
+                    </div>
+                  </div>
+                </div>
+    </body>
  <script>
 
      /* This is a variable we can use for login, once logged in save username there, null if logged out */
@@ -376,19 +382,6 @@
               return r2;
             }
           }
-        /**
-         * newProject()
-         * This function is to create a new project.
-         * It is called from the newPrjoect button or in the popup modal
-         * at the load of the page.
-         */
-        function newProject() {
-            //TODO this needs changed to reflect the new project code right now just creates a file
-            var projectName = prompt("Creating a new project:", "NewProjectName.py");
-            document.getElementById('code').setAttribute('name', projectName);
-            newFile();
-            //NOTE: upon saving the newFile is intented to be saved within a folder titled with the projectName variable
-        }
 
         /**
          * newFile()
@@ -421,7 +414,7 @@
                 x.style.display = "none";
             }
             /* once console is displayed try the device REPL */
-            bleConsole();
+           // bleConsole();
         }
 
 		/**
@@ -473,7 +466,7 @@
          */
         var masterList = ["main.py"]; /* array variable to store the tab names */
         $(window).on('load',function(){
-            $('#onloadModal').modal('show');
+            $('#loginModal').modal('show');
             try{
                 masterList = localStorage.getItem("tabList").toString();
                 masterList = masterList.split(",");
@@ -481,9 +474,7 @@
             }catch(error){
                 console.error(error);
             }
-
-        });
-
+	});
         /**
          * populateTabs()
          * This function populates the tabs with the tab names
@@ -627,6 +618,18 @@
                 rgtClickContextMenu.style.display = 'block';
 		}
 	}
+
+	/**
+	* This function handles the logic for logging out the user
+	*/
+
+	function logout() {
+		alert("User logged out");
+		localStorage.clear();
+		sessionStorage.clear();
+		location.reload();
+	}
+
     </script>
 
 </html>
