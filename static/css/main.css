@@ -224,9 +224,18 @@ button{
     border: none;
 }
 
+#nfBtn:hover{
+	background-color: #0000ff1a;
+}
+
+
 #npBtn{
     background-color: Transparent;
     border: none;
+}
+
+#npBtn:hover{
+	background-color: #0000ff1a;
 }
 
 #sBtn{
@@ -234,9 +243,17 @@ button{
     border: none;
 }
 
+#sBtn:hover{
+	background-color:#0000ff1a;
+}
+
 #loadFileBtn{
     background-color: Transparent;
     border: none;
+}
+
+#loadFileBtn:hover{
+	background-color:#0000ff1a;
 }
 
 #bBtn{
@@ -244,9 +261,16 @@ button{
     border: none;
 }
 
+#bBtn:hover{
+	background-color:#0000ff1a;
+}
 #settingsBtn{
     background-color: Transparent;
     border: none;
+}
+
+#settingsBtn:hover{
+	background-color: #0000ff1a;
 }
 
 #serialBtn{
@@ -254,13 +278,26 @@ button{
     border: none;
 }
 
+#serialBtn:hover{
+	background-color:#0000ff1a;
+}
+
 #debugBtn{
     background-color: Transparent;
     border: none;
 }
+
+#debugBtn:hover{
+	background-color:#0000ff1a;
+}
+
 #loginBtn{
     background-color: Transparent;
     border: none;
+}
+
+#loginBtn:hover{
+	background-color: #0000ff1a;
 }
 
 #signBtn{
@@ -268,9 +305,17 @@ button{
     border: none;
 }
 
+#signBtn:hover{
+	background-color:#0000ff1a;
+}
+
 #logoutBtn{
 	background-color: Transparent;
 	border: none;
+}
+
+#logoutBtn:hover{
+	background-color:#0000ff1a;
 }
 
 #uploadBtn{
@@ -278,9 +323,17 @@ button{
     border: none;
 }
 
+#uploadBtn:hover{
+	background-color:#0000ff1a;
+}
+
 #helpBtn{
 	background-color: Transparent;
 	border: none;
+}
+
+#helpBtn:hover{
+	background-color:#0000ff1a;
 }
 
 
