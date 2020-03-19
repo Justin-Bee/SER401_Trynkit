@@ -58,21 +58,24 @@ function bluetooth(){
              return server.getPrimaryService(service);
          })
          .then(service => {
-             return service.getCharacteristic(RX_char).then(characteristic => {
+             return service.getCharacteristic(RX_char)
+             .then(characteristic => {
+                 console.log(characteristic);
                  RX_characteristic = characteristic;
                  return service.getCharacteristic(TX_char);
              })
          })
          .then(characteristic => {
+             console.log(characteristic);
              TX_characteristic = characteristic;
              /* add an event listener to the TX characteristic */
              TX_characteristic.addEventListener('valueUpdate', handleValueUpdated);
-
-             return service.getCharacteristic(TX_char);
+             console.log(TX_characteristic.readValue());
          })
          .then( value =>{
              /* try to read from the device and print to console */
              y.innerText = value.getUint8(0);
+             console.log(value.getUint8(0));
          })
      .catch(error=> {
      z.innerHTML= z.innerHTML + "\n"+ (error);
@@ -84,9 +87,10 @@ function bluetooth(){
  *
  */
 function handleValueUpdated(event) {
-  console.log(event.isReadResponse) /* Returns true if stored value comes from a read operation */
-  console.log(event.target.value); /* Characteristic value */
-  bleConsole(event.target.value);
+  //console.log(event.isReadResponse) /* Returns true if stored value comes from a read operation */
+  console.log(event.target.value.getUint8(0)); /* Characteristic value */
+  bleConsole(event.target.value.getUint8(0));
+  console.log("Trying to read characteristic");
 }
 /*
  * bleSend()
@@ -102,7 +106,7 @@ function bleSend() {
     if(isConnected){
         /* send an erase command so that the file gets started fresh */
         RX_characteristic.writeValue(encoder.encode("erase"));
-         for(let a = 0; a<2000; a++){
+         for(let a = 0; a<2500; a++){
                 console.log("")
             }
          /* get the contents of the editor that is in use */
@@ -115,7 +119,7 @@ function bleSend() {
             //console.log(temp[i]);
             RX_characteristic.writeValue(encoder.encode(temp[i]));
             // delay to allow the device to handle the write
-            for(let a = 0; a<2000; a++){
+            for(let a = 0; a<2500; a++){
                 console.log("")
             }
         }
