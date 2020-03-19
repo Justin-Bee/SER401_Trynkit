@@ -71,6 +71,8 @@
 
 
 #menu {
+	display: grid;
+	grid-template-columns: auto;
     width: 105px;
     height: 100%;
     position: fixed;
@@ -85,6 +87,13 @@
     overflow-y:auto;
 }
 
+#menu button {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+
+
 
 @media only screen and (max-width: 1000px) {
     #dText {
@@ -95,6 +104,12 @@
         width: 720px;
         margin-left: 113px;
     }
+
+	#menu button {
+		margin-top: 0px;
+		margin-bottom: 0px;
+	}
+
 }
 
 @media only screen and (min-width: 1200px) {
@@ -127,6 +142,11 @@
     #debugger, #console {
         width: 2003px;
     }
+
+	#menu button {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
 }
 
 body{
