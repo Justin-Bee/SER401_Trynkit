@@ -55,8 +55,8 @@
             <p></p>
             <button data-toggle="modal" data-target="#loginModal" id="loginBtn"><img type="image/svg+xml" id ="logBtn" src="/static/images/login-regular.svg" width="50" height="50" title="User login"><figcaption> Login </figcaption></button>
             <p></p>
-	    <button onClick="logout()" id="logoutBtn"><img type="image/svg+xml" id="lgoutBtn" src="/static/images/logout.svg" width="50" height="50" title="Logout"><figcaption> Logout </figcaption></button><p><p>
-	    <button data-toggle="modal" data-target="#signUpModal" id="signBtn"><img type="image/svg+xml" id ="siBtn" src="/static/images/signup.svg" width="50" height="50" title="Create an account and sign up"><figcaption> Sign Up </figcaption></button><p><p>
+	    <button onClick="logout()" id="logoutBtn"><img type="image/svg+xml" id="lgoutBtn" src="/static/images/logout.svg" width="50" height="50" title="Logout"><figcaption> Logout </figcaption></button><p></p>
+	    <button data-toggle="modal" data-target="#signUpModal" id="signBtn"><img type="image/svg+xml" id ="siBtn" src="/static/images/signup.svg" width="50" height="50" title="Create an account and sign up"><figcaption> Sign Up </figcaption></button><p></p>
 	   <button data-toggle="modal" data-target="#helpModal" id="helpBtn"><img type="image/svg+xml" id ="hlpBtn" src="/static/images/help.svg" width="50" height="50" title="Help/FAQ"><figcaption> Help </figcaption></button> </div> <!-- this is the context menu --> <!-- note the string to=0 where the 0 is the digit to be replaced --> <div id="div-context-menu" class="cls-context-menu"> <ul> <li><a href="javascript:void(0)" class="rename-tab">Rename Tab </a></li>
 		    <li><a href="javascript:void(0)" class="remove-tabs">- Close All Tabs</a></li>
                 </ul>
@@ -158,7 +158,7 @@
 
                                     <button type="button"  class="cancelbtn" data-dismiss="modal">Cancel</button>
                                     <span class="psw">Forgot <a href="#">password?</a></span>
-				                            <span class="sgnUp"> Or create <a href="#">an account</a></span>
+				                            <span class="sgnUp"> Or create <button data-dismiss="modal" data-toggle="modal" data-target="#signUpModal">account</button></span>
 
                                 </div>
 
