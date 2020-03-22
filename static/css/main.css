@@ -92,7 +92,12 @@
 	margin-bottom: 5px;
 }
 
-
+@media only screen and (max-width: 1000px) and (orientation : landscape) {
+    #menu {
+        grid-template-columns: auto auto;
+        width: 200px;
+    }
+}
 
 
 @media only screen and (max-width: 1000px) {
@@ -177,6 +182,36 @@ button{
     margin-top: 10px;
     margin-left: 100px;
 }
+
+@media only screen and (max-width: 1000px) and (orientation : landscape) {
+    .container {
+        margin-left: 200px;
+    }
+
+/*
+    #main {
+        display: inline-grid;
+        grid-template-columns: 1 2 3;
+        padding: 10px;
+        border dashed #99ccff: 1px;
+        width: 175px;
+    }
+
+
+    #cMenu {
+        padding: 10px;
+        margin-left: 100px;
+        width: 175px;
+    }
+
+    #dMenu {
+        padding: 5px;
+        margin-left: 100px;
+        width: 175px;
+    }
+*/
+}
+
 .nav-tabs > li {
     position:relative;
     border-radius: 7px 7px 0px 0px;
