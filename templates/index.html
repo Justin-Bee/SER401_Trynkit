@@ -316,6 +316,12 @@
 
          $(document).on('submit', '#update-pass-form', function (e) {
                 e.preventDefault();
+                if($('#oldPassword').val() === ($('#updatedPassword').val())){
+                    alert("Please choose a password different from existing password.");
+                }
+                else if($('#updatedPassword').val() !== $('#updatedPasswordCheck').val()){
+                    alert("The two new password fields do not match");
+                }else{
                 $.ajax({
                     type: 'POST',
                     dataType: 'json',
@@ -337,6 +343,7 @@
                         console.log(data);
                     },
                 });
+                }
         });
 
         document.getElementById('code').setAttribute('name', 'main.py');
