@@ -103,16 +103,20 @@
                       </div>
                       <p><b>Update Password</b></p>
                       <p>
+
                         <div for="OldPassword">Current Password</div>
-                        <input type="password" placeholder="Enter Password" name="password" required>
+                         <form method ="POST" id="update-pass-form">
+                                          {% csrf_token %}
+                        <input type="password" placeholder="Enter Password" name="password" required id="oldPassword">
                       </p><p>
                         <div for="NewPassword">New Password</div>
-                        <input type="password" placeholder="Enter Password" name="password" required>
+                        <input type="password" placeholder="Enter Password" name="password" required id="updatedPassword">
                       </p><p>
                         <div for="NewPasswordCheck">Re-enter New Password</div>
-                        <input type="password" placeholder="Enter Password" name="password" required>
+                        <input type="password" placeholder="Enter Password" name="updatedPasswordCheck" required id="updatedPasswordCheck">
                       </p><p>
-                        <button type= "button">Update Password</button>
+                        <button type= "submitUpdate">Update Password</button>
+                    </form>
                       </p>
                       <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -140,7 +144,7 @@
                                 <p>Please enter login credentials</p>
                                 <div class="container">
                                       <form method ="GET" id="login-form">
-                                          {%  csrf_token %}
+                                          {% csrf_token %}
                                     <label for="UserName"><b>Username</b></label>
                                     <input id='un' type="username" placeholder="Enter Username" name="userName" required>
                                     <p></p>
@@ -310,10 +314,31 @@
 
         });
 
+         $(document).on('submit', '#update-pass-form', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: "{% url "create_user" %}",
+                    data:{
+                        username:login,
+                        password:$('#updatedPassword').val(),
+                        action: 'update',
+                    },
+                    success:function(data){
+                        if(data.login === "True"){
+                            $('#loginModal').modal('hide');
+                            alert("Password Updated");
+                        }else{
+                            alert("Update Unsuccessful!!!! Please Try Again");
+                        }
+                    },
+                    error: function(data){
+                        console.log(data);
+                    },
+                });
+        });
 
-
-    </script>
-    <script>
         document.getElementById('code').setAttribute('name', 'main.py');
         /**
          * signUp()

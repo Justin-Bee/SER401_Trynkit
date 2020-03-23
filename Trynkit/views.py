@@ -56,6 +56,14 @@ def create_user(request):
         else:
             response_data['login'] = 'False'
 
+
+    elif request.POST.get('action') == 'update':
+        uname = request.POST.get('username')
+        pswd = request.POST.get('password')
+        obj = User.objects.get(username = uname)
+        obj.password = pswd
+        obj.save()
+        response_data['login'] = 'True'
      
     print(response)
     return JsonResponse(response_data)
