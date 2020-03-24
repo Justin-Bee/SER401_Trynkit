@@ -71,6 +71,8 @@
 
 
 #menu {
+	display: grid;
+	grid-template-columns: auto;
     width: 105px;
     height: 100%;
     position: fixed;
@@ -85,6 +87,13 @@
     overflow-y:auto;
 }
 
+#menu button {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+
+
 
 @media only screen and (max-width: 1000px) {
     #dText {
@@ -95,6 +104,12 @@
         width: 720px;
         margin-left: 113px;
     }
+
+	#menu button {
+		margin-top: 0px;
+		margin-bottom: 0px;
+	}
+
 }
 
 @media only screen and (min-width: 1200px) {
@@ -127,6 +142,11 @@
     #debugger, #console {
         width: 2003px;
     }
+
+	#menu button {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
 }
 
 body{
@@ -224,9 +244,18 @@ button{
     border: none;
 }
 
+#nfBtn:hover{
+	background-color: #0000ff1a;
+}
+
+
 #npBtn{
     background-color: Transparent;
     border: none;
+}
+
+#npBtn:hover{
+	background-color: #0000ff1a;
 }
 
 #sBtn{
@@ -234,9 +263,17 @@ button{
     border: none;
 }
 
+#sBtn:hover{
+	background-color:#0000ff1a;
+}
+
 #loadFileBtn{
     background-color: Transparent;
     border: none;
+}
+
+#loadFileBtn:hover{
+	background-color:#0000ff1a;
 }
 
 #bBtn{
@@ -244,9 +281,16 @@ button{
     border: none;
 }
 
+#bBtn:hover{
+	background-color:#0000ff1a;
+}
 #settingsBtn{
     background-color: Transparent;
     border: none;
+}
+
+#settingsBtn:hover{
+	background-color: #0000ff1a;
 }
 
 #serialBtn{
@@ -254,13 +298,26 @@ button{
     border: none;
 }
 
+#serialBtn:hover{
+	background-color:#0000ff1a;
+}
+
 #debugBtn{
     background-color: Transparent;
     border: none;
 }
+
+#debugBtn:hover{
+	background-color:#0000ff1a;
+}
+
 #loginBtn{
     background-color: Transparent;
     border: none;
+}
+
+#loginBtn:hover{
+	background-color: #0000ff1a;
 }
 
 #signBtn{
@@ -268,9 +325,17 @@ button{
     border: none;
 }
 
+#signBtn:hover{
+	background-color:#0000ff1a;
+}
+
 #logoutBtn{
 	background-color: Transparent;
 	border: none;
+}
+
+#logoutBtn:hover{
+	background-color:#0000ff1a;
 }
 
 #uploadBtn{
@@ -278,9 +343,17 @@ button{
     border: none;
 }
 
+#uploadBtn:hover{
+	background-color:#0000ff1a;
+}
+
 #helpBtn{
 	background-color: Transparent;
 	border: none;
+}
+
+#helpBtn:hover{
+	background-color:#0000ff1a;
 }
 
 
