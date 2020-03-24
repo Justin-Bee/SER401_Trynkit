@@ -97,10 +97,24 @@
         grid-template-columns: auto auto;
         width: 200px;
     }
+
+    #dText {
+        width: 705px;
+    }
+
+    #debugger, #console {
+        width: 720px;
+        margin-left: 213px;
+    }
+
+    #menu button {
+        margin-top: 0px;
+        margin-bottom: 0px;
+	}
 }
 
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1000px) and (orientation : portrait) {
     #dText {
         width: 705px;
     }
@@ -187,29 +201,6 @@ button{
     .container {
         margin-left: 200px;
     }
-
-/*
-    #main {
-        display: inline-grid;
-        grid-template-columns: 1 2 3;
-        padding: 10px;
-        border dashed #99ccff: 1px;
-        width: 175px;
-    }
-
-
-    #cMenu {
-        padding: 10px;
-        margin-left: 100px;
-        width: 175px;
-    }
-
-    #dMenu {
-        padding: 5px;
-        margin-left: 100px;
-        width: 175px;
-    }
-*/
 }
 
 .nav-tabs > li {
