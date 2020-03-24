@@ -3,6 +3,9 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from .models import User
 from django.views.decorators.csrf import csrf_exempt
+from django.core.mail import send_mail
+from django.conf import settings
+from django.core.mail import EmailMessage
 
 
 # Create your views here.
@@ -46,6 +49,10 @@ def create_user(request):
             )
             response = "True"
             response_data['login'] = 'True'
+            mail_subject = "Thank you for registering!"
+            message = "Your username is: " + uname + "\nYour password is: " + psword
+            email = EmailMessage(mail_subject, message, to=[eml])
+            email.send()
 
 
     elif request.GET.get('action') == 'get':
