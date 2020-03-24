@@ -27,37 +27,42 @@
     </div>
     <body>
         <div id="menu">
-            <p></p>
+
             <button onclick="newFile()" id="nfBtn"><img type="image/svg+xml" id ="newFileBtn" src="/static/images/file-regular.svg" width="50" height="50" title="Create a new file"><figcaption> New File </figcaption></button>
-            <p></p>
             <button onclick="saveTabPrompt(currentTab, masterList)" id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50" title="Save the current file"><figcaption> Save File </figcaption></button>
-            <p></p>
-            <button id="loadFileBtn" title="Load a file">
-                <img type="image/svg+xml" id="lFileBtn" src="/static/images/cloud-upload-alt-solid.svg" width="50" height="50"><figcaption> Load File </figcaption>
+            <button id="loadFileBtn">
+
+                <img type="image/svg+xml" id="lFileBtn" src="/static/images/cloud-upload-alt-solid.svg" width="50" height="50" title="Load a file"><figcaption> Load File </figcaption>
 
             </button>
-            <span id="spnFilePath"></span>
             <input type="file" id="file" style="display: none" />
             <script type="text/javascript">
                 window.onload = loadFile();
             </script>
-            <p></p>
+
 
             <button onClick="bluetooth()" id="bBtn"><img type="image/svg+xml" id ="devicesBtn" src="/static/images/bluetooth-b-brands.svg" width="50" height="50" title="Pair editor with bluetooth device"><figcaption> Bluetooth </figcaption></button>
-            <p></p>
+
             <button onClick="bleSend()" id="uploadBtn"><img type="image/svg+xml" id ="uploadBtn" src="/static/images/upload.svg" width="50" height="50" title="Upload a file"><figcaption> Upload </figcaption></button>
-            <p></p>
+
             <button data-toggle="modal" data-target="#settingsModal" id="settingsBtn"><img type="image/svg+xml" id ="settBtn" src="/static/images/cogs-solid.svg" width="50" height="50" title="Editor settings"><figcaption> Settings </figcaption></button>
-             <p></p>
+
             <button onClick="consoleHide()" id="serialBtn"><img type="image/svg+xml"  id="serBtn" src="/static/images/plug-solid.svg" width="50" height="50" title="MicroPython console"><figcaption> Console </figcaption></button>
-            <p></p>
-            <button onClick="debugToggle()" id="debugBtn"><img type ="image/svg+xml" id="debuggerBtn" src="/static/images/bug-solid.svg" width="50" height="50" title="Toggle debugger"><figcaption> Debug </figcaption></button>
-            <p></p>
+
             <button data-toggle="modal" data-target="#loginModal" id="loginBtn"><img type="image/svg+xml" id ="logBtn" src="/static/images/login-regular.svg" width="50" height="50" title="User login"><figcaption> Login </figcaption></button>
-            <p></p>
-	    <button onClick="logout()" id="logoutBtn"><img type="image/svg+xml" id="lgoutBtn" src="/static/images/logout.svg" width="50" height="50" title="Logout"><figcaption> Logout </figcaption></button><p><p>
-	    <button data-toggle="modal" data-target="#signUpModal" id="signBtn"><img type="image/svg+xml" id ="siBtn" src="/static/images/signup.svg" width="50" height="50" title="Create an account and sign up"><figcaption> Sign Up </figcaption></button><p><p>
-	   <button data-toggle="modal" data-target="#helpModal" id="helpBtn"><img type="image/svg+xml" id ="hlpBtn" src="/static/images/help.svg" width="50" height="50" title="Help/FAQ"><figcaption> Help </figcaption></button> </div> <!-- this is the context menu --> <!-- note the string to=0 where the 0 is the digit to be replaced --> <div id="div-context-menu" class="cls-context-menu"> <ul> <li><a href="javascript:void(0)" class="rename-tab">Rename Tab </a></li>
+=
+
+	    <button onClick="logout()" id="logoutBtn"><img type="image/svg+xml" id="lgoutBtn" src="/static/images/logout.svg" width="50" height="50" title="Logout"><figcaption> Logout </figcaption></button>
+	    <button data-toggle="modal" data-target="#signUpModal" id="signBtn"><img type="image/svg+xml" id ="siBtn" src="/static/images/signup.svg" width="50" height="50" title="Create an account and sign up"><figcaption> Sign Up </figcaption></button>
+	   <button data-toggle="modal" data-target="#helpModal" id="helpBtn"><img type="image/svg+xml" id ="hlpBtn" src="/static/images/help.svg" width="50" height="50" title="Help/FAQ"><figcaption> Help </figcaption></button>
+
+	        </div>
+	<!-- this is the context menu -->
+        <!-- note the string to=0 where the 0 is the digit to be replaced -->
+        <div id="div-context-menu" class="cls-context-menu">
+		<ul>
+                    <li><a href="javascript:void(0)" class="rename-tab">Rename Tab </a></li>
+
 		    <li><a href="javascript:void(0)" class="remove-tabs">- Close All Tabs</a></li>
                 </ul>
         </div>
@@ -162,7 +167,7 @@
 
                                     <button type="button"  class="cancelbtn" data-dismiss="modal">Cancel</button>
                                     <span class="psw">Forgot <a href="#">password?</a></span>
-				                            <span class="sgnUp"> Or create <a href="#">an account</a></span>
+				                            <span class="sgnUp"> Or create <button data-dismiss="modal" data-toggle="modal" data-target="#signUpModal">account</button></span>
 
                                 </div>
 
@@ -423,10 +428,10 @@
          * This function shows the debug console or if the console is shown
          * then hide the console.
          */
-		function debugToggle() {
+	/*function debugToggle() {
 			var debugDiv = document.getElementById('debugger');
 			debugDiv.style.display = debugDiv.style.display == "none" ? "block" : "none";
-		}
+		}*/
 
 		/**
          * consoleHide()
