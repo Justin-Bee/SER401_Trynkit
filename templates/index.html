@@ -9,7 +9,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}" />
-	<link rel="shortcut icon" type="image/png" href="/static/images/favicon.png"/>
+	<link rel="shortcut icon" type="image/png" href="/static/images/SD_logo.png"/>
 
         <script src="/static/js/loadFile.js" type="text/javascript"></script>
         <script src="/static/js/save.js" type="text/javascript"></script>
@@ -27,7 +27,7 @@
     </div>
     <body>
         <div id="menu">
-
+            <img src="/static/images/SD_logo.png" style="width:75px;height:75px;margin:5px 5px;">
             <button onclick="newFile()" id="nfBtn"><img type="image/svg+xml" id ="newFileBtn" src="/static/images/file-regular.svg" width="50" height="50" title="Create a new file"><figcaption> New File </figcaption></button>
             <button onclick="saveTabPrompt(currentTab, masterList)" id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50" title="Save the current file"><figcaption> Save File </figcaption></button>
             <button id="loadFileBtn">
@@ -52,9 +52,11 @@
 
             <button data-toggle="modal" data-target="#loginModal" id="loginBtn"><img type="image/svg+xml" id ="logBtn" src="/static/images/login-regular.svg" width="50" height="50" title="User login"><figcaption> Login </figcaption></button>
 
-	    <button onClick="logout()" id="logoutBtn"><img type="image/svg+xml" id="lgoutBtn" src="/static/images/logout.svg" width="50" height="50" title="Logout"><figcaption> Logout </figcaption></button>
-	    <button data-toggle="modal" data-target="#signUpModal" id="signBtn"><img type="image/svg+xml" id ="siBtn" src="/static/images/signup.svg" width="50" height="50" title="Create an account and sign up"><figcaption> Sign Up </figcaption></button>
-	   <button data-toggle="modal" data-target="#helpModal" id="helpBtn"><img type="image/svg+xml" id ="hlpBtn" src="/static/images/help.svg" width="50" height="50" title="Help/FAQ"><figcaption> Help </figcaption></button>
+            <button onClick="logout()" id="logoutBtn"><img type="image/svg+xml" id="lgoutBtn" src="/static/images/logout.svg" width="50" height="50" title="Logout"><figcaption> Logout </figcaption></button>
+            
+            <button data-toggle="modal" data-target="#signUpModal" id="signBtn"><img type="image/svg+xml" id ="siBtn" src="/static/images/signup.svg" width="50" height="50" title="Create an account and sign up"><figcaption> Sign Up </figcaption></button>
+            
+	          <button data-toggle="modal" data-target="#helpModal" id="helpBtn"><img type="image/svg+xml" id ="hlpBtn" src="/static/images/help.svg" width="50" height="50" title="Help/FAQ"><figcaption> Help </figcaption></button>
 	        </div>
 	<!-- this is the context menu -->
         <!-- note the string to=0 where the 0 is the digit to be replaced -->
