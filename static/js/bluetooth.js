@@ -60,22 +60,26 @@ function bluetooth(){
          .then(service => {
              return service.getCharacteristic(RX_char)
              .then(characteristic => {
+                 console.log("RX char data:");
                  console.log(characteristic);
                  RX_characteristic = characteristic;
                  return service.getCharacteristic(TX_char);
              })
          })
          .then(characteristic => {
+             console.log("TX char data");
              console.log(characteristic);
              TX_characteristic = characteristic;
              /* add an event listener to the TX characteristic */
-             TX_characteristic.addEventListener('valueUpdate', handleValueUpdated);
-             console.log(TX_characteristic.readValue());
+            // TX_characteristic.addEventListener('valueUpdate', handleValueUpdated);
+             return characteristic;
+             TX_characteristic.readValue();
          })
          .then( value =>{
              /* try to read from the device and print to console */
+             TX_characteristic.readValue();
           //   y.innerText = value.getUint8(0);
-           //  console.log(value.getUint8(0));
+             console.log(value.getUint8(0));
          })
      .catch(error=> {
      z.innerHTML= z.innerHTML + "\n"+ (error);
