@@ -29,8 +29,11 @@
         <div id="menu">
 
             <button onclick="newFile()" id="nfBtn"><img type="image/svg+xml" id ="newFileBtn" src="/static/images/file-regular.svg" width="50" height="50" title="Create a new file"><figcaption> New File </figcaption></button>
-            <button onclick="saveTabPrompt(currentTab, masterList)" id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50" title="Save the current file"><figcaption> Save File </figcaption></button>
-            <button id="loadFileBtn">
+             <form method ="POST" id="save-form">
+                                {% csrf_token %}
+                 <button id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50" title="Save the current file"><figcaption> Save File </figcaption></button>
+             </form>
+                 <button id="loadFileBtn">
 
                 <img type="image/svg+xml" id="lFileBtn" src="/static/images/cloud-upload-alt-solid.svg" width="50" height="50" title="Load a file"><figcaption> Load File </figcaption>
 
@@ -351,6 +354,33 @@
                 }
         });
 
+         $(document).on('submit', '#save-form', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: "{% url "create_user" %}",
+                    data:{
+                        filename: currentTab,
+                        contents: editor.getValue(),
+                        username: login,
+                        number: tabNumber,
+                        action: 'save',
+                    },
+                    success:function(data){
+                        if(data.saved === "True"){
+                            $('#loginModal').modal('hide');
+                            alert("Saved file");
+                        }else{
+                            alert("Didn't save file");
+                        }
+                    },
+                    error: function(data){
+                        console.log(data);
+                    },
+                });
+        });
+
         document.getElementById('code').setAttribute('name', 'main.py');
         /**
          * signUp()
@@ -523,6 +553,7 @@
          */
         var currentTab = "main.py";  /* used to determine the previous tab */
         var tabList;
+        var tabNumber = 1;
 
         /**
          * This function handles all of the logic when clicking on a tab
@@ -534,6 +565,7 @@
                  localStorage.setItem(currentTab, editor.getValue());
                  $(this).tab('show');
                  currentTab = this.innerText;
+                 tabNumber = masterList.indexOf(currentTab) + 1;
                  try {
                      editor.setValue(localStorage.getItem(currentTab).toString());
                  }catch(e){
@@ -574,6 +606,7 @@
                     		var id = $(".nav-tabs").children().length;
 		    		$(this).closest('li').before('<li class="active"><a href="#tab_' + id + '" id="tab'+id+'">'+ projectName+'</a> <span> x </span></li>');
 		    		currentTab = projectName;
+		    		tabNumber = id +1;
                     		masterList.push(projectName);
                     		localStorage.setItem("tabList", masterList); /* add tab to the tab list */
                     		editor.setValue("");
