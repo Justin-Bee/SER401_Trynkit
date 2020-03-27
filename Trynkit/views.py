@@ -22,6 +22,18 @@ def devices(request):
 def console(request):
     return render(request, 'console.html')
 
+def forgot_pass(request):
+    posts = User.objects.all()
+    response_data = {}
+
+    response = ""
+    uname = request.POST.get('username')
+    psword = request.POST.get('password')
+    eml = request.POST.get('email')
+    mail_subject = "Password Reminder!"
+    message = "\nYour password is: " + psword
+    email = EmailMessage(mail_subject, message, to=[eml])
+    email.send()
 
 @csrf_exempt
 def create_user(request):
