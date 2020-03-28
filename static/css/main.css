@@ -92,10 +92,29 @@
 	margin-bottom: 5px;
 }
 
+@media only screen and (max-width: 1000px) and (orientation : landscape) {
+    #menu {
+        grid-template-columns: auto auto;
+        width: 200px;
+    }
+
+    #dText {
+        width: 705px;
+    }
+
+    #debugger, #console {
+        width: 720px;
+        margin-left: 213px;
+    }
+
+    #menu button {
+        margin-top: 0px;
+        margin-bottom: 0px;
+	}
+}
 
 
-
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1000px) and (orientation : portrait) {
     #dText {
         width: 705px;
     }
@@ -177,6 +196,13 @@ button{
     margin-top: 10px;
     margin-left: 100px;
 }
+
+@media only screen and (max-width: 1000px) and (orientation : landscape) {
+    .container {
+        margin-left: 200px;
+    }
+}
+
 .nav-tabs > li {
     position:relative;
     border-radius: 7px 7px 0px 0px;
