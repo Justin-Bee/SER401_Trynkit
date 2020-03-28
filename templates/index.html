@@ -314,7 +314,38 @@
 
         });
 
-
+	 
+	 /*
+         * This function gets the username and send an email for a password reminder
+         */
+	$('#forgot').click(function() {
+          if($('#un').val().length==0) {
+            alert("Please enter a username");
+          } else{
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: "{% url "create_user" %}",
+                data:{
+                    username:$('#un').val(),
+                    //password:$('#pw').val(),
+                    action: 'forgot',
+                },
+                success:function(data){
+                    if(data.login === "True"){
+                        alert("Password has been sent to the user email");
+                        console.log(login);
+                    }else{
+                        alert("User doesn't exist");
+                    }
+                },
+                error: function(data){
+                    console.log(data);
+                },
+            });
+          }
+          
+        });
 
     </script>
     <script>
