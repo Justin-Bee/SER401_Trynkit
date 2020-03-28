@@ -64,6 +64,35 @@ def create_user(request):
         obj.password = pswd
         obj.save()
         response_data['login'] = 'True'
+
+    elif request.POST.get('action') == 'save':
+        filename = request.POST.get('filename')
+        contents = request.POST.get('contents')
+        uname = request.POST.get('username')
+        number = request.POST.get('number')
+        content = bytearray()
+        content.extend(contents.encode())
+        obj = User.objects.get(username = uname)
+        if number == "1":
+            obj.file1name = filename
+            obj.file1 = content
+        elif number == "2":
+            obj.file2name = filename
+            obj.file2 = content
+        elif number == "3":
+            obj.file3name = filename
+            obj.file3 = content
+        elif number == "4":
+            obj.file4name = filename
+            obj.file4 = content
+        elif number == "5":
+            obj.file5name = filename
+            obj.file5 = content
+
+        obj.save()
+
+        response_data['saved'] = 'True'
+
      
     print(response)
     return JsonResponse(response_data)
