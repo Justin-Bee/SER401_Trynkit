@@ -6,7 +6,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import send_mail
 from django.conf import settings
 from django.core.mail import EmailMessage
-
+import logging
+import sys
 
 # Create your views here.
 
@@ -22,18 +23,6 @@ def devices(request):
 def console(request):
     return render(request, 'console.html')
 
-def forgot_pass(request):
-    posts = User.objects.all()
-    response_data = {}
-
-    response = ""
-    uname = request.POST.get('username')
-    psword = request.POST.get('password')
-    eml = request.POST.get('email')
-    mail_subject = "Password Reminder!"
-    message = "\nYour password is: " + psword
-    email = EmailMessage(mail_subject, message, to=[eml])
-    email.send()
 
 @csrf_exempt
 def create_user(request):
@@ -75,6 +64,17 @@ def create_user(request):
         else:
             response_data['login'] = 'False'
 
+    elif request.GET.get('action') == 'forgot':
+        uname = request.GET.get('username')
+        try:
+            thisUser = User.objects.get(username=uname)
+            response_data['login'] = 'True'
+            mail_subject = "Password Reminder"
+            message = "Hello, " + thisUser.username + ", your password is: " + thisUser.password
+            email = EmailMessage(mail_subject, message, to=[thisUser.email])
+            email.send()
+        except User.DoesNotExist:
+            response_data['login'] = 'False'
      
     print(response)
     return JsonResponse(response_data)
