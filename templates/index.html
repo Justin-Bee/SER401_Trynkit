@@ -9,7 +9,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}" />
-	<link rel="shortcut icon" type="image/png" href="/static/images/SD_logo.png"/>
+	<link rel="shortcut icon" type="image/png" href="/static/images/pitchfork_grey.png"/>
 
         <script src="/static/js/loadFile.js" type="text/javascript"></script>
         <script src="/static/js/save.js" type="text/javascript"></script>
@@ -27,7 +27,7 @@
     </div>
     <body>
         <div id="menu">
-            <img src="/static/images/SD_logo.png" style="width:75px;height:75px;margin:5px 5px;">
+            <img src="/static/images/logo_BandW.png" style="width:75px;height:75px;margin:5px 5px;">
             <button onclick="newFile()" id="nfBtn"><img type="image/svg+xml" id ="newFileBtn" src="/static/images/file-regular.svg" width="50" height="50" title="Create a new file"><figcaption> New File </figcaption></button>
             <button onclick="saveTabPrompt(currentTab, masterList)" id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50" title="Save the current file"><figcaption> Save File </figcaption></button>
             <button id="loadFileBtn">
@@ -39,7 +39,6 @@
             <script type="text/javascript">
                 window.onload = loadFile();
             </script>
-
 
             <button onClick="bluetooth()" id="bBtn"><img type="image/svg+xml" id ="devicesBtn" src="/static/images/bluetooth-b-brands.svg" width="50" height="50" title="Pair editor with bluetooth device"><figcaption> Bluetooth </figcaption></button>
 
