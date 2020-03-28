@@ -3,7 +3,11 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from .models import User
 from django.views.decorators.csrf import csrf_exempt
-
+from django.core.mail import send_mail
+from django.conf import settings
+from django.core.mail import EmailMessage
+import logging
+import sys
 
 # Create your views here.
 
@@ -46,7 +50,10 @@ def create_user(request):
             )
             response = "True"
             response_data['login'] = 'True'
-
+            mail_subject = "Thank you for registering!"
+            message = "Your username is: " + uname + "\nYour password is: " + psword
+            email = EmailMessage(mail_subject, message, to=[eml])
+            email.send()
 
     elif request.GET.get('action') == 'get':
         uname = request.GET.get('username')
@@ -56,6 +63,17 @@ def create_user(request):
         else:
             response_data['login'] = 'False'
 
+    elif request.GET.get('action') == 'forgot':
+        uname = request.GET.get('username')
+        try:
+            thisUser = User.objects.get(username=uname)
+            response_data['login'] = 'True'
+            mail_subject = "Password Reminder"
+            message = "Hello, " + thisUser.username + ", your password is: " + thisUser.password
+            email = EmailMessage(mail_subject, message, to=[thisUser.email])
+            email.send()
+        except User.DoesNotExist:
+            response_data['login'] = 'False'
 
     elif request.POST.get('action') == 'update':
         uname = request.POST.get('username')
@@ -88,11 +106,8 @@ def create_user(request):
         elif number == "5":
             obj.file5name = filename
             obj.file5 = content
-
         obj.save()
-
         response_data['saved'] = 'True'
-
      
     print(response)
     return JsonResponse(response_data)
