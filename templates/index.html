@@ -29,8 +29,11 @@
         <div id="menu">
             <img src="/static/images/logo_BandW.png" style="width:75px;height:75px;margin:5px 5px;">
             <button onclick="newFile()" id="nfBtn"><img type="image/svg+xml" id ="newFileBtn" src="/static/images/file-regular.svg" width="50" height="50" title="Create a new file"><figcaption> New File </figcaption></button>
-            <button onclick="saveTabPrompt(currentTab, masterList)" id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50" title="Save the current file"><figcaption> Save File </figcaption></button>
-            <button id="loadFileBtn">
+             <form method ="POST" id="save-form">
+                                {% csrf_token %}
+                 <button id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50" title="Save the current file"><figcaption> Save File </figcaption></button>
+             </form>
+                 <button id="loadFileBtn">
 
                 <img type="image/svg+xml" id="lFileBtn" src="/static/images/cloud-upload-alt-solid.svg" width="50" height="50" title="Load a file"><figcaption> Load File </figcaption>
 
@@ -49,6 +52,14 @@
             <button onClick="consoleHide()" id="serialBtn"><img type="image/svg+xml"  id="serBtn" src="/static/images/plug-solid.svg" width="50" height="50" title="MicroPython console"><figcaption> Console </figcaption></button>
 
             <button data-toggle="modal" data-target="#loginModal" id="loginBtn"><img type="image/svg+xml" id ="logBtn" src="/static/images/login-regular.svg" width="50" height="50" title="User login"><figcaption> Login </figcaption></button>
+<<<<<<< HEAD
+=======
+
+
+	    <button onClick="logout()" id="logoutBtn"><img type="image/svg+xml" id="lgoutBtn" src="/static/images/logout.svg" width="50" height="50" title="Logout"><figcaption> Logout </figcaption></button>
+	    <button data-toggle="modal" data-target="#signUpModal" id="signBtn"><img type="image/svg+xml" id ="siBtn" src="/static/images/signup.svg" width="50" height="50" title="Create an account and sign up"><figcaption> Sign Up </figcaption></button>
+	   <button data-toggle="modal" data-target="#helpModal" id="helpBtn"><img type="image/svg+xml" id ="hlpBtn" src="/static/images/help.svg" width="50" height="50" title="Help/FAQ"><figcaption> Help </figcaption></button>
+>>>>>>> 56276359817c31edc8301cf0cd39fb5630b68460
 
             <button onClick="logout()" id="logoutBtn"><img type="image/svg+xml" id="lgoutBtn" src="/static/images/logout.svg" width="50" height="50" title="Logout"><figcaption> Logout </figcaption></button>
             
@@ -79,7 +90,7 @@
 
 
 
-		<div id="debugger" contenteditable="false" name="empty" style="display:none">Debug Content Here</div>
+		<div id="debugger" contenteditable="false" name="empty">Debug Content Here</div>
         <div id="console" contenteditable="true" name="empty" style="display:none">Serial Console</div>
 
 
@@ -350,6 +361,33 @@
                 }
         });
 
+         $(document).on('submit', '#save-form', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: "{% url "create_user" %}",
+                    data:{
+                        filename: currentTab,
+                        contents: editor.getValue(),
+                        username: login,
+                        number: tabNumber,
+                        action: 'save',
+                    },
+                    success:function(data){
+                        if(data.saved === "True"){
+                            $('#loginModal').modal('hide');
+                            alert("Saved file");
+                        }else{
+                            alert("Didn't save file");
+                        }
+                    },
+                    error: function(data){
+                        console.log(data);
+                    },
+                });
+        });
+
         document.getElementById('code').setAttribute('name', 'main.py');
         /**
          * signUp()
@@ -522,6 +560,7 @@
          */
         var currentTab = "main.py";  /* used to determine the previous tab */
         var tabList;
+        var tabNumber = 1;
 
         /**
          * This function handles all of the logic when clicking on a tab
@@ -533,6 +572,7 @@
                  localStorage.setItem(currentTab, editor.getValue());
                  $(this).tab('show');
                  currentTab = this.innerText;
+                 tabNumber = masterList.indexOf(currentTab) + 1;
                  try {
                      editor.setValue(localStorage.getItem(currentTab).toString());
                  }catch(e){
@@ -573,6 +613,7 @@
                     		var id = $(".nav-tabs").children().length;
 		    		$(this).closest('li').before('<li class="active"><a href="#tab_' + id + '" id="tab'+id+'">'+ projectName+'</a> <span> x </span></li>');
 		    		currentTab = projectName;
+		    		tabNumber = id +1;
                     		masterList.push(projectName);
                     		localStorage.setItem("tabList", masterList); /* add tab to the tab list */
                     		editor.setValue("");
