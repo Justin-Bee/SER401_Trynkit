@@ -631,14 +631,17 @@
              */
             $('.add-tab').click(function (e) {
                 localStorage.setItem(currentTab, editor.getValue());
+                //var selectedTab = sessionStorage.getItem('active');
+	              //window.sessionStorage.removeItem('active');
                 var projectName = prompt("Creating a new file:", "NewProjectName.py");
                 if(projectName){
 			if (masterList.indexOf(projectName) == -1) {
 				e.preventDefault();
-                    		var id = $(".nav-tabs").children().length;
+            var id = $(".nav-tabs").children().length;
 		    		$(this).closest('li').before('<li class="active"><a href="#tab_' + id + '" id="tab'+id+'">'+ projectName+'</a> <span> x </span></li>');
 		    		currentTab = projectName;
 		    		tabNumber = id +1;
+           // $("tabList").tabList({"active": tabNumber});
                     		masterList.push(projectName);
                     		localStorage.setItem("tabList", masterList); /* add tab to the tab list */
                     		editor.setValue("");
