@@ -9,7 +9,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}" />
-	<link rel="shortcut icon" type="image/png" href="/static/images/favicon.png"/>
+	<link rel="shortcut icon" type="image/png" href="/static/images/pitchfork_grey.png"/>
 
         <script src="/static/js/loadFile.js" type="text/javascript"></script>
         <script src="/static/js/save.js" type="text/javascript"></script>
@@ -27,43 +27,44 @@
     </div>
     <body>
         <div id="menu">
-            <p></p>
-            <button onclick="newFile()" id="nfBtn"><img type="image/svg+xml" id ="newFileBtn" src="/static/images/file-regular.svg" width="50" height="50"><figcaption> New File </figcaption></button>
-            <p></p>
-            <button onclick="saveTabPrompt(currentTab, masterList)" id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50"><figcaption> Save File </figcaption></button>
-            <p></p>
-            <button id="loadFileBtn">
-                <img type="image/svg+xml" id="lFileBtn" src="/static/images/cloud-upload-alt-solid.svg" width="50" height="50"><figcaption> Load File </figcaption>
+            <img src="/static/images/logo_BandW.png" style="width:75px;height:75px;margin:5px 5px;">
+            <button onclick="newFile()" id="nfBtn"><img type="image/svg+xml" id ="newFileBtn" src="/static/images/file-regular.svg" width="50" height="50" title="Create a new file"><figcaption> New File </figcaption></button>
+             <form method ="POST" id="save-form">
+                                {% csrf_token %}
+                 <button id="sBtn" ><img type="image/svg+xml" id ="saveFileBtn" src="/static/images/save-regular.svg" width="50" height="50" title="Save the current file"><figcaption> Save File </figcaption></button>
+             </form>
+                 <button id="loadFileBtn">
+
+                <img type="image/svg+xml" id="lFileBtn" src="/static/images/cloud-upload-alt-solid.svg" width="50" height="50" title="Load a file"><figcaption> Load File </figcaption>
 
             </button>
-            <span id="spnFilePath"></span>
             <input type="file" id="file" style="display: none" />
             <script type="text/javascript">
                 window.onload = loadFile();
             </script>
-            <p></p>
 
-            <button onClick="bluetooth()" id="bBtn"><img type="image/svg+xml" id ="devicesBtn" src="/static/images/bluetooth-b-brands.svg" width="50" height="50"><figcaption> Bluetooth </figcaption></button>
-            <p></p>
-            <button onClick="bleSend()" id="uploadBtn"><img type="image/svg+xml" id ="uploadBtn" src="/static/images/upload.svg" width="50" height="50"><figcaption> Upload </figcaption></button>
-            <p></p>
-            <button data-toggle="modal" data-target="#settingsModal" id="settingsBtn"><img type="image/svg+xml" id ="settBtn" src="/static/images/cogs-solid.svg" width="50" height="50"><figcaption> Settings </figcaption></button>
-             <p></p>
-            <button onClick="consoleHide()" id="serialBtn"><img type="image/svg+xml"  id="serBtn" src="/static/images/plug-solid.svg" width="50" height="50"><figcaption> Console </figcaption></button>
-            <p></p>
-            <button onClick="debugToggle()" id="debugBtn"><img type ="image/svg+xml" id="debuggerBtn" src="/static/images/bug-solid.svg" width="50" height="50"><figcaption> Debug </figcaption></button>
-            <p></p>
-            <button data-toggle="modal" data-target="#loginModal" id="loginBtn"><img type="image/svg+xml" id ="logBtn" src="/static/images/login-regular.svg" width="50" height="50"><figcaption> Login </figcaption></button>
-            <p></p>
-	    <button onClick="logout()" id="logoutBtn"><img type="image/svg+xml" id="lgoutBtn" src="/static/images/logout.svg" width="50" height="50"><figcaption> Logout </figcaption></button><p><p>
-	    <button data-toggle="modal" data-target="#signUpModal" id="signBtn"><img type="image/svg+xml" id ="siBtn" src="/static/images/signup.svg" width="50" height="50"><figcaption> Sign Up </figcaption></button><p><p>
-	   <button data-toggle="modal" data-target="#helpModal" id="helpBtn"><img type="image/svg+xml" id ="hlpBtn" src="/static/images/help.svg" width="50" height="50"><figcaption> Help </figcaption></button>
+            <button onClick="bluetooth()" id="bBtn"><img type="image/svg+xml" id ="devicesBtn" src="/static/images/bluetooth-b-brands.svg" width="50" height="50" title="Pair editor with bluetooth device"><figcaption> Bluetooth </figcaption></button>
+
+            <button onClick="bleSend()" id="uploadBtn"><img type="image/svg+xml" id ="uploadBtn" src="/static/images/upload.svg" width="50" height="50" title="Upload a file"><figcaption> Upload </figcaption></button>
+
+            <button data-toggle="modal" data-target="#settingsModal" id="settingsBtn"><img type="image/svg+xml" id ="settBtn" src="/static/images/cogs-solid.svg" width="50" height="50" title="Editor settings"><figcaption> Settings </figcaption></button>
+
+            <button onClick="consoleHide()" id="serialBtn"><img type="image/svg+xml"  id="serBtn" src="/static/images/plug-solid.svg" width="50" height="50" title="MicroPython console"><figcaption> Console </figcaption></button>
+
+            <button data-toggle="modal" data-target="#loginModal" id="loginBtn"><img type="image/svg+xml" id ="logBtn" src="/static/images/login-regular.svg" width="50" height="50" title="User login"><figcaption> Login </figcaption></button>
+
+            <button onClick="logout()" id="logoutBtn"><img type="image/svg+xml" id="lgoutBtn" src="/static/images/logout.svg" width="50" height="50" title="Logout"><figcaption> Logout </figcaption></button>
+            
+            <button data-toggle="modal" data-target="#signUpModal" id="signBtn"><img type="image/svg+xml" id ="siBtn" src="/static/images/signup.svg" width="50" height="50" title="Create an account and sign up"><figcaption> Sign Up </figcaption></button>
+            
+	          <button data-toggle="modal" data-target="#helpModal" id="helpBtn"><img type="image/svg+xml" id ="hlpBtn" src="/static/images/help.svg" width="50" height="50" title="Help/FAQ"><figcaption> Help </figcaption></button>
 	        </div>
 	<!-- this is the context menu -->
         <!-- note the string to=0 where the 0 is the digit to be replaced -->
         <div id="div-context-menu" class="cls-context-menu">
 		<ul>
                     <li><a href="javascript:void(0)" class="rename-tab">Rename Tab </a></li>
+
 		    <li><a href="javascript:void(0)" class="remove-tabs">- Close All Tabs</a></li>
                 </ul>
         </div>
@@ -81,7 +82,7 @@
 
 
 
-		<div id="debugger" contenteditable="false" name="empty" style="display:none">Debug Content Here</div>
+		<div id="debugger" contenteditable="false" name="empty">Debug Content Here</div>
         <div id="console" contenteditable="true" name="empty" style="display:none">Serial Console</div>
 
 
@@ -109,16 +110,20 @@
                       </div>
                       <p><b>Update Password</b></p>
                       <p>
+
                         <div for="OldPassword">Current Password</div>
-                        <input type="password" placeholder="Enter Password" name="password" required>
+                         <form method ="POST" id="update-pass-form">
+                                          {% csrf_token %}
+                        <input type="password" placeholder="Enter Password" name="password" required id="oldPassword">
                       </p><p>
                         <div for="NewPassword">New Password</div>
-                        <input type="password" placeholder="Enter Password" name="password" required>
+                        <input type="password" placeholder="Enter Password" name="password" required id="updatedPassword">
                       </p><p>
                         <div for="NewPasswordCheck">Re-enter New Password</div>
-                        <input type="password" placeholder="Enter Password" name="password" required>
+                        <input type="password" placeholder="Enter Password" name="updatedPasswordCheck" required id="updatedPasswordCheck">
                       </p><p>
-                        <button type= "button">Update Password</button>
+                        <button type= "submitUpdate">Update Password</button>
+                    </form>
                       </p>
                       <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -146,7 +151,7 @@
                                 <p>Please enter login credentials</p>
                                 <div class="container">
                                       <form method ="GET" id="login-form">
-                                          {%  csrf_token %}
+                                          {% csrf_token %}
                                     <label for="UserName"><b>Username</b></label>
                                     <input id='un' type="username" placeholder="Enter Username" name="userName" required>
                                     <p></p>
@@ -163,8 +168,9 @@
                                 <div class="modal-footer">
 
                                     <button type="button"  class="cancelbtn" data-dismiss="modal">Cancel</button>
-                                    <span class="psw">Forgot <a href="#">password?</a></span>
-				                            <span class="sgnUp"> Or create <a href="#">an account</a></span>
+
+                                    <span class="psw" id="forgot">Forgot <a href="#">password?</a></span>
+				                            <span class="sgnUp"> Or create <button data-dismiss="modal" data-toggle="modal" data-target="#signUpModal">account</button></span>
 
                                 </div>
 
@@ -316,10 +322,97 @@
 
         });
 
+	 
+	 /*
+         * This function gets the username and send an email for a password reminder
+         */
+	$('#forgot').click(function() {
+          if($('#un').val().length==0) {
+            alert("Please enter a username");
+          } else{
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: "{% url "create_user" %}",
+                data:{
+                    username:$('#un').val(),
+                    //password:$('#pw').val(),
+                    action: 'forgot',
+                },
+                success:function(data){
+                    if(data.login === "True"){
+                        alert("Password has been sent to the user email");
+                        console.log(login);
+                    }else{
+                        alert("User doesn't exist");
+                    }
+                },
+                error: function(data){
+                    console.log(data);
+                },
+            });
+          }
+    });
 
+         $(document).on('submit', '#update-pass-form', function (e) {
+                e.preventDefault();
+                if($('#oldPassword').val() === ($('#updatedPassword').val())){
+                    alert("Please choose a password different from existing password.");
+                }
+                else if($('#updatedPassword').val() !== $('#updatedPasswordCheck').val()){
+                    alert("The two new password fields do not match");
+                }else{
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: "{% url "create_user" %}",
+                    data:{
+                        username:login,
+                        password:$('#updatedPassword').val(),
+                        action: 'update',
+                    },
+                    success:function(data){
+                        if(data.login === "True"){
+                            $('#loginModal').modal('hide');
+                            alert("Password Updated");
+                        }else{
+                            alert("Update Unsuccessful!!!! Please Try Again");
+                        }
+                    },
+                    error: function(data){
+                        console.log(data);
+                    },
+                });
+                }
+        });
 
-    </script>
-    <script>
+         $(document).on('submit', '#save-form', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: "{% url "create_user" %}",
+                    data:{
+                        filename: currentTab,
+                        contents: editor.getValue(),
+                        username: login,
+                        number: tabNumber,
+                        action: 'save',
+                    },
+                    success:function(data){
+                        if(data.saved === "True"){
+                            $('#loginModal').modal('hide');
+                            alert("Saved file");
+                        }else{
+                            alert("Didn't save file");
+                        }
+                    },
+                    error: function(data){
+                        console.log(data);
+                    },
+                });
+        });
+
         document.getElementById('code').setAttribute('name', 'main.py');
         /**
          * signUp()
@@ -397,10 +490,10 @@
          * This function shows the debug console or if the console is shown
          * then hide the console.
          */
-		function debugToggle() {
+	/*function debugToggle() {
 			var debugDiv = document.getElementById('debugger');
 			debugDiv.style.display = debugDiv.style.display == "none" ? "block" : "none";
-		}
+		}*/
 
 		/**
          * consoleHide()
@@ -492,6 +585,7 @@
          */
         var currentTab = "main.py";  /* used to determine the previous tab */
         var tabList;
+        var tabNumber = 1;
 
         /**
          * This function handles all of the logic when clicking on a tab
@@ -503,6 +597,7 @@
                  localStorage.setItem(currentTab, editor.getValue());
                  $(this).tab('show');
                  currentTab = this.innerText;
+                 tabNumber = masterList.indexOf(currentTab) + 1;
                  try {
                      editor.setValue(localStorage.getItem(currentTab).toString());
                  }catch(e){
@@ -543,6 +638,7 @@
                     		var id = $(".nav-tabs").children().length;
 		    		$(this).closest('li').before('<li class="active"><a href="#tab_' + id + '" id="tab'+id+'">'+ projectName+'</a> <span> x </span></li>');
 		    		currentTab = projectName;
+		    		tabNumber = id +1;
                     		masterList.push(projectName);
                     		localStorage.setItem("tabList", masterList); /* add tab to the tab list */
                     		editor.setValue("");
