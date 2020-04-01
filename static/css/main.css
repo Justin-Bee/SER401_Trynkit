@@ -87,6 +87,40 @@
     overflow-y:auto;
 }
 
+#comp-container {
+	display: grid;
+	grid-gap: 5px;
+	grid-column-start: 1;
+	grid-column-end: 2; 
+	grid-template-columns: main side;
+	border-radius: 30px 45px;
+	margin-top: 15px;
+	margin-left: 50px;
+	background: teal;
+	position: fixed;
+}
+
+.comp-items {
+	overflow: auto;
+	padding: 10px;
+	width: 100%;
+}
+
+@media only screen and (max-width: 1000px) and (orientation : portrait) {
+	.comp-items {
+		padding: 5px;
+		grid-gap: 2px;
+	}
+}
+
+@media only screen and (max-width: 1000px) and (orientation : landscape) {
+	.comp-items {
+		padding: 8px;
+		grid-gap: 3px;
+		margin-left: 20px;
+	}
+}
+
 #menu button {
 	margin-top: 5px;
 	margin-bottom: 5px;
