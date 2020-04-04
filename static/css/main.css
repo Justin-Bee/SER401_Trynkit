@@ -87,6 +87,10 @@
     overflow-y:auto;
 }
 
+#main-grid {
+	display: grid;
+	grid-template-columns: auto auto;
+}
 
 #menu button {
 	margin-top: 5px;
@@ -95,7 +99,7 @@
 
 @media only screen and (max-width: 1000px) and (orientation : landscape) {
     #menu {
-        grid-template-columns: auto auto;
+        grid-template-columns: auto;
         width: 200px;
     }
 
