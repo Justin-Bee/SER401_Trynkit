@@ -594,15 +594,15 @@
          $(".nav-tabs").on("click", "a", function (e) {
             e.preventDefault();
              if (!$(this).hasClass('add-tab')) {
-                 localStorage.setItem(currentTab, editor.getValue());
+                // localStorage.setItem(currentTab, editor.getValue());
                  $(this).tab('show');
                  currentTab = this.innerText;
                  tabNumber = masterList.indexOf(currentTab) + 1;
-                 try {
-                     editor.setValue(localStorage.getItem(currentTab).toString());
-                 }catch(e){
-                     console.error(e);
-                 }
+              //   try {
+              //       editor.setValue(localStorage.getItem(currentTab).toString());
+            //     }catch(e){
+              //       console.error(e);
+              //   }
                 }
             })
             .on("click", "span", function () { //this is to handle the remove button
@@ -644,7 +644,7 @@
 		    		    currentTab = projectName;
 		    		    tabNumber = id +1;
                         masterList.push(projectName);
-                        localStorage.setItem("tabList", masterList); /* add tab to the tab list */
+                    //    localStorage.setItem("tabList", masterList); /* add tab to the tab list */
                         editor.setValue("");
                         $('.nav-tabs li:nth-child(' + id + ') a').show();
                     }else{
@@ -677,6 +677,7 @@
                     }
                 }
             });
+
 	    $('.rename-tab').click(function(e) {
 	    var newTabName = prompt("Enter a new name for the current tab: ", ".py");
 	    var selectedTab = sessionStorage.getItem('selectedTab');
