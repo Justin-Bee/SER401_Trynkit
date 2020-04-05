@@ -607,12 +607,15 @@
             })
             .on("click", "span", function () { //this is to handle the remove button
                     /** this is to check the parent text for main.py */
+
                     var parentEl = $(this).parent().clone();
                     parentEl.children('span').remove();
                     var text = parentEl.text();
                     var result = text.includes('main.py');
-                    console.log(result);
-
+                    var num = masterList.indexOf(currentTab);
+                    console.log(num);
+                    masterList.splice(num-1);
+                    $('.nav-tabs li:nth-child(' + 0 + ') a').click();
                     if(result){
                     }
                     else {
@@ -630,26 +633,27 @@
              * and sets the tab to be the open tab.
              */
             $('.add-tab').click(function (e) {
-                localStorage.setItem(currentTab, editor.getValue());
+               // localStorage.setItem(currentTab, editor.getValue());
+                $(".nav-tabs li.active").removeClass('active');
                 var projectName = prompt("Creating a new file:", "NewProjectName.py");
                 if(projectName){
-			if (masterList.indexOf(projectName) == -1) {
-				e.preventDefault();
-                    		var id = $(".nav-tabs").children().length;
-		    		$(this).closest('li').before('<li class="active"><a href="#tab_' + id + '" id="tab'+id+'">'+ projectName+'</a> <span> x </span></li>');
-		    		currentTab = projectName;
-		    		tabNumber = id +1;
-                    		masterList.push(projectName);
-                    		localStorage.setItem("tabList", masterList); /* add tab to the tab list */
-                    		editor.setValue("");
-                    		$('.nav-tabs li:nth-child(' + id + ') a').click();
-                		}else{
-                    			alert("File name already exists.");
-                    			$(".add-tab").click();
-                		}
-			} else {
-			//Do nothing
-		}
+			        if (masterList.indexOf(projectName) == -1) {
+				        e.preventDefault();
+                        var id = $(".nav-tabs").children().length;
+		    		    $(this).closest('li').before('<li class="active"><a href="#tab_' + id + '" id="tab'+id+'">'+ projectName+'</a> <span> x </span></li>');
+		    		    currentTab = projectName;
+		    		    tabNumber = id +1;
+                        masterList.push(projectName);
+                        localStorage.setItem("tabList", masterList); /* add tab to the tab list */
+                        editor.setValue("");
+                        $('.nav-tabs li:nth-child(' + id + ') a').show();
+                    }else{
+                        alert("File name already exists.");
+                        $(".add-tab").click();
+                    }
+			    } else {
+			        //Do nothing
+		        }
         });
         /**
          * This function handles all of the logic when close all tabs button is clicked
