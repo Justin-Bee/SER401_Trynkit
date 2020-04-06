@@ -249,10 +249,10 @@
      /* This is a variable we can use for login, once logged in save username there, null if logged out */
      var login = null;
 
+
         /*
          * This function gets the data input in the use creation form
          * then POSTs it to the database, on success it hides the modal
-         * TODO on success send email to user
          */
         $(document).on('submit', '#post-form', function (e) {
             e.preventDefault();
@@ -310,6 +310,7 @@
                         alert("Login Successful!!!!");
                         login = $('#un').val();
                         console.log(login);
+                        console.log(data.serial);
                     }else{
                         alert("Login Unsuccessful!!!! Please Try Again");
                     }

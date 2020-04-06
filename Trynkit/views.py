@@ -1,4 +1,4 @@
-
+import serial
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from .models import User
@@ -8,6 +8,7 @@ from django.conf import settings
 from django.core.mail import EmailMessage
 import logging
 import sys
+
 
 # Create your views here.
 
@@ -56,10 +57,12 @@ def create_user(request):
             email.send()
 
     elif request.GET.get('action') == 'get':
+        serial_connection = serial.Serial(port = '/dev/ttyUSB0', baudrate = 115200, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=0)
         uname = request.GET.get('username')
         pswd = request.GET.get('password')
         if User.objects.filter(username=uname, password=pswd).exists():
             response_data['login'] = "True"
+            response_data['serial'] = serial_connection.readline()
         else:
             response_data['login'] = 'False'
 
