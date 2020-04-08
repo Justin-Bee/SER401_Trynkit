@@ -725,6 +725,54 @@
 		sessionStorage.clear();
 		location.reload();
 	}
+	
+	/**
+	 * applyWorldTheme()
+	 * This function is used to apply the theme of the editor
+	 * to the world view of the site
+	 * @type {HTMLElement}
+	 */
+	var cor = document.getElementById("select");
+	var rep = cor.options[extra.action].textArea;
+	function applyWorldTheme() {
+		window.setOption("theme", rep);
+		masterList = masterList.split(",");
+	
+		var select = (location.hash && location.hash.slice(1)) ||
+				(document.location.search &&
+				decodeURIComponent(document.location.search.slice(1)));
+		
+		if (select) {
+			cor.value = rep;
+			window.setOption("theme", rep);
+		}
+		
+		masterList.splice(0, 1, "theme");
+		cor.accessKeyLabel(settings);
+		localStorage.setItem("theme", masterList);
+		window.setValue("");
+	
+		sessionStorage.removeItem("theme");
+		window.target.style.background = theme.data;
+		
+		switch (localStorage.getItem("themeType")) {
+			case "default":
+				window.location.background = "default";
+				break;
+			case "ambiance":
+				window.location.background = "ambiance";
+				break;
+			case "darcula":
+				window.location.background = "darcula";
+				break;
+			case "elegant":
+				window.location.background = "elegant";
+				break;
+			case "rubyblue":
+				window.location.background = "rubyblue";
+				break;
+		}
+	}
 
     </script>
 
