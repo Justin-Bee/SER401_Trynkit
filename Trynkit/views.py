@@ -57,12 +57,10 @@ def create_user(request):
             email.send()
 
     elif request.GET.get('action') == 'get':
-        serial_connection = serial.Serial(port = '/dev/ttyUSB0', baudrate = 115200, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=0)
         uname = request.GET.get('username')
         pswd = request.GET.get('password')
         if User.objects.filter(username=uname, password=pswd).exists():
             response_data['login'] = "True"
-            response_data['serial'] = serial_connection.readline()
         else:
             response_data['login'] = 'False'
 
@@ -111,6 +109,17 @@ def create_user(request):
             obj.file5 = content
         obj.save()
         response_data['saved'] = 'True'
+
+    elif request.POST.get('action') == 'serial':
+        write = request.POST.get('input')
+        serial_connection = serial.Serial(port='/dev/ttyUSB0', baudrate=115200, parity=serial.PARITY_NONE,
+                                          stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=0)
+        serial_connection.write(str(write).encode('utf-8'))
+        serial_connection.write('\n'.encode('utf-8'))
+        msg = (serial_connection.readline()).decode('utf-8')
+        response_data['serial'] = msg
+        response_data['input'] = write
+
      
     print(response)
     return JsonResponse(response_data)

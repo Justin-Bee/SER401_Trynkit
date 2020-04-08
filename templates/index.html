@@ -84,7 +84,14 @@
 
 		<div id="debugger" contenteditable="false" name="empty">Debug Content Here</div>
         <div id="console" contenteditable="true" name="empty" style="display:none">Serial Console</div>
-
+         <div class="container">
+        <form method ="POST" id="serial-form">
+            {% csrf_token %}
+            <input type="text" placeholder="" id="inputSerial">
+            </p><p>
+            <button type= "submitSerial">Enter</button>
+        </form>
+         </div>
 
 
                 <!-- Settings Modal -->
@@ -407,6 +414,29 @@
                         }else{
                             alert("Didn't save file");
                         }
+                    },
+                    error: function(data){
+                        console.log(data);
+                    },
+                });
+        });
+
+         $(document).on('submit', '#serial-form', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: "{% url "create_user" %}",
+                    data:{
+                        input: $('#inputSerial').val(),
+                        action: 'serial',
+                    },
+                    success:function(data){
+                        console.log(data.input);
+                        document.getElementById('console').innerText += "\n";
+                        document.getElementById('console').innerText += document.getElementById('inputSerial').innerText;
+                        document.getElementById('console').innerText += "\n";
+                        document.getElementById('console').innerText += data.serial;
                     },
                     error: function(data){
                         console.log(data);
