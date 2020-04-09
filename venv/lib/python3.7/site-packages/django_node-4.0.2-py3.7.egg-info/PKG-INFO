@@ -1,0 +1,23 @@
+Metadata-Version: 1.0
+Name: django-node
+Version: 4.0.2
+Summary: Bindings and utils for integrating Node.js and NPM into a Django application
+Home-page: https://github.com/markfinger/django-node
+Author: Mark Finger
+Author-email: markfinger@gmail.com
+License: UNKNOWN
+Description: 
+        Deprecated
+        ----------
+        
+        django-node has been deprecated. The project has been split into the following packages:
+        
+        https://github.com/markfinger/python-js-host
+        
+        https://github.com/markfinger/python-nodejs
+        
+        https://github.com/markfinger/python-npm
+        
+        Documentation for django-node is available at https://github.com/markfinger/django-node
+        
+Platform: UNKNOWN

@@ -66,20 +66,29 @@ function bluetooth(){
              })
          })
          .then(characteristic => {
+             characteristic.startNotifications();
              console.log(characteristic);
              TX_characteristic = characteristic;
              /* add an event listener to the TX characteristic */
              TX_characteristic.addEventListener('valueUpdate', handleValueUpdated);
              console.log(TX_characteristic.readValue());
          })
-         .then( value =>{
-             /* try to read from the device and print to console */
-          //   y.innerText = value.getUint8(0);
-           //  console.log(value.getUint8(0));
-         })
      .catch(error=> {
      z.innerHTML= z.innerHTML + "\n"+ (error);
      });
+}
+
+/*
+ * serial()
+ * This function is to access the REPL of the ESP32 device.
+ * Called by the console button in the menu.
+ *
+ * Author: Justin Bee
+ */
+function serialBLE(){
+    var y = document.getElementById('serial')
+    var input = document.getElementById('inputSerial').innerText;
+
 }
 
 /*
@@ -135,27 +144,5 @@ function bleSend() {
     bledevice.gatt.disconnect();
 }
 
-/*
- * bleConsole()
- * This function is to access the REPL of the ESP32 device.
- * Called by the console button in the menu.
- *
- * Author: Justin Bee
- */
-function bleConsole(value){
-    const y = document.getElementById('serial')
-    /* check if the device is connected if true send file*/
-     if(isConnected){
-         /* need to read the value of the TX_char
-          * may need some kind of loop or trigger to watch if new data comes in????
-          * not sure what I want to implement for this yet....
-          */
-       //  y.innerText = TX_characteristic.readValue(); TODO does not work
-     }else{
-         const x = document.getElementById('console');
-         x.style.display ="none";
-        alert("MicroTrynkit device not connected. Please pair it first.");
-     }
 
-}
 

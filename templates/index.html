@@ -10,12 +10,11 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}" />
 	<link rel="shortcut icon" type="image/png" href="/static/images/pitchfork_grey.png"/>
-
+        <script src="/static/js/bluetooth.js" type="text/javascript"></script>
         <script src="/static/js/loadFile.js" type="text/javascript"></script>
         <script src="/static/js/save.js" type="text/javascript"></script>
         <script src="/static/js/codemirror.js" type="text/javascript"></script>
         <script src="/static/js/python.js" type="text/javascript"></script>
-        <script src="/static/js/bluetooth.js" type="text/javascript"></script>
         <link rel="stylesheet" type="text/css" href="/static/css/codemirror.css"/>
         <link rel="stylesheet" type="text/css" href="/static/css/ambiance.css"/>
         <link rel="stylesheet" type="text/css" href="/static/css/darcula.css"/>
@@ -68,6 +67,7 @@
 		    <li><a href="javascript:void(0)" class="remove-tabs">- Close All Tabs</a></li>
                 </ul>
         </div>
+        <div id="main-grid">
         <div class="container">
             <ul class="nav nav-tabs" role="tablist" id="nav-tab list">
 		    <li class="active"><a href="#tab_1" id="tab1" data-toggle="tab">main.py</a><span>x</span>
@@ -80,17 +80,17 @@
             </div>
         </div>
 
-
-
+		<div></div>
 		<div id="debugger" contenteditable="false" name="empty">Debug Content Here</div>
-        <div id="console" contenteditable="true" name="empty" style="display:none">Serial Console</div>
+		<div></div>
+        <div id="console" contenteditable="true" name="empty">Serial Console</div>
+
+        </div>
+
          <div class="container">
-        <form method ="POST" id="serial-form">
-            {% csrf_token %}
             <input type="text" placeholder="" id="inputSerial">
             </p><p>
-            <button type= "submitSerial">Enter</button>
-        </form>
+            <button onClick="serialBLE()" id="serialEnterBtn">Enter</button>
          </div>
 
 
@@ -417,29 +417,7 @@
                 });
         });
 
-         $(document).on('submit', '#serial-form', function (e) {
-                e.preventDefault();
-                $.ajax({
-                    type: 'POST',
-                    dataType: 'json',
-                    url: "{% url "create_user" %}",
-                    data:{
-                        input: $('#inputSerial').val(),
-                        action: 'serial',
-                    },
-                    success:function(data){
-                        console.log(data.input);
-                        document.getElementById('console').innerText += "\n";
-                        document.getElementById('console').innerText += document.getElementById('inputSerial').innerText;
-                        document.getElementById('console').innerText += "\n";
-                        document.getElementById('console').innerText += data.serial;
 
-                    },
-                    error: function(data){
-                        console.log(data);
-                    },
-                });
-        });
 
         document.getElementById('code').setAttribute('name', 'main.py');
         /**
@@ -622,25 +600,28 @@
          $(".nav-tabs").on("click", "a", function (e) {
             e.preventDefault();
              if (!$(this).hasClass('add-tab')) {
-                 localStorage.setItem(currentTab, editor.getValue());
+                // localStorage.setItem(currentTab, editor.getValue());
                  $(this).tab('show');
                  currentTab = this.innerText;
                  tabNumber = masterList.indexOf(currentTab) + 1;
-                 try {
-                     editor.setValue(localStorage.getItem(currentTab).toString());
-                 }catch(e){
-                     console.error(e);
-                 }
+              //   try {
+              //       editor.setValue(localStorage.getItem(currentTab).toString());
+            //     }catch(e){
+              //       console.error(e);
+              //   }
                 }
             })
             .on("click", "span", function () { //this is to handle the remove button
                     /** this is to check the parent text for main.py */
+
                     var parentEl = $(this).parent().clone();
                     parentEl.children('span').remove();
                     var text = parentEl.text();
                     var result = text.includes('main.py');
-                    console.log(result);
-
+                    var num = masterList.indexOf(currentTab);
+                    console.log(num);
+                    masterList.splice(num-1);
+                    $('.nav-tabs li:nth-child(' + 0 + ') a').click();
                     if(result){
                     }
                     else {
@@ -658,26 +639,27 @@
              * and sets the tab to be the open tab.
              */
             $('.add-tab').click(function (e) {
-                localStorage.setItem(currentTab, editor.getValue());
+               // localStorage.setItem(currentTab, editor.getValue());
+                $(".nav-tabs li.active").removeClass('active');
                 var projectName = prompt("Creating a new file:", "NewProjectName.py");
                 if(projectName){
-			if (masterList.indexOf(projectName) == -1) {
-				e.preventDefault();
-                    		var id = $(".nav-tabs").children().length;
-		    		$(this).closest('li').before('<li class="active"><a href="#tab_' + id + '" id="tab'+id+'">'+ projectName+'</a> <span> x </span></li>');
-		    		currentTab = projectName;
-		    		tabNumber = id +1;
-                    		masterList.push(projectName);
-                    		localStorage.setItem("tabList", masterList); /* add tab to the tab list */
-                    		editor.setValue("");
-                    		$('.nav-tabs li:nth-child(' + id + ') a').click();
-                		}else{
-                    			alert("File name already exists.");
-                    			$(".add-tab").click();
-                		}
-			} else {
-			//Do nothing
-		}
+			        if (masterList.indexOf(projectName) == -1) {
+				        e.preventDefault();
+                        var id = $(".nav-tabs").children().length;
+		    		    $(this).closest('li').before('<li class="active"><a href="#tab_' + id + '" id="tab'+id+'">'+ projectName+'</a> <span> x </span></li>');
+		    		    currentTab = projectName;
+		    		    tabNumber = id +1;
+                        masterList.push(projectName);
+                    //    localStorage.setItem("tabList", masterList); /* add tab to the tab list */
+                        editor.setValue("");
+                        $('.nav-tabs li:nth-child(' + id + ') a').show();
+                    }else{
+                        alert("File name already exists.");
+                        $(".add-tab").click();
+                    }
+			    } else {
+			        //Do nothing
+		        }
         });
         /**
          * This function handles all of the logic when close all tabs button is clicked
@@ -701,6 +683,7 @@
                     }
                 }
             });
+
 	    $('.rename-tab').click(function(e) {
 	    var newTabName = prompt("Enter a new name for the current tab: ", ".py");
 	    var selectedTab = sessionStorage.getItem('selectedTab');
@@ -753,6 +736,7 @@
 		sessionStorage.clear();
 		location.reload();
 	}
+
 
     </script>
 
