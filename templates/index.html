@@ -173,14 +173,10 @@
                             </form>
                                 </div>
                                 <div class="modal-footer">
-
                                     <button type="button"  class="cancelbtn" data-dismiss="modal">Cancel</button>
-
                                     <span class="psw" id="forgot">Forgot <a href="#">password?</a></span>
-				                            <span class="sgnUp"> Or create <button data-dismiss="modal" data-toggle="modal" data-target="#signUpModal">account</button></span>
-
+                                    <span class="sgnUp"> Or create <button data-dismiss="modal" data-toggle="modal" data-target="#signUpModal">account</button></span>
                                 </div>
-
                              </div>
                           </div>
                         </div>
@@ -437,6 +433,7 @@
                         document.getElementById('console').innerText += document.getElementById('inputSerial').innerText;
                         document.getElementById('console').innerText += "\n";
                         document.getElementById('console').innerText += data.serial;
+
                     },
                     error: function(data){
                         console.log(data);
