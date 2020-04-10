@@ -16,6 +16,7 @@
         <script src="/static/js/codemirror.js" type="text/javascript"></script>
         <script src="/static/js/python.js" type="text/javascript"></script>
         <script src="/static/js/bluetooth.js" type="text/javascript"></script>
+	<script src="/static/js/vim.js" type="text/javascript"></script>
         <link rel="stylesheet" type="text/css" href="/static/css/codemirror.css"/>
         <link rel="stylesheet" type="text/css" href="/static/css/ambiance.css"/>
         <link rel="stylesheet" type="text/css" href="/static/css/darcula.css"/>
@@ -108,8 +109,7 @@
                                 <option>rubyblue</option>
                             </select></p>
                       </div>
-		      <input type="checkbox" id-"vimToggleCheckbox" name="vimToggleCheckbox">
-		      <label for="vimToggleCheckbox">Enable Vim Keybindings for Editor</label>
+		      <label><input type='checkbox' onclick='toggleVim(this);'>Enable Vim Keybindings for Editor</label>
                       <p><b>Update Password</b></p>
                       <p>
 
@@ -552,6 +552,18 @@
             var theme = location.hash.slice(1);
             if (theme) { input.value = theme; selectTheme(); }
           });
+	
+	/**
+	* toggleVim()
+	* This function toggles the vim functionality
+	*/
+	function toggleVim(vimToggleCheckbox) {
+		if(vimToggleCheckbox.checked) {
+			editor.setOption("keyMap", "vim");
+		} else {
+			editor.setOption("keyMap", "default");
+		}
+	};
 
         /**
          * This function is for the startup model to show only when the page loads
