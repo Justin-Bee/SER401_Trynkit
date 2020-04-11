@@ -66,6 +66,7 @@
 		    <li><a href="javascript:void(0)" class="remove-tabs">- Close All Tabs</a></li>
                 </ul>
         </div>
+        <div id="main-grid">
         <div class="container">
             <ul class="nav nav-tabs" role="tablist" id="nav-tab list">
 		    <li class="active"><a href="#tab_1" id="tab1" data-toggle="tab">main.py</a><span>x</span>
@@ -74,15 +75,23 @@
 		</li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane active" id="tab_1"><textarea id="code"> </textarea></div>
+                <div class="tab-pane active" id="tab_1"><textarea id="code"></textarea></div>
             </div>
         </div>
 
+<<<<<<< HEAD
 		<div id="debugger" contenteditable="false" name="empty">Debug Content Here</div>
     <div id="console" contenteditable="true" name="empty" style="display:none">Serial Console</div>
     
     <div id="serialConsole" contenteditable="false" name="empty">Serial Console Content Here</div>
     <div id="sConsole" contenteditable="true" name="empty" style="display:none">Serial Console</div
+=======
+		<div></div>
+		<div id="debugger" contenteditable="false" name="empty">Debug Content Here</div>
+		<div></div>
+        <div id="console" contenteditable="true" name="empty" style="display:none">Serial Console</div>
+        </div>
+>>>>>>> 0a742883daa1d82be2f2dfa942b6fda1cbe74ccd
 
                 <!-- Settings Modal -->
               <div class="modal fade" id="settingsModal" role="dialog" style="display:none">
@@ -253,14 +262,16 @@
          */
         $(document).on('submit', '#post-form', function (e) {
             e.preventDefault();
-            
+            var user=$('#usNm').val();
+            var password=$('#pswd').val();
+            var cominFrom='createUser';
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
                 url: "{% url "create_user" %}",
                 data:{
-                    username:$('#usNm').val(),
-                    password:$('#pswd').val(),
+                    username:user,
+                    password:password,
                     email:$('#email').val(),
                     action: 'post'
                 },
@@ -268,12 +279,11 @@
                     $('#signUpModal').modal('hide');
                     if(result.login == 'FalseE'){
                       alert("Sorry, that email already exists.");
-                    } 
-                    else if(result.login == 'FalseU'){
+                    } else if(result.login == 'FalseU'){
                       alert("Sorry, that username already exists.");
-                    }
-		    else {
+                    } else {
                       alert("User added");
+                      loginMe(user, password, cominFrom);
                     }
 
                 },
@@ -292,32 +302,40 @@
          */
         $(document).on('submit', '#login-form', function (e) {
             e.preventDefault();
-            $.ajax({
-                type: 'GET',
-                dataType: 'json',
-                url: "{% url "create_user" %}",
-                data:{
-                    username:$('#un').val(),
-                    password:$('#pw').val(),
-                    action: 'get',
-                },
-                success:function(data){
-                    if(data.login === "True"){
-                        $('#loginModal').modal('hide');
-                        alert("Login Successful!!!!");
-                        login = $('#un').val();
-                        console.log(login);
-                    }else{
-                        alert("Login Unsuccessful!!!! Please Try Again");
-                    }
-                },
-                error: function(data){
-                    console.log(data);
-                },
-            });
-
-
+            var user=$('#un').val();
+            var password=$('#pw').val();
+            var cominFrom='login';
+            loginMe(user, password, cominFrom);
         });
+
+      function loginMe(user, password, cominFrom){
+            $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: "{% url "create_user" %}",
+            data:{
+                username:user,
+                password:password,
+                action: 'get',
+            },
+            success:function(data){
+                if(data.login === "True"){
+                  if (cominFrom == 'login'){  
+                    $('#loginModal').modal('hide');
+                  }
+                  alert("Login Successful!!!!");
+                  login = $('#un').val();
+                  console.log(login);
+                }else{
+                    alert("Login Unsuccessful!!!! Please Try Again");
+                }
+            },
+            error: function(data){
+                console.log(data);
+            },
+        });
+
+  }
 
 	 
 	 /*
@@ -591,25 +609,28 @@
          $(".nav-tabs").on("click", "a", function (e) {
             e.preventDefault();
              if (!$(this).hasClass('add-tab')) {
-                 localStorage.setItem(currentTab, editor.getValue());
+                // localStorage.setItem(currentTab, editor.getValue());
                  $(this).tab('show');
                  currentTab = this.innerText;
                  tabNumber = masterList.indexOf(currentTab) + 1;
-                 try {
-                     editor.setValue(localStorage.getItem(currentTab).toString());
-                 }catch(e){
-                     console.error(e);
-                 }
+              //   try {
+              //       editor.setValue(localStorage.getItem(currentTab).toString());
+            //     }catch(e){
+              //       console.error(e);
+              //   }
                 }
             })
             .on("click", "span", function () { //this is to handle the remove button
                     /** this is to check the parent text for main.py */
+
                     var parentEl = $(this).parent().clone();
                     parentEl.children('span').remove();
                     var text = parentEl.text();
                     var result = text.includes('main.py');
-                    console.log(result);
-
+                    var num = masterList.indexOf(currentTab);
+                    console.log(num);
+                    masterList.splice(num-1);
+                    $('.nav-tabs li:nth-child(' + 0 + ') a').click();
                     if(result){
                     }
                     else {
@@ -627,26 +648,27 @@
              * and sets the tab to be the open tab.
              */
             $('.add-tab').click(function (e) {
-                localStorage.setItem(currentTab, editor.getValue());
+               // localStorage.setItem(currentTab, editor.getValue());
+                $(".nav-tabs li.active").removeClass('active');
                 var projectName = prompt("Creating a new file:", "NewProjectName.py");
                 if(projectName){
-			if (masterList.indexOf(projectName) == -1) {
-				e.preventDefault();
-                    		var id = $(".nav-tabs").children().length;
-		    		$(this).closest('li').before('<li class="active"><a href="#tab_' + id + '" id="tab'+id+'">'+ projectName+'</a> <span> x </span></li>');
-		    		currentTab = projectName;
-		    		tabNumber = id +1;
-                    		masterList.push(projectName);
-                    		localStorage.setItem("tabList", masterList); /* add tab to the tab list */
-                    		editor.setValue("");
-                    		$('.nav-tabs li:nth-child(' + id + ') a').click();
-                		}else{
-                    			alert("File name already exists.");
-                    			$(".add-tab").click();
-                		}
-			} else {
-			//Do nothing
-		}
+			        if (masterList.indexOf(projectName) == -1) {
+				        e.preventDefault();
+                        var id = $(".nav-tabs").children().length;
+		    		    $(this).closest('li').before('<li class="active"><a href="#tab_' + id + '" id="tab'+id+'">'+ projectName+'</a> <span> x </span></li>');
+		    		    currentTab = projectName;
+		    		    tabNumber = id +1;
+                        masterList.push(projectName);
+                    //    localStorage.setItem("tabList", masterList); /* add tab to the tab list */
+                        editor.setValue("");
+                        $('.nav-tabs li:nth-child(' + id + ') a').show();
+                    }else{
+                        alert("File name already exists.");
+                        $(".add-tab").click();
+                    }
+			    } else {
+			        //Do nothing
+		        }
         });
         /**
          * This function handles all of the logic when close all tabs button is clicked
@@ -670,6 +692,7 @@
                     }
                 }
             });
+
 	    $('.rename-tab').click(function(e) {
 	    var newTabName = prompt("Enter a new name for the current tab: ", ".py");
 	    var selectedTab = sessionStorage.getItem('selectedTab');
