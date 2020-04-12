@@ -26,6 +26,8 @@
 
     </div>
     <body>
+        <div id="cm-all">
+        <div class="header">
         <div id="menu">
             <img src="/static/images/logo_BandW.png" style="width:75px;height:75px;margin:5px 5px;">
             <button onclick="newFile()" id="nfBtn"><img type="image/svg+xml" id ="newFileBtn" src="/static/images/file-regular.svg" width="50" height="50" title="Create a new file"><figcaption> New File </figcaption></button>
@@ -68,6 +70,8 @@
 		    <li><a href="javascript:void(0)" class="remove-tabs">- Close All Tabs</a></li>
                 </ul>
         </div>
+        </div>
+        <div class="gutters">
         <div class="container">
             <ul class="nav nav-tabs" role="tablist" id="nav-tab list">
 		    <li class="active"><a href="#tab_1" id="tab1" data-toggle="tab">main.py</a><span>x</span>
@@ -84,7 +88,7 @@
 
 		<div id="debugger" contenteditable="false" name="empty">Debug Content Here</div>
         <div id="console" contenteditable="true" name="empty" style="display:none">Serial Console</div>
-
+        </div>
 
 
                 <!-- Settings Modal -->
@@ -242,6 +246,7 @@
 
                     </div>
                   </div>
+                </div>
                 </div>
     </body>
  <script>
